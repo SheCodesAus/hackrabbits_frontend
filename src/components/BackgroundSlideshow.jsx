@@ -10,11 +10,11 @@ const images = [
 ];
 
 const BackgroundSlideshow = () => {
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+            setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
         }, 5000); //  5 seconds
 
         return () => clearInterval(interval);
@@ -23,7 +23,7 @@ const BackgroundSlideshow = () => {
     return (
         <div
             className="background-slideshow"
-            style={{ backgroundImage: `url(${images[currentImageIndex]})` }}
+            style={{ backgroundImage: `url(${images[currentIndex]})` }}
         >
             <div className="slideshow-content">
                 <h1>She Inspires</h1>
