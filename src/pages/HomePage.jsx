@@ -1,5 +1,5 @@
 
-import "./HomePage.css";
+// import "./HomePage.css";
 import BackgroundSlideshow from "../components/BackgroundSlideshow";
 
 function HomePage() {
