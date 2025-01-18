@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000">
+  <!-- Styles -->
+  <style>
+    .header { fill: #663399; }
+    .button { fill: #008080; }
+    .box { fill: #ffffff; stroke: #e0e0e0; stroke-width: 1; }
+    .text { font-family: Arial; font-size: 14px; fill: #333333; }
+    .label { font-family: Arial; font-size: 14px; fill: #666666; }
+    .required { font-family: Arial; font-size: 14px; fill: #ff0000; }
+    .bg { fill: #f5f0f7; }
+    .input { fill: white; stroke: #663399; stroke-width: 1; }
+  </style>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="80" class="header"/>
+  <text x="40" y="50" fill="white" font-size="24">Sign Up</text>
+
+  <!-- Main Container -->
+  <rect x="0" y="80" width="800" height="920" class="bg"/>
+  
+  <!-- Sign Up Form -->
+  <rect x="100" y="120" width="600" height="700" class="box" rx="10"/>
+  
+  <!-- Form Title -->
+  <text x="400" y="160" text-anchor="middle" font-size="24" fill="#663399">Create Your Account</text>
+  
+  <!-- Required Fields Note -->
+  <text x="140" y="190" class="text">* Required fields</text>
+
+  <!-- Subject Choice (Moved to Top) -->
+  <text x="140" y="230" class="label">Subject <tspan class="required">*</tspan></text>
+  <rect x="140" y="240" width="520" height="40" class="input" rx="5"/>
+  <text x="160" y="265" class="text">Select: To Inspire / To Be Inspired</text>
+  <text x="620" y="265" class="text">▼</text>
+
+  <!-- Personal Information -->
+  <text x="140" y="310" class="text" font-weight="bold">Personal Information</text>
+  
+  <!-- Full Name -->
+  <text x="140" y="350" class="label">Full Name <tspan class="required">*</tspan></text>
+  <rect x="140" y="360" width="520" height="40" class="input" rx="5"/>
+  
+  <!-- Email -->
+  <text x="140" y="430" class="label">Email <tspan class="required">*</tspan></text>
+  <rect x="140" y="440" width="520" height="40" class="input" rx="5"/>
+  
+  <!-- Password -->
+  <text x="140" y="510" class="label">Password <tspan class="required">*</tspan></text>
+  <rect x="140" y="520" width="520" height="40" class="input" rx="5"/>
+  
+  <!-- Industry -->
+  <text x="140" y="590" class="label">Industry <tspan class="required">*</tspan></text>
+  <rect x="140" y="600" width="520" height="40" class="input" rx="5"/>
+  <text x="620" y="625" class="text">▼</text>
+  
+  <!-- Location -->
+  <text x="140" y="670" class="label">Location (City) <tspan class="required">*</tspan></text>
+  <rect x="140" y="680" width="520" height="40" class="input" rx="5"/>
+  
+  <!-- Terms and Privacy -->
+  <rect x="140" y="740" width="20" height="20" class="input"/>
+  <text x="170" y="755" class="text">I agree to the Terms of Service and Privacy Policy</text>
+
+  <!-- Sign Up Button -->
+  <rect x="140" y="780" width="520" height="50" class="button" rx="25"/>
+  <text x="400" y="810" text-anchor="middle" fill="white" font-size="16">Create Account</text>
+  
+  <!-- Login Link -->
+  <text x="300" y="860" class="text">Already have an account?</text>
+  <text x="450" y="860" fill="#008080" class="text">Log In</text>
+
+</svg>
