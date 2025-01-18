@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1700 1000">
+  <!-- Styles -->
+  <style>
+    .header { fill: #663399; }
+    .button { fill: #008080; }
+    .content-bg { fill: #f5f0f7; }
+    .box { fill: #f8f8f8; stroke: #e0e0e0; stroke-width: 1; }
+    .text { font-family: Arial; font-size: 14px; fill: #333333; }
+    .label { font-family: Arial; font-size: 14px; fill: #666666; }
+    .phase-label { font-family: Arial; font-size: 24px; fill: #663399; font-weight: bold; }
+    .input { fill: white; stroke: #663399; stroke-width: 1; }
+  </style>
+
+  <!-- Phase 1 Login Page -->
+  <g transform="translate(0,0)">
+    <!-- Background -->
+    <rect x="0" y="0" width="800" height="1000" class="content-bg"/>
+
+    <!-- Phase Label -->
+    <text x="40" y="40" class="phase-label">Phase 1</text>
+
+    <!-- Header -->
+    <rect x="0" y="80" width="800" height="80" class="header"/>
+    <circle cx="50" cy="120" r="30" fill="#f8f8f8"/>
+    <text x="100" y="130" fill="white" font-size="24">Logo</text>
+
+    <!-- Login Form Container -->
+    <rect x="200" y="200" width="400" height="480" class="box" rx="10"/>
+    
+    <!-- Form Title -->
+    <text x="400" y="260" text-anchor="middle" font-size="24" fill="#663399">Welcome Back</text>
+
+    <!-- Email -->
+    <text x="250" y="320" class="label">Email</text>
+    <rect x="250" y="330" width="300" height="40" class="input" rx="5"/>
+    
+    <!-- Password -->
+    <text x="250" y="400" class="label">Password</text>
+    <rect x="250" y="410" width="300" height="40" class="input" rx="5"/>
+    
+    <!-- Remember Me -->
+    <g transform="translate(250, 470)">
+      <rect width="15" height="15" class="input"/>
+      <text x="25" y="13" class="text">Remember me</text>
+    </g>
+    
+    <!-- Login Button -->
+    <rect x="250" y="510" width="300" height="45" class="button" rx="5"/>
+    <text x="400" y="538" text-anchor="middle" fill="white" font-size="16">Login</text>
+
+    <!-- Forgot Password Button -->
+    <rect x="250" y="565" width="300" height="45" class="button" rx="5"/>
+    <text x="400" y="593" text-anchor="middle" fill="white" font-size="16">Forgot Password?</text>
+    
+    <!-- Sign Up Link -->
+    <text x="400" y="640" text-anchor="middle">
+      <tspan class="text">Don't have an account? </tspan>
+      <tspan fill="#008080" class="text">Sign Up</tspan>
+    </text>
+  </g>
+
+  <!-- Phase 2 Login Page -->
+  <g transform="translate(900,0)">
+    <!-- Background -->
+    <rect x="0" y="0" width="800" height="1000" class="content-bg"/>
+
+    <!-- Phase Label -->
+    <text x="40" y="40" class="phase-label">Phase 2</text>
+
+    <!-- Header -->
+    <rect x="0" y="80" width="800" height="80" class="header"/>
+    <circle cx="50" cy="120" r="30" fill="#f8f8f8"/>
+    <text x="100" y="130" fill="white" font-size="24">Logo</text>
+
+    <!-- Login Form Container -->
+    <rect x="200" y="200" width="400" height="600" class="box" rx="10"/>
+    
+    <!-- Form Title -->
+    <text x="400" y="260" text-anchor="middle" font-size="24" fill="#663399">Welcome Back</text>
+
+    <!-- Last Login Info -->
+    <text x="400" y="290" text-anchor="middle" class="label">Last login: Melbourne, Australia</text>
+
+    <!-- Email -->
+    <text x="250" y="320" class="label">Email</text>
+    <rect x="250" y="330" width="300" height="40" class="input" rx="5"/>
+    
+    <!-- Password -->
+    <text x="250" y="400" class="label">Password</text>
+    <rect x="250" y="410" width="300" height="40" class="input" rx="5"/>
+    
+    <!-- Remember Me -->
+    <g transform="translate(250, 470)">
+      <rect width="15" height="15" class="input"/>
+      <text x="25" y="13" class="text">Remember me</text>
+    </g>
+
+    <!-- Stay Logged In -->
+    <g transform="translate(250, 500)">
+      <rect width="15" height="15" class="input"/>
+      <text x="25" y="13" class="text">Stay logged in on this device</text>
+    </g>
+
+    <!-- Trust Device Option -->
+    <g transform="translate(250, 530)">
+      <rect width="15" height="15" class="input"/>
+      <text x="25" y="13" class="text">Trust this device</text>
+      <text x="25" y="30" class="label">Skip email verification next time</text>
+    </g>
+    
+    <!-- Login Button -->
+    <rect x="250" y="580" width="300" height="45" class="button" rx="5"/>
+    <text x="400" y="608" text-anchor="middle" fill="white" font-size="16">Login</text>
+
+    <!-- Forgot Password Button -->
+    <rect x="250" y="635" width="300" height="45" class="button" rx="5"/>
+    <text x="400" y="663" text-anchor="middle" fill="white" font-size="16">Forgot Password?</text>
+
+    <!-- Session Info -->
+    <text x="400" y="700" text-anchor="middle" class="label">Your session will expire in 24 hours</text>
+
+    <!-- Browser Info -->
+    <text x="400" y="720" text-anchor="middle" class="label">Chrome on Windows</text>
+    
+    <!-- Sign Up Link -->
+    <text x="400" y="760" text-anchor="middle">
+      <tspan class="text">Don't have an account? </tspan>
+      <tspan fill="#008080" class="text">Sign Up</tspan>
+    </text>
+  </g>
+</svg>
