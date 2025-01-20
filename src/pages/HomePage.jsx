@@ -68,13 +68,7 @@ function HomePage() {
 
             {/* rolemodel cards Section */}
 
-            /* <div id="rolemodel-list">
-                <h1> Featured Role Models</h1>
-                render rolemodel cards */
-                {rolemodel.map((rolemodelData, index) => (
-                    <RolemodelCard key={index} rolemodelData={rolemodelData} customClass="home-page" />
-                ))}
-            </div>
+            
 
 
 
@@ -85,4 +79,10 @@ function HomePage() {
 
 export default HomePage;
 
-
+// {/* <div id="rolemodel-list">
+                // <h1> Featured Role Models</h1>
+                // render rolemodel cards */
+                // {rolemodel.map((rolemodelData, index) => (
+                //     <RolemodelCard key={index} rolemodelData={rolemodelData} customClass="home-page" />
+                // ))}
+            // </div> */}
