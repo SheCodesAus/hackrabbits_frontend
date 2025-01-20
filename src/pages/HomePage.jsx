@@ -1,4 +1,3 @@
-
 import BackgroundSlideshow from "../components/BackgroundSlideshow";
 import React, { useState } from "react";
 
