@@ -1,30 +1,182 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter&family=Rubik:ital,wght@0,400;0,700;1,400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Openans:ital,wght@0,300..800;1,300..800&display=swap');
 
-header {
-    font-size: 3rem; /* Large text */
-    font-weight: bold; /* Bold text */
-    color: #2f4f2f; /* Dark green color */
-    text-align: center; /* Center align */
-    background: linear-gradient(90deg, #50c878, #a2d5ab); /* Gradient background */
-    background-clip: text; /* Clip gradient to text */
-    -webkit-text-fill-color: transparent; /* Make the gradient visible */
-    margin: 20px 0; /* Space around the h1 */
-    padding: 10px 0; /* Space inside the h1 */
-    border-bottom: 2px solid #50c878; /* Add a pastel green underline */
-    text-transform: uppercase; /* Uppercase letters */
-    letter-spacing: 2px; /* Add spacing between letters */
+:root {
+    --brand: #5E17EB;
+    --secondarybrand: #078375; 
+    --action: #F4AB02;
+    --white: #ffffff;
+    --base-light: #F5F5F5;
+    --base-dark: #737373;
+    --black: #111111;
+  }
+
+/* CSS Reset */
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: "Inter", sans-serif;
+  color: var(--black);
+  scroll-behavior: smooth;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Merriweather", serif;
+}
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+ol,
+ul {
+  list-style: none;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 2px, solid var(--secondarybrand)
+}
+input,
+button,
+textarea,
+select {
+  font: inherit;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    font-size: 16px;
-    background-color: #eafaf1; /* Light pastel green background */
-    color: #2f4f2f; /* Darker green for text */
-    line-height: 1.6;
-    box-sizing: border-box;
-    text-align: center;
+/* Header & Footer */
+header {
+    margin: 20px;
+    border-radius: 70px;
+}
 
-    
+.headercontainer {
+    display: flex;
+    flex-direction: row;
+    background: var(--base-light);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    background-color: #fff;
+
+
+
+}
+
+footer {
+    margin: 20px;
+    border-radius: 70px;
+}
+
+.footercontainer {
+    display: flex;
+    background: var(--base-light);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    background-color: #fff;
+
+
+}
+
+.inclusiveicons {
+        display: flex;
+        flex-direction: row;
+        width: 60px;
+        height: 60px;
+        padding: 15px;
+        margin: 20px;
+        border-radius: 30px;
+}
+
+
+
+  /* Dropdown container */
+.dropdown {
+    position: fixed; /* Fix position at the top right */
+    top: 10px;       /* Adjust this value to control vertical positioning */
+    right: 10px;     /* Adjust this value to control horizontal positioning */
+    z-index: 1000;   /* Ensure it's above other content */
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Dropdown button */
+  .dropbtn {
+    background-color: var(--brand);
+    color: var(--white);
+    padding: 12px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .dropbtn:hover {
+    background-color: var(--secondarybrand);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Dropdown content (hidden by default) */
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--white);
+    min-width: 180px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--base-light);
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: var(--base-dark);
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: var(--base-light);
+    color: var(--brand);
+  }
+  
+  /* Show the dropdown content on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  
+  /* Optional: Add some subtle animations */
+  .dropdown-content {
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }

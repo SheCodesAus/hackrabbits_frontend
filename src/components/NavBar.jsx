@@ -1,31 +1,38 @@
 import { Link, Outlet } from "react-router-dom";
 import useAuth from "../hooks/use-auth.js";
-import "../styles.css"
+import "../styles.css"; // Ensure your styles are included
 
 function NavBar() {
-  const {auth, setAuth} = useAuth();
+  const { auth, setAuth } = useAuth();
 
   const handleLogout = () => {
-      window.localStorage.removeItem("token");
-      setAuth({ token: null });
-    };
-    console.log(auth)
+    window.localStorage.removeItem("token");
+    setAuth({ token: null });
+  };
 
-    return (
-        <div class="navbar">
-          <nav class="buttons">
-            <Link to="/">Home</Link>
-            {auth.token ? (
-              <Link to="/" onClick={handleLogout}>
-                Log Out
-              </Link>
-            ) : null}
-          </nav>
-
-        {/* React Router will pass components into the <Outlet /> based on the path */}
-        <Outlet />
+  return (
+    <div className="dropdown">
+      <button className="dropbtn">Menu</button>
+      <div className="dropdown-content">
+        <Link to="/">Home</Link>
+        {auth.token ? (
+          <Link to="/" onClick={handleLogout}>
+            Log Out
+          </Link>
+            ) : ( 
+              <>
+          <Link to="/login">
+            Login
+          </Link>
+          <Link to="/signup">
+            Create an Account
+          </Link>
+              </>
+              )}
       </div>
-    );
-  }
-  
-  export default NavBar;
+      <Outlet />
+    </div>
+  );
+}
+
+export default NavBar;
