@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element: <NavBar />,
     children: [
       { path: "/", element: <HomePage /> },
-      { path: "/role-model-profile/:id", element: <RoleModelProfile /> },
+      { path: "/role-model-profile", element: <RoleModelProfile /> },
 
     ],
   },
