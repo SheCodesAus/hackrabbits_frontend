@@ -1,8 +1,7 @@
 // RoleModelProfile.js
 import React from 'react';
 import ProfileDetails from '../components/RMProfileDetails';
-import ContactForm from './ContactForm';
-import './RoleModelProfile.css';
+import ContactForm from '../components/ContactForm';
 
 const RoleModelProfile = () => {
   const handleFormSubmit = (formData) => {
