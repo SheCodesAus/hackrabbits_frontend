@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import HomePage from "./pages/HomePage.jsx";
 import NavBar from "./components/NavBar.jsx";
+import RoleModelProfile from "./pages/RoleModelProfilePage.jsx";
 
 import { AuthProvider } from "./components/AuthProvider.jsx";
 
@@ -14,7 +15,9 @@ const router = createBrowserRouter([
     path: "/",
     element: <NavBar />,
     children: [
-      { path: "/", element: <HomePage /> }
+      { path: "/", element: <HomePage /> },
+      { path: "/role-model-profile/:id", element: <RoleModelProfile /> },
+
     ],
   },
 ]);
