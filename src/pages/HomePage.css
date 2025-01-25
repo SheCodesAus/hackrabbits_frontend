@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Openans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root {
+    --brand: #5E17EB;
+    --secondarybrand: #078375;
+    --action: #F4AB02;
+    --white: #ffffff;
+    --base-light: #F5F5F5;
+    --base-dark: #737373;
+    --black: #111111;
+}
+
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background-color: var(--base-light);
+    color: var(--black);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main {
+    width: 100%;
+    max-width: 1200px;
+    margin: 200px;
+    text-align: center;
+    padding: 20px;
+  }
+
+
+.homepage {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.homepage-slideshow {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1s ease-in-out;
+    color: var(--white);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.featured_rolemodels {
+    margin: 20px 200px;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    align-content: center;
+}
+
+
+.search-section {
+    margin: 20px 0;
+}
+
+.location-dropdown {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid var(--base-dark);
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.search-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: var(--secondarybrand);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-button:hover {
+    background-color: var(--action);
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.action-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: var(--brand);
+    color: var(--white);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action-button:hover {
+    background-color: var(--secondarybrand);
+}

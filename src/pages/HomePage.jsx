@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./HomePage.css";
-import "../Styles.css"
+import "../Styles.css";
 
 
 function HomePage() {
