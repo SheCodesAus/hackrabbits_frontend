@@ -1,0 +1,155 @@
+/* LoginForm.module.css */
+.loginForm {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--brand) 0%, #9b59b6 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+  }
+  
+  .logo {
+    width: 48px;
+    height: 48px;
+    background: var(--white);
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+  
+  .loginContainer {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
+    max-width: 420px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .loginContainer h2 {
+    color: var(--brand);
+    font-size: 1.875rem;
+    margin-bottom: 32px;
+    text-align: center;
+    font-family: "Merriweather", serif;
+  }
+  
+  .formGroup {
+    margin-bottom: 24px;
+  }
+  
+  .formGroup label {
+    display: block;
+    color: var(--base-dark);
+    margin-bottom: 8px;
+    text-align: left;
+    font-size: 0.875rem;
+  }
+  
+  .formGroup input[type="email"],
+  .formGroup input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--base-light);
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .formGroup input[type="email"]:focus,
+  .formGroup input[type="password"]:focus {
+    outline: none;
+    border-color: var(--brand);
+    box-shadow: 0 0 0 3px rgba(94, 23, 235, 0.1);
+  }
+  
+  .checkboxGroup {
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+  
+  .checkboxGroup input[type="checkbox"] {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--base-light);
+    border-radius: 4px;
+  }
+  
+  .checkboxGroup label {
+    color: var(--base-dark);
+    font-size: 0.875rem;
+  }
+  
+  .submitButton {
+    width: 100%;
+    background: var(--secondarybrand);
+    color: var(--white);
+    padding: 14px;
+    border: none;
+    border-radius: 9999px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submitButton:hover {
+    background: #056b5f;
+  }
+  
+  .forgotPassword {
+    display: block;
+    text-align: center;
+    color: var(--secondarybrand);
+    text-decoration: none;
+    font-size: 0.875rem;
+    margin-bottom: 24px;
+    transition: color 0.3s ease;
+  }
+  
+  .forgotPassword:hover {
+    color: #056b5f;
+    text-decoration: underline;
+  }
+  
+  .signupLink {
+    text-align: center;
+    color: var(--base-dark);
+    font-size: 0.875rem;
+  }
+  
+  .signUp {
+    color: var(--brand);
+    text-decoration: none;
+    margin-left: 4px;
+    transition: color 0.3s ease;
+  }
+  
+  .signUp:hover {
+    text-decoration: underline;
+  }
+
+  .inputError {
+    border-color: #dc2626 !important;
+    background-color: #fef2f2;
+  }
+  
+  .errorMessage {
+    color: #dc2626;
+    font-size: 0.75rem;
+    margin-top: 4px;
+    display: block;
+    text-align: left;
+  }
+  
+  .generalError {
+    background-color: #fef2f2;
+    border: 1px solid #dc2626;
+    color: #dc2626;
+    padding: 12px;
+    border-radius: 8px;
+    margin-top: 16px;
+    text-align: center;
+    font-size: 0.875rem;
+  }
