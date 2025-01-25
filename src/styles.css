@@ -62,40 +62,46 @@ select {
   font: inherit;
 }
 
-/* Header & Footer */
-header {
-    margin: 20px;
-    border-radius: 70px;
-}
 
-.headercontainer {
-    display: flex;
-    flex-direction: row;
-    background: var(--base-light);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-    padding: 20px;
-    background-color: #fff;
-
-
-
-}
-
-footer {
-    margin: 20px;
-    border-radius: 70px;
-}
-
-.footercontainer {
-    display: flex;
-    background: var(--base-light);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-    padding: 20px;
-    background-color: #fff;
-
+/* Header styles */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* Ensure it stays above other content */
+  background-color: var(--base-light);
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex; /* Use flexbox for layout */
+  align-items: center; /* Center vertically */
+  padding: 10px 20px;
+  margin: 5px 20px 20px 20px;
+  max-height: 8rem;
 
 }
 
-.inclusiveicons {
+/* Hero image styles */
+.heroimg {
+  max-height: 7rem; /* Adjust height to fit nicely */
+  width: auto; /* Maintain aspect ratio */
+  margin-right: 20px; /* Add space between the image and other content */
+}
+
+
+
+.footer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin: 20px;
+  border-radius: 70px;
+  
+}
+
+
+
+.iconcontainer {
         display: flex;
         flex-direction: row;
         width: 60px;
@@ -104,7 +110,6 @@ footer {
         margin: 20px;
         border-radius: 30px;
 }
-
 
 
   /* Dropdown container */
