@@ -1,0 +1,149 @@
+/* src/components/ErrorMessage/ErrorMessage.css */
+@import url('https://fonts.googleapis.com/css2?family=Limelight&family=Oxygen:wght@400;700&family=Hind+Madurai:wght@400;500;700&display=swap');
+
+:root {
+  --purple-primary: rgb(124, 58, 237);
+  --purple-dark: rgb(109, 40, 217);
+  --teal-primary: rgb(13, 148, 136);
+  --teal-dark: rgb(15, 118, 110);
+  --yellow-accent: rgb(234, 179, 8);
+}
+
+.error-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(88, 28, 135, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+}
+
+.error-container {
+  max-width: 28rem;
+  background: linear-gradient(to right, rgb(243, 232, 255), rgb(254, 249, 195));
+  border: 2px solid var(--purple-primary);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.error-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.error-title {
+  font-family: 'Limelight', cursive;
+  font-size: 1.5rem;
+  color: var(--purple-dark);
+  margin: 0;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.sparkle {
+  color: var(--purple-primary);
+}
+
+.star {
+  color: var(--yellow-accent);
+}
+
+.error-content {
+  text-align: center;
+}
+
+.error-message {
+  font-family: 'Hind Madurai', sans-serif;
+  font-size: 1.125rem;
+  color: rgb(55, 65, 81);
+  margin-bottom: 1rem;
+}
+
+.encouragement {
+  font-family: 'Oxygen', sans-serif;
+  font-size: 1.125rem;
+  color: var(--teal-primary);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-family: 'Oxygen', sans-serif;
+  font-weight: 600;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.button-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.refresh-button {
+  background-color: var(--purple-primary);
+}
+
+.refresh-button:hover {
+  background-color: var(--purple-dark);
+  transform: translateY(-1px);
+}
+
+.home-button {
+  background-color: var(--teal-primary);
+}
+
+.home-button:hover {
+  background-color: var(--teal-dark);
+  transform: translateY(-1px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (max-width: 640px) {
+  .error-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  .button-container {
+    flex-direction: column;
+  }
+  
+  .button {
+    width: 100%;
+    justify-content: center;
+  }
+}
