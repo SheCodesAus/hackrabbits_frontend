@@ -15,7 +15,6 @@ async function signupCommunityUser() {
                 });
 
 
-
         if (!response.ok) {
             const fallbackError = "Error trying to create a project";
 
