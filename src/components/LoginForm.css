@@ -1,0 +1,152 @@
+/* LoginForm.css */
+.loginForm {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #5E17EB 0%, #9b59b6 100%);
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginContainer {
+  background: white;
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.loginContainer h2 {
+  color: #5E17EB;
+  font-size: 1.875rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  font-family: "Merriweather", serif;
+}
+
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  display: block;
+  color: #444;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  border-color: #5E17EB;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(94,23,235,0.1);
+}
+
+.inputError {
+  border-color: #dc2626;
+  background-color: #fff5f5;
+}
+
+.errorMessage {
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.checkboxGroup input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+.submitButton {
+  width: 100%;
+  background: #078375;
+  color: white;
+  padding: 0.875rem;
+  border: none;
+  border-radius: 9999px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #056b5f;
+}
+
+.submitButton:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
+}
+
+.forgotPassword {
+  display: block;
+  text-align: center;
+  color: #078375;
+  text-decoration: none;
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.forgotPassword:hover {
+  text-decoration: underline;
+}
+
+.signupLink {
+  text-align: center;
+  color: #666;
+  font-size: 0.875rem;
+}
+
+.signUp {
+  color: #5E17EB;
+  margin-left: 0.25rem;
+  text-decoration: none;
+}
+
+.signUp:hover {
+  text-decoration: underline;
+}
+
+.generalError {
+  background: #fde8e8;
+  color: #dc2626;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 640px) {
+  .loginContainer {
+    padding: 1.5rem;
+  }
+}
+
+/**
+ * @author SP
+ * Added styles:
+ * - Loading states
+ * - Error states and messages
+ * - Disabled button styling
+ * - Form validation styling
+ * - Mobile responsiveness
+ * - Improved transitions
+ * - Brand colors (#5E17EB purple, #078375 teal)
+ */
