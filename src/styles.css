@@ -53,7 +53,7 @@ img {
   max-width: 100%;
   height: auto;
   border-radius: 10px;
-  border: 2px, solid var(--secondarybrand)
+  display: flex;
 }
 input,
 button,
@@ -85,33 +85,43 @@ select {
   max-height: 7rem; /* Adjust height to fit nicely */
   width: auto; /* Maintain aspect ratio */
   margin-right: 20px; /* Add space between the image and other content */
+  border: 2px, solid var(--secondarybrand)
 }
 
 
 /* Footer styles */
 
 .footer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  margin: 20px;
-  border-radius: 70px;
-  
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  text-align: center;
+  margin-top: 20px;
+  position: relative;
+  left:0;
+  bottom:0;
+  right:0;
+  margin: 50px 20px 20px 20px;
+  max-height: 8rem;
 }
 
 .iconcontainer {
   display: flex;
-  flex-direction: row;
-  width: 60px;
-  height: 60px;
-  padding: 15px;
-  margin: 20px;
-  border-radius: 30px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px; 
 }
 
-.inclusiveivons {
-  align-self: auto;
+.inclusiveicons {
+  width: 50px;
+  height: auto;
+  margin: 0 10px;
+}
+
+.copyright {
+  font-size: 14px;
+  color: #555;
+  margin: 0; 
 }
 
 
