@@ -1,176 +1,163 @@
+// LoginForm.jsx
 import React, { useState } from 'react';
-import styles from './LoginForm.css';
+import styles from './LoginForm.module.css';
 
 const LoginForm = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    rememberMe: false
-  });
+ const [formData, setFormData] = useState({
+   email: '',
+   password: '',
+   rememberMe: false
+ });
 
-  const [errors, setErrors] = useState({
-    email: '',
-    password: ''
-  });
+ const [errors, setErrors] = useState({});
+ const [isLoading, setIsLoading] = useState(false);
 
-  // Handle input changes
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData(prevState => ({
-      ...prevState,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-    
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
-  };
+ const validateForm = () => {
+   const errors = {};
+   if (!formData.email) {
+     errors.email = 'Email is required';
+   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+     errors.email = 'Please enter a valid email';
+   }
 
-  // Validate email format
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
+   if (!formData.password) {
+     errors.password = 'Password is required';
+   } else if (formData.password.length < 6) {
+     errors.password = 'Password must be at least 6 characters';
+   }
+   return errors;
+ };
 
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-    // Validate form
-    const newErrors = {};
-    
-    if (!formData.email) {
-      newErrors.email = 'Email is required';
-    } else if (!validateEmail(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
-    }
+ const handleChange = (e) => {
+   const { name, value, type, checked } = e.target;
+   setFormData(prev => ({
+     ...prev,
+     [name]: type === 'checkbox' ? checked : value
+   }));
 
-    if (!formData.password) {
-      newErrors.password = 'Password is required';
-    } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
-    }
+   if (errors[name]) {
+     setErrors(prev => ({
+       ...prev,
+       [name]: ''
+     }));
+   }
+ };
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
+ const handleSubmit = async (e) => {
+   e.preventDefault();
+   setIsLoading(true);
+   setErrors({});
 
-    try {
-      // Here you would typically make an API call to your backend
-      console.log('Form submitted:', formData);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Handle successful login
-      console.log('Login successful');
-      
-      // You might want to redirect user or update app state here
-      
-    } catch (error) {
-      console.error('Login failed:', error);
-      setErrors({
-        general: 'Login failed. Please try again.'
-      });
-    }
-  };
+   const validationErrors = validateForm();
+   if (Object.keys(validationErrors).length > 0) {
+     setErrors(validationErrors);
+     setIsLoading(false);
+     return;
+   }
 
-  // Handle forgot password
-  const handleForgotPassword = (e) => {
-    e.preventDefault();
-    console.log('Forgot password clicked');
-    // Add your forgot password logic here
-  };
+   try {
+     const response = await fetch('/api/login', {
+       method: 'POST',
+       headers: {
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify(formData)
+     });
 
-  // Handle signup link
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    console.log('Sign up clicked');
-    // Add your signup navigation logic here
-  };
+     const data = await response.json();
 
-  return (
-    <div className={styles.loginFormPhase1}>
-      <div className={styles.loginContainer}>
-        <h2>Welcome Back</h2>
-        
-        <form onSubmit={handleSubmit}>
-          <div className={styles.formGroup}>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className={errors.email ? styles.inputError : ''}
-              required
-            />
-            {errors.email && <span className={styles.errorMessage}>{errors.email}</span>}
-          </div>
+     if (!response.ok) {
+       throw new Error(data.message || 'Login failed');
+     }
 
-          <div className={styles.formGroup}>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className={errors.password ? styles.inputError : ''}
-              required
-            />
-            {errors.password && <span className={styles.errorMessage}>{errors.password}</span>}
-          </div>
+     // Handle successful login
+     console.log('Login successful:', data);
+     
+   } catch (err) {
+     setErrors({
+       general: err.message || 'Login failed. Please try again.'
+     });
+   } finally {
+     setIsLoading(false);
+   }
+ };
 
-          <div className={styles.checkboxGroup}>
-            <input
-              type="checkbox"
-              id="rememberMe"
-              name="rememberMe"
-              checked={formData.rememberMe}
-              onChange={handleChange}
-            />
-            <label htmlFor="rememberMe">Remember me</label>
-          </div>
+ return (
+   <div className={styles.loginForm}>
+     <div className={styles.loginContainer}>
+       <h2>Welcome Back</h2>
+       
+       {errors.general && (
+         <div className={styles.generalError}>{errors.general}</div>
+       )}
 
-          <button type="submit" className={styles.submitButton}>
-            Login
-          </button>
+       <form onSubmit={handleSubmit}>
+         <div className={styles.formGroup}>
+           <label htmlFor="email">Email</label>
+           <input
+             type="email"
+             id="email"
+             name="email"
+             value={formData.email}
+             onChange={handleChange}
+             className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
+             disabled={isLoading}
+             required
+           />
+           {errors.email && (
+             <span className={styles.errorMessage}>{errors.email}</span>
+           )}
+         </div>
 
-          <a 
-            href="#" 
-            className={styles.forgotPassword}
-            onClick={handleForgotPassword}
-          >
-            Forgot Password?
-          </a>
-        </form>
+         <div className={styles.formGroup}>
+           <label htmlFor="password">Password</label>
+           <input
+             type="password"
+             id="password"
+             name="password"
+             value={formData.password}
+             onChange={handleChange}
+             className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
+             disabled={isLoading}
+             required
+           />
+           {errors.password && (
+             <span className={styles.errorMessage}>{errors.password}</span>
+           )}
+         </div>
 
-        <div className={styles.signupLink}>
-          Don't have an account?
-          <a 
-            href="#" 
-            className={styles.signUp}
-            onClick={handleSignUp}
-          >
-            Sign Up
-          </a>
-        </div>
+         <div className={styles.checkboxGroup}>
+           <input
+             type="checkbox"
+             id="rememberMe"
+             name="rememberMe"
+             checked={formData.rememberMe}
+             onChange={handleChange}
+             disabled={isLoading}
+           />
+           <label htmlFor="rememberMe">Remember me</label>
+         </div>
 
-        {errors.general && (
-          <div className={styles.generalError}>
-            {errors.general}
-          </div>
-        )}
-      </div>
-    </div>
-  );
+         <button 
+           type="submit"
+           className={styles.submitButton}
+           disabled={isLoading}
+         >
+           {isLoading ? 'Logging in...' : 'Login'}
+         </button>
+
+         <a href="#" className={styles.forgotPassword}>
+           Forgot Password?
+         </a>
+       </form>
+
+       <div className={styles.signupLink}>
+         Don't have an account?
+         <a href="#" className={styles.signUp}>Sign Up</a>
+       </div>
+     </div>
+   </div>
+ );
 };
 
 export default LoginForm;
