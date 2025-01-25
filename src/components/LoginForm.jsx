@@ -161,15 +161,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
-/**
-* @author SP
-* Added functionality:
-* - Async form submission with loading states
-* - Form validation with error messages
-* - Email format validation
-* - Password length validation
-* - API error handling
-* - Loading and disabled states
-* - Form field error styling
-*/
