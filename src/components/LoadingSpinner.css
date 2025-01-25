@@ -1,0 +1,255 @@
+/* LoadingSpinner.css */
+@import url('https://fonts.googleapis.com/css2?family=Limelight&family=Oxygen:wght@400;700&family=Hind+Madurai:wght@400;500;700&display=swap');
+
+:root {
+  --purple-primary: rgb(124, 58, 237);
+  --purple-dark: rgb(109, 40, 217);
+  --teal-primary: rgb(13, 148, 136);
+  --teal-dark: rgb(15, 118, 110);
+  --yellow-accent: rgb(234, 179, 8);
+}
+
+/* Loading Spinner Styles */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(234, 179, 8, 0.1));
+  backdrop-filter: blur(4px);
+  z-index: 50;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.spinner-box {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+}
+
+.spinner {
+  animation: spin 2s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sparkle-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--purple-primary);
+}
+
+.star-container {
+  position: absolute;
+  inset: 0;
+}
+
+.star {
+  position: absolute;
+  font-size: 1.25rem;
+  opacity: 0;
+}
+
+.star-1 {
+  top: 0;
+  right: 0;
+  animation: twinkle 1.5s ease-in-out infinite;
+}
+
+.star-2 {
+  bottom: 10px;
+  right: 10px;
+  animation: twinkle 1.5s ease-in-out infinite 0.5s;
+}
+
+.star-3 {
+  bottom: 0;
+  left: 0;
+  animation: twinkle 1.5s ease-in-out infinite 1s;
+}
+
+.loading-text {
+  font-family: 'Oxygen', sans-serif;
+  color: var(--purple-dark);
+  font-size: 1.125rem;
+  animation: fadeInOut 2s ease-in-out infinite;
+}
+
+/* Error State Styles */
+.error-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(88, 28, 135, 0.4);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+}
+
+.error-container {
+  max-width: 28rem;
+  background: linear-gradient(to right, rgb(243, 232, 255), rgb(254, 249, 195));
+  border: 2px solid var(--purple-primary);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.error-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.error-title {
+  font-family: 'Limelight', cursive;
+  font-size: 1.5rem;
+  color: var(--purple-dark);
+  margin: 0;
+}
+
+.header-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.header-icon.sparkle {
+  color: var(--purple-primary);
+}
+
+.header-icon.star {
+  color: var(--yellow-accent);
+}
+
+.error-content {
+  text-align: center;
+}
+
+.error-message {
+  font-family: 'Hind Madurai', sans-serif;
+  font-size: 1.125rem;
+  color: rgb(55, 65, 81);
+  margin-bottom: 1rem;
+}
+
+.encouragement {
+  font-family: 'Oxygen', sans-serif;
+  font-size: 1.125rem;
+  color: var(--teal-primary);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-family: 'Oxygen', sans-serif;
+  font-weight: 600;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-button.refresh {
+  background-color: var(--purple-primary);
+}
+
+.action-button.refresh:hover {
+  background-color: var(--purple-dark);
+  transform: translateY(-1px);
+}
+
+.action-button.home {
+  background-color: var(--teal-primary);
+}
+
+.action-button.home:hover {
+  background-color: var(--teal-dark);
+  transform: translateY(-1px);
+}
+
+.button-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Animations */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .spinner-box {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .sparkle-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .loading-text {
+    font-size: 1rem;
+  }
+  
+  .error-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .action-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
