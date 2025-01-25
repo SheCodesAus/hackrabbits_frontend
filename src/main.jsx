@@ -8,12 +8,13 @@ import NavBar from "./components/NavBar.jsx";
 import RoleModelProfile from "./pages/RoleModelProfilePage.jsx";
 
 import { AuthProvider } from "./components/AuthProvider.jsx";
+import Header from "./components/Header.jsx";
 
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <NavBar />,
+    // element: <NavBar />,
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/role-model-profile", element: <RoleModelProfile /> },

@@ -1,5 +1,9 @@
 import BackgroundSlideshow from "../components/BackgroundSlideshow";
 import React, { useState } from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import "./HomePage.css";
+import "../Styles.css"
 
 
 function HomePage() {
@@ -23,6 +27,10 @@ function HomePage() {
 
     return (
         <>
+
+            <Header />
+
+            {/* <NavBar /> */}
 
 
             {/* Hero Section */}
@@ -71,7 +79,7 @@ function HomePage() {
 
 
 
-
+            <Footer />
         </>
     );
 }
