@@ -1,5 +1,6 @@
 import BackgroundSlideshow from "../components/BackgroundSlideshow";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./HomePage.css";
@@ -7,7 +8,7 @@ import "../Styles.css";
 
 
 function HomePage() {
-
+    const navigate = useNavigate();
 
     // if (isLoading) {
     //     return (<p>loading...</p>);
@@ -24,6 +25,9 @@ function HomePage() {
         // Add functionality to filter role models based on location
     };
 
+    const handleSignUpNavigation = (type) => {
+        navigate(`/signup?type=${type}`);
+    };
 
     return (
         <>
@@ -69,8 +73,18 @@ function HomePage() {
 
             {/* Action Buttons */}
             <div className="action-buttons">
-                <button className="action-button">To Inspires</button>
-                <button className="action-button">To Be Inspired</button>
+                <button
+                    className="action-button"
+                    onClick={() => handleSignUpNavigation("role-model")}
+                >
+                    To Inspire
+                </button>
+                <button
+                    className="action-button"
+                    onClick={() => handleSignUpNavigation("community-user")}
+                >
+                    To Be Inspired
+                </button>
                 <button className="action-button">Know someone Inspiring</button>
             </div>
 
@@ -88,10 +102,10 @@ function HomePage() {
 export default HomePage;
 
 
-            /* <div id="rolemodel-list">
-                <h1> Featured Role Models</h1>
-                render rolemodel cards */
-            //     {rolemodel.map((rolemodelData, index) => (
-            //         <RolemodelCard key={index} rolemodelData={rolemodelData} customClass="home-page" />
-            //     ))}
-            // </div>
+/* <div id="rolemodel-list">
+    <h1> Featured Role Models</h1>
+    render rolemodel cards */
+//     {rolemodel.map((rolemodelData, index) => (
+//         <RolemodelCard key={index} rolemodelData={rolemodelData} customClass="home-page" />
+//     ))}
+// </div>
