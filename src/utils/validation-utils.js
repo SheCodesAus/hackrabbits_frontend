@@ -30,3 +30,29 @@ export const validatePhoneNumber = (phoneNumber) => {
       })
     };
   };
+
+  export const validateLoginForm = (formData) => {
+    const errors = {};
+  
+    // Username validation
+    if (!formData.username) {
+      errors.username = 'Username is required';
+    } else if (formData.username.length < 3) {
+      errors.username = 'Username must be at least 3 characters';
+    } else if (formData.username.length > 30) {
+      errors.username = 'Username must be less than 30 characters';
+    } else if (!/^[a-zA-Z0-9_]+$/.test(formData.username)) {
+      errors.username = 'Username can only contain letters, numbers, and underscores';
+    }
+  
+    // Password validation
+    if (!formData.password) {
+      errors.password = 'Password is required';
+    } else if (formData.password.length < 8) {
+      errors.password = 'Password must be at least 8 characters';
+    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.password)) {
+      errors.password = 'Password must contain uppercase, lowercase, and numbers';
+    }
+  
+    return errors;
+  };
