@@ -8,6 +8,9 @@
     --base-light: #F5F5F5;
     --base-dark: #737373;
     --black: #111111;
+    --background1: #dddaf3;
+    --background2: #e4f0f2;
+
   }
 
 /* CSS Reset */
@@ -77,6 +80,7 @@ select {
   padding: 10px 20px;
   margin: 5px 31px 20px 20px;
   max-height: 8rem;
+  background-image: linear-gradient(180deg, #dddaf3, #e4f0f2);
 
 }
 
@@ -85,7 +89,7 @@ select {
   max-height: 7rem;
   width: auto;
   margin-right: 20px;
-  border: 2px, solid var(--secondarybrand)
+  /* border: 2px, solid var(--secondarybrand) */
 }
 
 /* Ensures content falls below header */
@@ -137,6 +141,8 @@ body {
     z-index: 1000;   
     font-family: Arial, sans-serif;
     right: calc(10px + 5vw);
+    padding-top:0.5rem;
+    padding-right: 3rem;
   }
   
   /* Dropdown button */

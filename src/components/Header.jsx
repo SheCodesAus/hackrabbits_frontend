@@ -7,7 +7,7 @@ function Header() {
       
         <div class="header">
                 <NavBar />
-          <img class="heroimg" src="img/teal_to_purple_gradient_background.png"
+          <img class="heroimg" src="img/sheinspirescroplogo.png"
           alt="A brightly coloured logo that says She Inspires in a retro font, surrounded by stars" />
         </div>
 
