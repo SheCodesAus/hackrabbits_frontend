@@ -175,6 +175,10 @@ main {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.rolemodel-card a {
+    text-decoration: none; /* Remove underline */
+    color: inherit; /* Inherit text color from parent */
+}
 
 /* Hover effect to add some interactivity */
 .rolemodel-card:hover {
