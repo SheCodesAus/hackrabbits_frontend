@@ -6,18 +6,13 @@ import Footer from "../components/Footer";
 import "./HomePage.css";
 import "../Styles.css";
 
+import useRolemodels from "../hooks/use-rolemodels";
+import RolemodelCard from "../components/RolemodelCard";
 
 function HomePage() {
     const navigate = useNavigate();
 
-    // if (isLoading) {
-    //     return (<p>loading...</p>);
-    // }
-
-    // if (error) {
-    //     return (<p>Error: {error.message}</p>);
-    // }
-
+    const { rolemodels, isLoading, error } = useRolemodels();
     const [selectedLocation, setSelectedLocation] = useState("");
 
     const handleSearch = () => {
@@ -28,6 +23,15 @@ function HomePage() {
     const handleSignUpNavigation = (type) => {
         navigate(`/signup?type=${type}`);
     };
+
+    if (isLoading) {
+        return (<p>loading...</p>);
+    }
+
+    if (error) {
+        return (<p>Error: {error.message}</p>);
+    }
+
 
     return (
         <>
@@ -91,6 +95,13 @@ function HomePage() {
             {/* rolemodel cards Section */}
 
 
+            <div id="rolemodel-list">
+                <h1> Featured Role Models</h1>
+
+                {rolemodels.map((rolemodelData, key) => (
+                    <RolemodelCard key={key} rolemodelData={rolemodelData} />
+                ))}
+            </div>
 
 
             <Footer />
@@ -101,11 +112,3 @@ function HomePage() {
 
 export default HomePage;
 
-
-/* <div id="rolemodel-list">
-    <h1> Featured Role Models</h1>
-    render rolemodel cards */
-//     {rolemodel.map((rolemodelData, index) => (
-//         <RolemodelCard key={index} rolemodelData={rolemodelData} customClass="home-page" />
-//     ))}
-// </div>
