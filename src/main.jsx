@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./pages/HomePage.jsx";
 import NavBar from "./components/NavBar.jsx";
 import RoleModelProfile from "./pages/RoleModelProfilePage.jsx";
-import SignUpForm from "./pages/SignUpForm.jsx";
+import SignUpForm from "./components/SignUpPageForm.jsx";
 
 import { AuthProvider } from "./components/AuthProvider.jsx";
 import Header from "./components/Header.jsx";
