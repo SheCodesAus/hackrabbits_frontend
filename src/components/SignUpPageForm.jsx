@@ -1,367 +1,404 @@
 import React, { useState } from 'react';
+import { validatePhoneNumber, validateLinkedInUrl } from "../utils/validation-utils";
+import { registerCommunityUser } from "../api/communityuser_profile/post_signup";
+import { registerRoleModel } from "../api/rolemodeluser_profile/post_signup";
 import './SignupPageForm.css';
 
-const SignupForm = () => {
- const [formData, setFormData] = useState({
-   userType: 'general',
-   fullName: '',
-   email: '',
-   password: '',
-   industry: '',
-   location: '',
-   agreeToTerms: false,
-   roleModel: {
-     currentRole: '',
-     organization: '',
-     linkedinUrl: '',
-     achievements: ''
-   }
- });
+const SignupPageForm = () => {
+  const [formData, setFormData] = useState({
+    userType: 'COMMUNITY_USER',
+    username: '',
+    password: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    image: 'https://example.com/profile-image.jpg',
+    current_role: '',
+    location: '',
+    phone_number: '',
+    linkedin: '',
+    industry: '',
+    inspiration: '',
+    advice: '',
+    milestone: 'Career change',
+    is_active: true,
+    is_staff: false,
+    is_superuser: false,
+    agreeToTerms: false
+  });
 
- const [isLoading, setIsLoading] = useState(false);
- const [error, setError] = useState(null);
- const [successMessage, setSuccessMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState('');
 
- const validateForm = () => {
-   const errors = {};
+  const validateForm = () => {
+    const errors = {};
+    
+    // Common validations
+    if (!formData.username.trim()) {
+      errors.username = 'Username is required';
+    } else if (formData.username.length < 3) {
+      errors.username = 'Username must be at least 3 characters';
+    }
 
-   if (!formData.fullName.trim()) {
-     errors.fullName = 'Full name is required';
-   }
+    if (!formData.password.trim()) {
+      errors.password = 'Password is required';
+    } else if (formData.password.length < 8) {
+      errors.password = 'Password must be at least 8 characters';
+    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.password)) {
+      errors.password = 'Password must contain at least one uppercase letter, one lowercase letter, and one number';
+    }
 
-   if (!formData.email.trim()) {
-     errors.email = 'Email is required';
-   } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-     errors.email = 'Invalid email format';
-   }
+    if (!formData.first_name.trim()) errors.first_name = 'First name is required';
+    if (!formData.last_name.trim()) errors.last_name = 'Last name is required';
+    
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
+      errors.email = 'Invalid email address';
+    }
 
-   if (!formData.password.trim()) {
-     errors.password = 'Password is required';
-   } else if (formData.password.length < 8) {
-     errors.password = 'Password must be at least 8 characters';
-   }
+    if (!formData.location.trim()) errors.location = 'Location is required';
+    
+    if (!formData.phone_number.trim()) {
+      errors.phone_number = 'Phone number is required';
+    } else if (!validatePhoneNumber(formData.phone_number)) {
+      errors.phone_number = 'Invalid phone number format';
+    }
 
-   if (!formData.industry.trim()) {
-     errors.industry = 'Industry is required';
-   }
+    if (!formData.linkedin.trim()) {
+      errors.linkedin = 'LinkedIn URL is required';
+    } else if (!validateLinkedInUrl(formData.linkedin)) {
+      errors.linkedin = 'Invalid LinkedIn URL';
+    }
 
-   if (!formData.location.trim()) {
-     errors.location = 'Location is required';
-   }
+    if (!formData.current_role.trim()) errors.current_role = 'Current role is required';
 
-   if (formData.userType === 'roleModel') {
-     if (!formData.roleModel.currentRole.trim()) {
-       errors.currentRole = 'Current role is required';
-     }
-     if (!formData.roleModel.organization.trim()) {
-       errors.organization = 'Organization is required';
-     }
-     if (!formData.roleModel.linkedinUrl.trim()) {
-       errors.linkedinUrl = 'LinkedIn URL is required';
-     }
-     if (!formData.roleModel.achievements.trim()) {
-       errors.achievements = 'Achievements are required';
-     }
-   }
+    // Role Model specific validations
+    if (formData.userType === 'ROLE_MODEL') {
+      if (!formData.industry.trim()) errors.industry = 'Industry is required';
+      if (!formData.inspiration.trim()) errors.inspiration = 'Inspiration is required';
+      if (!formData.advice.trim()) errors.advice = 'Advice is required';
+      if (!formData.milestone.trim()) errors.milestone = 'Milestone is required';
+    }
 
-   return errors;
- };
+    if (!formData.agreeToTerms) {
+      errors.agreeToTerms = 'You must agree to the Terms of Service';
+    }
 
- const handleChange = (e) => {
-   const { name, value, type, checked } = e.target;
-   if (name.includes('roleModel.')) {
-     const roleModelField = name.split('.')[1];
-     setFormData(prev => ({
-       ...prev,
-       roleModel: {
-         ...prev.roleModel,
-         [roleModelField]: value
-       }
-     }));
-   } else {
-     setFormData(prev => ({
-       ...prev,
-       [name]: type === 'checkbox' ? checked : value,
-       ...(name === 'userType' && {
-         roleModel: {
-           currentRole: '',
-           organization: '',
-           linkedinUrl: '',
-           achievements: ''
-         }
-       })
-     }));
-   }
- };
+    return errors;
+  };
 
- const handleSubmit = async (e) => {
-   e.preventDefault();
-   setError(null);
-   setSuccessMessage('');
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
 
-   const validationErrors = validateForm();
-   if (Object.keys(validationErrors).length > 0) {
-     setError(validationErrors);
-     return;
-   }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setSuccessMessage('');
 
-   setIsLoading(true);
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length > 0) {
+      setError(validationErrors);
+      return;
+    }
 
-   try {
-     const response = await fetch('/api/signup', {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json',
-       },
-       body: JSON.stringify(formData)
-     });
+    setIsLoading(true);
 
-     const data = await response.json();
+    try {
+      const result = await registerUser(formData);
+      setSuccessMessage('Account created successfully!');
+      // Reset form to initial state
+      setFormData({
+        userType: 'COMMUNITY_USER',
+        username: '',
+        password: '',
+        first_name: '',
+        last_name: '',
+        email: '',
+        image: 'https://example.com/profile-image.jpg',
+        current_role: '',
+        location: '',
+        phone_number: '',
+        linkedin: '',
+        industry: '',
+        inspiration: '',
+        advice: '',
+        milestone: 'Career change',
+        is_active: true,
+        is_staff: false,
+        is_superuser: false,
+        agreeToTerms: false
+      });
+    } catch (err) {
+      setError(err.message || 'Failed to create account');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-     if (!response.ok) {
-       throw new Error(data.message || 'Signup failed');
-     }
+  return (
+    <div className="signup-form">
+      <div className="signup-container">
+        <h1 className="signup-title">Create Your Account</h1>
+        <p className="signup-subtitle">* Required fields</p>
 
-     setSuccessMessage('Account created successfully!');
-     setFormData({
-       userType: 'general',
-       fullName: '',
-       email: '',
-       password: '',
-       industry: '',
-       location: '',
-       agreeToTerms: false,
-       roleModel: {
-         currentRole: '',
-         organization: '',
-         linkedinUrl: '',
-         achievements: ''
-       }
-     });
-   } catch (err) {
-     setError(err.message);
-   } finally {
-     setIsLoading(false);
-   }
- };
+        {successMessage && (
+          <div className="success-message">{successMessage}</div>
+        )}
 
- return (
-   <div className="signup-form">
-     <div className="signup-container">
-       <h1 className="signup-title">Create Your Account</h1>
-       <p className="signup-subtitle">* Required fields</p>
+        {error && typeof error === 'string' && (
+          <div className="error-message">{error}</div>
+        )}
 
-       {successMessage && (
-         <div className="success-message">{successMessage}</div>
-       )}
+        <form onSubmit={handleSubmit} className="signup-form-container">
+          <div className="form-group">
+            <label htmlFor="userType" className="form-label">Account Type *</label>
+            <select
+              id="userType"
+              name="userType"
+              value={formData.userType}
+              onChange={handleChange}
+              required
+              className="form-input"
+              disabled={isLoading}
+            >
+              <option value="COMMUNITY_USER">Community Member</option>
+              <option value="ROLE_MODEL">Role Model</option>
+            </select>
+          </div>
 
-       {error && typeof error === 'string' && (
-         <div className="error-message">{error}</div>
-       )}
+          <div className="form-row">
+            <div className="form-group">
+              <label htmlFor="first_name" className="form-label">First Name *</label>
+              <input
+                type="text"
+                id="first_name"
+                name="first_name"
+                value={formData.first_name}
+                onChange={handleChange}
+                required
+                className={`form-input ${error?.first_name ? 'error' : ''}`}
+                disabled={isLoading}
+              />
+              {error?.first_name && <span className="error-text">{error.first_name}</span>}
+            </div>
 
-       <form onSubmit={handleSubmit} className="signup-form-container">
-         <div className="form-group">
-           <label htmlFor="userType" className="form-label">Subject *</label>
-           <select
-             id="userType"
-             name="userType"
-             value={formData.userType}
-             onChange={handleChange}
-             required
-             className="form-input"
-             disabled={isLoading}
-           >
-             <option value="general">To Be Inspired</option>
-             <option value="roleModel">To Inspire</option>
-           </select>
-         </div>
+            <div className="form-group">
+              <label htmlFor="last_name" className="form-label">Last Name *</label>
+              <input
+                type="text"
+                id="last_name"
+                name="last_name"
+                value={formData.last_name}
+                onChange={handleChange}
+                required
+                className={`form-input ${error?.last_name ? 'error' : ''}`}
+                disabled={isLoading}
+              />
+              {error?.last_name && <span className="error-text">{error.last_name}</span>}
+            </div>
+          </div>
 
-         <div className="form-group">
-           <label htmlFor="fullName" className="form-label">Full Name *</label>
-           <input
-             type="text"
-             id="fullName"
-             name="fullName"
-             value={formData.fullName}
-             onChange={handleChange}
-             required
-             className={`form-input ${error?.fullName ? 'error' : ''}`}
-             disabled={isLoading}
-           />
-           {error?.fullName && <span className="error-text">{error.fullName}</span>}
-         </div>
+          <div className="form-group">
+            <label htmlFor="username" className="form-label">Username *</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              required
+              className={`form-input ${error?.username ? 'error' : ''}`}
+              disabled={isLoading}
+            />
+            {error?.username && <span className="error-text">{error.username}</span>}
+          </div>
 
-         <div className="form-group">
-           <label htmlFor="email" className="form-label">Email *</label>
-           <input
-             type="email"
-             id="email"
-             name="email"
-             value={formData.email}
-             onChange={handleChange}
-             required
-             className={`form-input ${error?.email ? 'error' : ''}`}
-             disabled={isLoading}
-           />
-           {error?.email && <span className="error-text">{error.email}</span>}
-         </div>
+          <div className="form-group">
+            <label htmlFor="email" className="form-label">Email *</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className={`form-input ${error?.email ? 'error' : ''}`}
+              disabled={isLoading}
+            />
+            {error?.email && <span className="error-text">{error.email}</span>}
+          </div>
 
-         <div className="form-group">
-           <label htmlFor="password" className="form-label">Password *</label>
-           <input
-             type="password"
-             id="password"
-             name="password"
-             value={formData.password}
-             onChange={handleChange}
-             required
-             className={`form-input ${error?.password ? 'error' : ''}`}
-             disabled={isLoading}
-           />
-           {error?.password && <span className="error-text">{error.password}</span>}
-         </div>
+          <div className="form-group">
+            <label htmlFor="password" className="form-label">Password *</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className={`form-input ${error?.password ? 'error' : ''}`}
+              disabled={isLoading}
+            />
+            {error?.password && <span className="error-text">{error.password}</span>}
+            <span className="helper-text">
+              Must be at least 8 characters and include uppercase, lowercase, and numbers
+            </span>
+          </div>
 
-         <div className="form-group">
-           <label htmlFor="industry" className="form-label">Industry *</label>
-           <input
-             type="text"
-             id="industry"
-             name="industry"
-             value={formData.industry}
-             onChange={handleChange}
-             required
-             className={`form-input ${error?.industry ? 'error' : ''}`}
-             disabled={isLoading}
-           />
-           {error?.industry && <span className="error-text">{error.industry}</span>}
-         </div>
+          <div className="form-group">
+            <label htmlFor="phone_number" className="form-label">Phone Number *</label>
+            <input
+              type="tel"
+              id="phone_number"
+              name="phone_number"
+              value={formData.phone_number}
+              onChange={handleChange}
+              required
+              className={`form-input ${error?.phone_number ? 'error' : ''}`}
+              disabled={isLoading}
+              placeholder="+1234567890"
+            />
+            {error?.phone_number && <span className="error-text">{error.phone_number}</span>}
+          </div>
 
-         <div className="form-group">
-           <label htmlFor="location" className="form-label">Location (City) *</label>
-           <input
-             type="text"
-             id="location"
-             name="location"
-             value={formData.location}
-             onChange={handleChange}
-             required
-             className={`form-input ${error?.location ? 'error' : ''}`}
-             disabled={isLoading}
-           />
-           {error?.location && <span className="error-text">{error.location}</span>}
-         </div>
+          <div className="form-group">
+            <label htmlFor="current_role" className="form-label">Current Role *</label>
+            <input
+              type="text"
+              id="current_role"
+              name="current_role"
+              value={formData.current_role}
+              onChange={handleChange}
+              required
+              className={`form-input ${error?.current_role ? 'error' : ''}`}
+              disabled={isLoading}
+            />
+            {error?.current_role && <span className="error-text">{error.current_role}</span>}
+          </div>
 
-         {formData.userType === 'roleModel' && (
-           <>
-             <div className="form-group">
-               <label htmlFor="roleModel.currentRole" className="form-label">Current Role *</label>
-               <input
-                 type="text"
-                 id="roleModel.currentRole"
-                 name="roleModel.currentRole"
-                 value={formData.roleModel.currentRole}
-                 onChange={handleChange}
-                 required
-                 className={`form-input ${error?.currentRole ? 'error' : ''}`}
-                 disabled={isLoading}
-               />
-               {error?.currentRole && <span className="error-text">{error.currentRole}</span>}
-             </div>
+          <div className="form-group">
+            <label htmlFor="location" className="form-label">Location *</label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              value={formData.location}
+              onChange={handleChange}
+              required
+              className={`form-input ${error?.location ? 'error' : ''}`}
+              disabled={isLoading}
+            />
+            {error?.location && <span className="error-text">{error.location}</span>}
+          </div>
 
-             <div className="form-group">
-               <label htmlFor="roleModel.organization" className="form-label">Organization *</label>
-               <input
-                 type="text"
-                 id="roleModel.organization"
-                 name="roleModel.organization"
-                 value={formData.roleModel.organization}
-                 onChange={handleChange}
-                 required
-                 className={`form-input ${error?.organization ? 'error' : ''}`}
-                 disabled={isLoading}
-               />
-               {error?.organization && <span className="error-text">{error.organization}</span>}
-             </div>
+          <div className="form-group">
+            <label htmlFor="linkedin" className="form-label">LinkedIn URL *</label>
+            <input
+              type="url"
+              id="linkedin"
+              name="linkedin"
+              value={formData.linkedin}
+              onChange={handleChange}
+              required
+              className={`form-input ${error?.linkedin ? 'error' : ''}`}
+              disabled={isLoading}
+              placeholder="https://www.linkedin.com/in/yourprofile"
+            />
+            {error?.linkedin && <span className="error-text">{error.linkedin}</span>}
+          </div>
 
-             <div className="form-group">
-               <label htmlFor="roleModel.linkedinUrl" className="form-label">LinkedIn Profile URL *</label>
-               <input
-                 type="text"
-                 id="roleModel.linkedinUrl"
-                 name="roleModel.linkedinUrl"
-                 value={formData.roleModel.linkedinUrl}
-                 onChange={handleChange}
-                 required
-                 className={`form-input ${error?.linkedinUrl ? 'error' : ''}`}
-                 disabled={isLoading}
-               />
-               {error?.linkedinUrl && <span className="error-text">{error.linkedinUrl}</span>}
-             </div>
+          {formData.userType === 'ROLE_MODEL' && (
+            <>
+              <div className="form-group">
+                <label htmlFor="industry" className="form-label">Industry *</label>
+                <input
+                  type="text"
+                  id="industry"
+                  name="industry"
+                  value={formData.industry}
+                  onChange={handleChange}
+                  required
+                  className={`form-input ${error?.industry ? 'error' : ''}`}
+                  disabled={isLoading}
+                />
+                {error?.industry && <span className="error-text">{error.industry}</span>}
+              </div>
 
-             <div className="form-group">
-               <label htmlFor="roleModel.achievements" className="form-label">Notable Achievements *</label>
-               <textarea
-                 id="roleModel.achievements"
-                 name="roleModel.achievements"
-                 value={formData.roleModel.achievements}
-                 onChange={handleChange}
-                 required
-                 rows={4}
-                 className={`form-input ${error?.achievements ? 'error' : ''}`}
-                 disabled={isLoading}
-               />
-               {error?.achievements && <span className="error-text">{error.achievements}</span>}
-             </div>
-           </>
-         )}
+              <div className="form-group">
+                <label htmlFor="inspiration" className="form-label">Your Inspiration *</label>
+                <textarea
+                  id="inspiration"
+                  name="inspiration"
+                  value={formData.inspiration}
+                  onChange={handleChange}
+                  required
+                  className={`form-input ${error?.inspiration ? 'error' : ''}`}
+                  disabled={isLoading}
+                  rows={4}
+                />
+                {error?.inspiration && <span className="error-text">{error.inspiration}</span>}
+              </div>
 
-         <div className="form-group">
-           <input
-             type="checkbox"
-             id="agreeToTerms"
-             name="agreeToTerms"
-             checked={formData.agreeToTerms}
-             onChange={handleChange}
-             required
-             className="form-checkbox"
-             disabled={isLoading}
-           />
-           <label htmlFor="agreeToTerms" className="form-label">
-             I agree to the Terms of Service and Privacy Policy
-           </label>
-         </div>
+              <div className="form-group">
+                <label htmlFor="advice" className="form-label">Your Advice *</label>
+                <textarea
+                  id="advice"
+                  name="advice"
+                  value={formData.advice}
+                  onChange={handleChange}
+                  required
+                  className={`form-input ${error?.advice ? 'error' : ''}`}
+                  disabled={isLoading}
+                  rows={4}
+                />
+                {error?.advice && <span className="error-text">{error.advice}</span>}
+              </div>
+            </>
+          )}
 
-         <button 
-           type="submit" 
-           className="submit-button"
-           disabled={isLoading}
-         >
-           {isLoading ? 'Creating Account...' : 'Create Account'}
-         </button>
-       </form>
+          <div className="form-group checkbox-group">
+            <input
+              type="checkbox"
+              id="agreeToTerms"
+              name="agreeToTerms"
+              checked={formData.agreeToTerms}
+              onChange={handleChange}
+              required
+              className="form-checkbox"
+              disabled={isLoading}
+            />
+            <label htmlFor="agreeToTerms" className="checkbox-label">
+              I agree to the Terms of Service and Privacy Policy *
+            </label>
+            {error?.agreeToTerms && <span className="error-text">{error.agreeToTerms}</span>}
+          </div>
 
-       <div className="login-link">
-         Already have an account?
-         <a href="#" className="log-in">
-           Log In
-         </a>
-       </div>
-     </div>
-   </div>
- );
+          <button 
+            type="submit" 
+            className="submit-button"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Creating Account...' : 'Create Account'}
+          </button>
+        </form>
+
+        <div className="login-link">
+          Already have an account?
+          <a href="/login" className="log-in">
+            Log In
+          </a>
+        </div>
+      </div>
+    </div>
+  );
 };
 
-export default SignupForm;
-
-/**
-* @author SP
-* Changes added to original version:
-* - Added async form submission with loading states
-* - Added form validation for all fields
-* - Added error handling and display
-* - Added success message handling
-* - Added disabled states while submitting
-* - Added field-level error messages
-* - Added password length validation (min 8 chars)
-* - Added email format validation
-*/
+export default SignupPageForm;
