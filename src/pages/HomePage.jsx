@@ -104,13 +104,17 @@ function HomePage() {
 
             <div id="rolemodel-list">
                 <h1> Featured Role Models</h1>
-                <div class="cards-container">
-
-                    {rolemodels.map((rolemodelData, key) => (
-                        <RolemodelCard key={key} rolemodelData={rolemodelData} />
-                    ))}
+                <div className="cards-container">
+                    {filteredRolemodels.length > 0 ? (
+                        filteredRolemodels.map((rolemodelData, key) => (
+                            <RolemodelCard key={key} rolemodelData={rolemodelData} />
+                        ))
+                    ) : (
+                        <p>No role models found for the selected location.</p>
+                    )}
                 </div>
             </div>
+
 
 
 
