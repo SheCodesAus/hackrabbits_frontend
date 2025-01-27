@@ -199,6 +199,25 @@ body {
     animation: fadeIn 0.3s ease-in-out;
   }
   
+
+/* *****GENERIC BUTTON STYLING***** */
+.genericbtn {
+  margin-top: 1rem;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: var(--brand);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.genericbtn:hover {
+  background-color: var(--secondarybrand);
+}
+
   @keyframes fadeIn {
     from {
       opacity: 0;
