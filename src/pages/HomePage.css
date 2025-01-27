@@ -49,13 +49,7 @@ main {
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
-.featured_rolemodels {
-    margin: 20px 200px;
-    display: flex;
-    justify-self: center;
-    align-self: center;
-    align-content: center;
-}
+
 
 
 .search-section {
@@ -105,4 +99,106 @@ main {
 
 .action-button:hover {
     background-color: var(--secondarybrand);
+}
+
+
+/* Featured Role Models Section - Grid Container */
+#rolemodel-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between header and cards */
+    padding: 20px;
+    max-width: 1200px; /* Limit the width of the section */
+    margin: 0 auto; /* Center the section */
+}
+
+/* Header for Featured Role Models */
+#rolemodel-list h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-family: "Merriweather", serif;
+    color: var(--black);
+    margin-bottom: 20px;
+}
+
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+    gap: 20px; /* Space between cards */
+    justify-items: center; /* Center the cards in their grid cells */
+    padding: 20px;
+}
+
+.rolemodel-card {
+    background-color: var(--white);
+    border: 1px solid var(--base-light);
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* Fixed size for uniformity */
+    width: 250px; /* Fixed width */
+    height: 300px; /* Fixed height */
+}
+
+/* Ensure content fits within the fixed card size */
+.rolemodel-card img {
+    border-radius: 50%; /* Circular images */
+    width: 100px; /* Fixed size for images */
+    height: 100px;
+    object-fit: cover;
+    margin: 0 auto 1rem;
+}
+
+.rolemodel-card h3 {
+    font-family: "Merriweather", serif;
+    font-size: 1.2rem;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Handle long text gracefully */
+    white-space: nowrap;
+}
+
+.rolemodel-card p {
+    font-size: 0.9rem;
+    color: var(--base-dark);
+    margin-bottom: 1rem;
+    overflow: hidden; /* Prevent text overflow */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Hover effect to add some interactivity */
+.rolemodel-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    #rolemodel-list .cards-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 cards per row for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    #rolemodel-list .cards-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 cards per row for smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    #rolemodel-list .cards-container {
+        grid-template-columns: 1fr; /* 1 card per row for extra-small screens */
+    }
 }

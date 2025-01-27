@@ -97,11 +97,16 @@ function HomePage() {
 
             <div id="rolemodel-list">
                 <h1> Featured Role Models</h1>
+                <div class="cards-container">
 
-                {rolemodels.map((rolemodelData, key) => (
-                    <RolemodelCard key={key} rolemodelData={rolemodelData} />
-                ))}
+                    {rolemodels.map((rolemodelData, key) => (
+                        <RolemodelCard key={key} rolemodelData={rolemodelData} />
+                    ))}
+                </div>
             </div>
+
+
+
 
 
             <Footer />
