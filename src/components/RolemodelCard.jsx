@@ -15,7 +15,7 @@ function RolemodelCard(props) {
 
         <div className="rolemodel-card">
             <Link to={rolemodelLink}>
-                <h3>{rolemodelData.first_name + rolemodelData.last_name} </h3>
+                <h3>{rolemodelData.first_name + " " + rolemodelData.last_name} </h3>
                 <p>{rolemodelData.current_role}</p>
                 <div className="image-wrapper">
                     <img src={rolemodelData.image} alt="rolemodel visual" />
