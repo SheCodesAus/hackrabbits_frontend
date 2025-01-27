@@ -1,27 +1,32 @@
-async function getRolemodels() {
+export default async function getRolemodels() {
+  // Add debug logging for the API URL
+  if (!import.meta.env.VITE_API_URL) {
+      console.error('VITE_API_URL is not defined in environment variables');
+      throw new Error('API URL is not configured');
+  }
+  
+  const url = `${import.meta.env.VITE_API_URL}/role-models/public`;
+  console.log('Full API URL:', url); // This will help us verify the complete URL
 
-    const url = `${import.meta.env.VITE_API_URL}/role-models/public`;
-
-    try {
-      
-      const response = await fetch(url, { method: "GET" });
+  try {
+      const response = await fetch(url, { 
+          method: "GET",
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          }
+      });
 
       if (!response.ok) {
-        const fallbackError = "Error fetching rolemodels";
-        const data = await response.json().catch(() => {
-          throw new Error(fallbackError);
-        });
+          throw new Error(`Server responded with ${response.status}`);
+      }
 
-        const errorMessage = data?.detail ?? fallbackError;
-        throw new Error(errorMessage);
-    }
-
-    return await response.json();
+      return await response.json();
   } catch (error) {
-    // Log network or other unexpected errors
-    console.error("Network or fetch error in getRolemodels:", error.message);
-    throw new Error("An unexpected error occurred while fetching rolemodels. Please try again later.");
+      console.error('Fetch error:', {
+          message: error.message,
+          url: url
+      });
+      throw error;
+  }
 }
-}
-
-export default getRolemodels;
