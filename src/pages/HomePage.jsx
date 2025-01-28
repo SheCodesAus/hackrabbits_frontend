@@ -1,10 +1,11 @@
 import BackgroundSlideshow from "../components/BackgroundSlideshow";
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./HomePage.css";
-import "../Styles.css";
+import "../styles.css";
 
 import useRolemodels from "../hooks/use-rolemodels";
 import RolemodelCard from "../components/RolemodelCard";
@@ -96,7 +97,11 @@ function HomePage() {
                 >
                     To Be Inspired
                 </button>
-                <button className="action-button">Know someone Inspiring</button>
+                <Link to="/invite">
+                    <button className="action-button">
+                        Know someone Inspiring
+                    </button>
+                </Link>
             </div>
 
             {/* rolemodel cards Section */}

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
-import styles from './InvitePage.module.css';
+import { Link } from 'react-router-dom';
+import './InvitePage.css';
+import { sendInvitation } from '../api/invitations/post_invite';
+
 
 const InvitePage = () => {
   const [formData, setFormData] = useState({
@@ -17,12 +20,10 @@ const InvitePage = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    // Validate Full Name
     if (!formData.fullName.trim()) {
       newErrors.fullName = 'Full name is required';
     }
 
-    // Validate Email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
@@ -30,12 +31,14 @@ const InvitePage = () => {
       newErrors.email = 'Please enter a valid email address';
     }
 
-    // Validate Industry
     if (!formData.industry) {
       newErrors.industry = 'Please select an industry';
     }
 
-    // Validate Why Inspiring
+    if (!formData.currentRole.trim()) {
+      newErrors.currentRole = 'Current role is required';
+    }
+
     if (!formData.whyInspiring.trim()) {
       newErrors.whyInspiring = 'Please tell us why they inspire you';
     } else if (formData.whyInspiring.length < 20) {
@@ -51,7 +54,6 @@ const InvitePage = () => {
       ...prevState,
       [name]: value
     }));
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -64,7 +66,6 @@ const InvitePage = () => {
     e.preventDefault();
     setSubmitStatus('');
     
-    // Validate form
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
@@ -74,26 +75,28 @@ const InvitePage = () => {
     setIsSubmitting(true);
 
     try {
-      // Here you would typically make an API call to your backend
-      // For demonstration, using setTimeout to simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const response = await fetch('https://sheinspires-e47cb098889c.herokuapp.com/invitations/send', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
 
-      // Simulate API response
-      const response = await mockSubmitInvitation(formData);
-      
-      if (response.success) {
-        setSubmitStatus('success');
-        // Reset form
-        setFormData({
-          fullName: '',
-          email: '',
-          industry: '',
-          currentRole: '',
-          whyInspiring: ''
-        });
-      } else {
-        throw new Error(response.message || 'Failed to send invitation');
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to send invitation');
       }
+
+      setSubmitStatus('success');
+      setFormData({
+        fullName: '',
+        email: '',
+        industry: '',
+        currentRole: '',
+        whyInspiring: ''
+      });
     } catch (error) {
       setSubmitStatus('error');
       setErrors({
@@ -104,46 +107,34 @@ const InvitePage = () => {
     }
   };
 
-  // Mock API call - replace with your actual API endpoint
-  const mockSubmitInvitation = async (data) => {
-    // Simulate API validation and response
-    if (!data.email.includes('@')) {
-      return { success: false, message: 'Invalid email format' };
-    }
-    return { success: true, message: 'Invitation sent successfully' };
-  };
-
   return (
-    <div className={styles.container}>
-      <header className={styles.header}>
-        <h1>Invite - Phase 1</h1>
+    <div className="invite-page">
+      <header className="invite-header">
+        <h1>Invite a Role Model</h1>
       </header>
 
-      <div className={styles.formContainer}>
-        <h2 className={styles.formTitle}>Invite Someone Inspiring</h2>
-        <p className={styles.formSubtitle}>
+      <div className="invite-form-container">
+        <h2>Invite Someone Inspiring</h2>
+        <p className="invite-subtitle">
           Know someone who could inspire others? Invite them to join!
         </p>
 
         {submitStatus === 'success' && (
-          <div className={styles.successMessage}>
+          <div className="success-message">
             Invitation sent successfully!
           </div>
         )}
 
         {errors.submit && (
-          <div className={styles.errorMessage}>
+          <div className="error-message">
             {errors.submit}
           </div>
         )}
 
-        <h3 className={styles.sectionTitle}>Role Model's Information</h3>
-
         <form onSubmit={handleSubmit}>
-          {/* ... existing form fields ... */}
-          <div className={styles.formGroup}>
-            <label className={styles.label}>
-              Their Full Name <span className={styles.required}>*</span>
+          <div className="form-group">
+            <label>
+              Their Full Name <span className="required">*</span>
             </label>
             <input
               type="text"
@@ -151,30 +142,109 @@ const InvitePage = () => {
               value={formData.fullName}
               onChange={handleChange}
               required
-              className={`${styles.input} ${errors.fullName ? styles.inputError : ''}`}
+              className={errors.fullName ? 'form-input error' : 'form-input'}
               disabled={isSubmitting}
             />
             {errors.fullName && (
-              <span className={styles.errorText}>{errors.fullName}</span>
+              <span className="error-text">{errors.fullName}</span>
             )}
           </div>
 
-          {/* ... other form fields with similar error handling ... */}
+          <div className="form-group">
+            <label>
+              Their Email <span className="required">*</span>
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className={errors.email ? 'form-input error' : 'form-input'}
+              disabled={isSubmitting}
+            />
+            {errors.email && (
+              <span className="error-text">{errors.email}</span>
+            )}
+          </div>
+
+          <div className="form-group">
+            <label>
+              Their Industry <span className="required">*</span>
+            </label>
+            <select
+              name="industry"
+              value={formData.industry}
+              onChange={handleChange}
+              required
+              className={errors.industry ? 'form-input error' : 'form-input'}
+              disabled={isSubmitting}
+            >
+              <option value="">Select an industry</option>
+              <option value="SOFTWARE_ENGINEERING">Software Engineering</option>
+              <option value="EDUCATION">Education</option>
+              <option value="HEALTHCARE">Healthcare</option>
+              <option value="BUSINESS">Business</option>
+              <option value="ARTS">Arts</option>
+              <option value="OTHER">Other</option>
+            </select>
+            {errors.industry && (
+              <span className="error-text">{errors.industry}</span>
+            )}
+          </div>
+
+          <div className="form-group">
+            <label>
+              Their Current Role <span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              name="currentRole"
+              value={formData.currentRole}
+              onChange={handleChange}
+              required
+              className={errors.currentRole ? 'form-input error' : 'form-input'}
+              disabled={isSubmitting}
+            />
+            {errors.currentRole && (
+              <span className="error-text">{errors.currentRole}</span>
+            )}
+          </div>
+
+          <div className="form-group">
+            <label>
+              Why are they inspiring? <span className="required">*</span>
+            </label>
+            <textarea
+              name="whyInspiring"
+              value={formData.whyInspiring}
+              onChange={handleChange}
+              required
+              className={errors.whyInspiring ? 'form-input error' : 'form-input'}
+              disabled={isSubmitting}
+              rows={4}
+            />
+            {errors.whyInspiring && (
+              <span className="error-text">{errors.whyInspiring}</span>
+            )}
+          </div>
 
           <button 
             type="submit" 
-            className={styles.submitButton}
+            className="submit-button"
             disabled={isSubmitting}
           >
             {isSubmitting ? 'Sending...' : 'Send Invitation'}
           </button>
         </form>
+
+        <div className="signup-link">
+          Want to become a role model yourself? 
+          <Link to="/signup" className="link">Create an account</Link>
+        </div>
       </div>
     </div>
   );
 };
 
 export default InvitePage;
-
-//SP: some information about testing endpoints and mocking responses is included in this bit of jsx - take it with a grain of salt
-
