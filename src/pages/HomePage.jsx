@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./HomePage.css";
-import "../Styles.css";
+import "../styles.css";
 
 import useRolemodels from "../hooks/use-rolemodels";
 import RolemodelCard from "../components/RolemodelCard";
