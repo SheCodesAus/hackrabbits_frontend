@@ -8,6 +8,7 @@ import NavBar from "./components/NavBar.jsx";
 import RoleModelProfile from "./pages/RoleModelProfilePage.jsx";
 import SignUpForm from "./components/SignUpPageForm.jsx";
 import LoginForm from "./components/LoginForm.jsx"; 
+import InvitePage from "./components/InvitePage.jsx";
 
 import { AuthProvider } from "./components/AuthProvider.jsx";
 import Header from "./components/Header.jsx";
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
       { path: "/role-model-profile", element: <RoleModelProfile /> },
       { path: "/signup", element: <SignUpForm /> },
       { path: "/login", element: <LoginForm /> },
+      { path: "/invite", element: <InvitePage /> },
 
     ],
   },

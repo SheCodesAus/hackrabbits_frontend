@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { validatePhoneNumber, validateLinkedInUrl } from "../utils/validation-utils";
 import { registerCommunityUser } from "../api/communityuser_profile/post_signup";
 import { registerRoleModel } from "../api/rolemodeluser_profile/post_signup";
+import { Link } from 'react-router-dom';
 import './SignupPageForm.css';
 
 const SignupPageForm = () => {
@@ -33,7 +34,7 @@ const SignupPageForm = () => {
 
   const validateForm = () => {
     const errors = {};
-    
+
     // Common validations
     if (!formData.username.trim()) {
       errors.username = 'Username is required';
@@ -51,7 +52,7 @@ const SignupPageForm = () => {
 
     if (!formData.first_name.trim()) errors.first_name = 'First name is required';
     if (!formData.last_name.trim()) errors.last_name = 'Last name is required';
-    
+
     if (!formData.email.trim()) {
       errors.email = 'Email is required';
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
@@ -59,7 +60,7 @@ const SignupPageForm = () => {
     }
 
     if (!formData.location.trim()) errors.location = 'Location is required';
-    
+
     if (!formData.phone_number.trim()) {
       errors.phone_number = 'Phone number is required';
     } else if (!validatePhoneNumber(formData.phone_number)) {
@@ -381,8 +382,8 @@ const SignupPageForm = () => {
             {error?.agreeToTerms && <span className="error-text">{error.agreeToTerms}</span>}
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="submit-button"
             disabled={isLoading}
           >
@@ -395,6 +396,12 @@ const SignupPageForm = () => {
           <a href="/login" className="log-in">
             Log In
           </a>
+        </div>
+        <div className="invite-link-container">
+          <p>Know someone inspiring?</p>
+          <Link to="/invite" className="invite-link">
+            Invite them to become a role model
+          </Link>
         </div>
       </div>
     </div>

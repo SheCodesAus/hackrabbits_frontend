@@ -1,161 +1,61 @@
-/* InvitePage.module.css */
-.container {
-    min-height: 100vh;
-    background: #f8f5ff;
-    padding: 2rem;
-  }
-  
-  .header {
-    background: #5E17EB;
-    color: white;
-    padding: 1rem 2rem;
-    margin: -2rem -2rem 2rem -2rem;
-  }
-  
-  .header h1 {
-    font-size: 1.5rem;
-    font-weight: 400;
-  }
-  
-  .formContainer {
-    max-width: 600px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 16px;
-    padding: 2rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .formTitle {
-    color: #5E17EB;
-    font-size: 1.75rem;
-    text-align: center;
-    margin-bottom: 0.5rem;
-  }
-  
-  .formSubtitle {
-    color: #666;
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  .sectionTitle {
-    color: #333;
-    font-size: 1.1rem;
-    margin: 2rem 0 1.5rem;
-  }
-  
-  .formGroup {
-    margin-bottom: 1.5rem;
-  }
-  
-  .label {
-    display: block;
-    color: #444;
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-  }
-  
-  .required {
-    color: #e74c3c;
-    margin-left: 2px;
-  }
-  
-  .input,
-  .select,
-  .textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-  }
-  
-  .input:focus,
-  .select:focus,
-  .textarea:focus {
-    outline: none;
-    border-color: #5E17EB;
-    box-shadow: 0 0 0 3px rgba(94, 23, 235, 0.1);
-  }
-  
-  .select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.75rem center;
-    background-size: 1em;
-    padding-right: 2.5rem;
-  }
-  
-  .textarea {
-    min-height: 120px;
-    resize: vertical;
-  }
-  
-  .submitButton {
-    width: 100%;
-    background: #078375;
-    color: white;
+.invite-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--background1), var(--background2));
+  padding: 2rem;
+}
+
+.invite-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.invite-form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--white);
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.invite-subtitle {
+  color: var(--base-dark);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 0.9rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+textarea.form-input {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.signup-link {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.signup-link .link {
+  color: var(--brand);
+  margin-left: 0.5rem;
+  text-decoration: none;
+}
+
+.signup-link .link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .invite-page {
     padding: 1rem;
-    border: none;
-    border-radius: 9999px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 2rem;
-  }
-  
-  .submitButton:hover {
-    background: #056b5f;
-  }
-  
-  @media (max-width: 640px) {
-    .container {
-      padding: 1rem;
-    }
-  
-    .header {
-      margin: -1rem -1rem 1rem -1rem;
-    }
-  
-    .formContainer {
-      padding: 1.5rem;
-    }
   }
 
-  .successMessage {
-    background-color: #def7ec;
-    color: #03543f;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
-    text-align: center;
+  .invite-form-container {
+    padding: 1.5rem;
   }
-  
-  .errorMessage {
-    background-color: #fde8e8;
-    color: #c81e1e;
-    padding: 1rem;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-  
-  .errorText {
-    color: #c81e1e;
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-    display: block;
-  }
-  
-  .inputError {
-    border-color: #c81e1e;
-    background-color: #fff5f5;
-  }
-  
-  .submitButton:disabled {
-    background-color: #9ca3af;
-    cursor: not-allowed;
-  }
+}

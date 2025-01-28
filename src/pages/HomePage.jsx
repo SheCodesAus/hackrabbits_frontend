@@ -1,6 +1,6 @@
 import BackgroundSlideshow from "../components/BackgroundSlideshow";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import "./HomePage.css";
@@ -89,7 +89,11 @@ function HomePage() {
                 >
                     To Be Inspired
                 </button>
-                <button className="action-button">Know someone Inspiring</button>
+                <Link to="/invite">
+                    <button className="action-button">
+                        Know someone Inspiring
+                    </button>
+                </Link>
             </div>
 
             {/* rolemodel cards Section */}
