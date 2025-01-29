@@ -2,7 +2,7 @@ import { API_BASE_URL } from '../../config/constants';
 
 export const sendInvitation = async (inviteData) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/invitations/send`, {
+    const response = await fetch('https://sheinspires-e47cb098889c.herokuapp.com/invitations/send', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

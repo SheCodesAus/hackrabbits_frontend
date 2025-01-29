@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './InvitePage.css';
-import { sendInvitation } from '../api/invitations/post_invite';
-
 
 const InvitePage = () => {
   const [formData, setFormData] = useState({
@@ -80,7 +78,13 @@ const InvitePage = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          industry: formData.industry,
+          currentRole: formData.currentRole,
+          whyInspiring: formData.whyInspiring
+        })
       });
 
       const data = await response.json();
@@ -98,6 +102,7 @@ const InvitePage = () => {
         whyInspiring: ''
       });
     } catch (error) {
+      console.error('Invitation error:', error);
       setSubmitStatus('error');
       setErrors({
         submit: error.message || 'Failed to send invitation. Please try again.'
@@ -105,7 +110,7 @@ const InvitePage = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };
+};
 
   return (
     <div className="invite-page">
@@ -121,7 +126,7 @@ const InvitePage = () => {
 
         {submitStatus === 'success' && (
           <div className="success-message">
-            Invitation sent successfully!
+            Invitation sent successfully! Thank you for helping us grow our community.
           </div>
         )}
 
@@ -131,12 +136,13 @@ const InvitePage = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="invite-form">
           <div className="form-group">
-            <label>
+            <label htmlFor="fullName">
               Their Full Name <span className="required">*</span>
             </label>
             <input
+              id="fullName"
               type="text"
               name="fullName"
               value={formData.fullName}
@@ -144,6 +150,7 @@ const InvitePage = () => {
               required
               className={errors.fullName ? 'form-input error' : 'form-input'}
               disabled={isSubmitting}
+              placeholder="Enter their full name"
             />
             {errors.fullName && (
               <span className="error-text">{errors.fullName}</span>
@@ -151,10 +158,11 @@ const InvitePage = () => {
           </div>
 
           <div className="form-group">
-            <label>
+            <label htmlFor="email">
               Their Email <span className="required">*</span>
             </label>
             <input
+              id="email"
               type="email"
               name="email"
               value={formData.email}
@@ -162,6 +170,7 @@ const InvitePage = () => {
               required
               className={errors.email ? 'form-input error' : 'form-input'}
               disabled={isSubmitting}
+              placeholder="Enter their email address"
             />
             {errors.email && (
               <span className="error-text">{errors.email}</span>
@@ -169,10 +178,11 @@ const InvitePage = () => {
           </div>
 
           <div className="form-group">
-            <label>
+            <label htmlFor="industry">
               Their Industry <span className="required">*</span>
             </label>
             <select
+              id="industry"
               name="industry"
               value={formData.industry}
               onChange={handleChange}
@@ -194,10 +204,11 @@ const InvitePage = () => {
           </div>
 
           <div className="form-group">
-            <label>
+            <label htmlFor="currentRole">
               Their Current Role <span className="required">*</span>
             </label>
             <input
+              id="currentRole"
               type="text"
               name="currentRole"
               value={formData.currentRole}
@@ -205,6 +216,7 @@ const InvitePage = () => {
               required
               className={errors.currentRole ? 'form-input error' : 'form-input'}
               disabled={isSubmitting}
+              placeholder="Enter their current role"
             />
             {errors.currentRole && (
               <span className="error-text">{errors.currentRole}</span>
@@ -212,10 +224,11 @@ const InvitePage = () => {
           </div>
 
           <div className="form-group">
-            <label>
+            <label htmlFor="whyInspiring">
               Why are they inspiring? <span className="required">*</span>
             </label>
             <textarea
+              id="whyInspiring"
               name="whyInspiring"
               value={formData.whyInspiring}
               onChange={handleChange}
@@ -223,6 +236,7 @@ const InvitePage = () => {
               className={errors.whyInspiring ? 'form-input error' : 'form-input'}
               disabled={isSubmitting}
               rows={4}
+              placeholder="Tell us why this person inspires you (minimum 20 characters)"
             />
             {errors.whyInspiring && (
               <span className="error-text">{errors.whyInspiring}</span>
