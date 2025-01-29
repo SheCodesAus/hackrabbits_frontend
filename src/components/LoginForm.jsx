@@ -1,163 +1,132 @@
-// LoginForm.jsx
 import React, { useState } from 'react';
-import styles from './LoginForm.module.css';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/use-auth.js';
+import { loginUser } from '../api/auth-service';
+import { validateLoginForm } from '../utils/validation-utils';
+import './LoginForm.css';
 
 const LoginForm = () => {
- const [formData, setFormData] = useState({
-   email: '',
-   password: '',
-   rememberMe: false
- });
+  const navigate = useNavigate();
+  const { setAuth } = useAuth();
+  
+  const [formData, setFormData] = useState({
+    username: '',
+    password: ''
+  });
 
- const [errors, setErrors] = useState({});
- const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
 
- const validateForm = () => {
-   const errors = {};
-   if (!formData.email) {
-     errors.email = 'Email is required';
-   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-     errors.email = 'Please enter a valid email';
-   }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
 
-   if (!formData.password) {
-     errors.password = 'Password is required';
-   } else if (formData.password.length < 6) {
-     errors.password = 'Password must be at least 6 characters';
-   }
-   return errors;
- };
+    if (errors[name]) {
+      setErrors(prev => ({
+        ...prev,
+        [name]: ''
+      }));
+    }
+  };
 
- const handleChange = (e) => {
-   const { name, value, type, checked } = e.target;
-   setFormData(prev => ({
-     ...prev,
-     [name]: type === 'checkbox' ? checked : value
-   }));
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setErrors({});
 
-   if (errors[name]) {
-     setErrors(prev => ({
-       ...prev,
-       [name]: ''
-     }));
-   }
- };
+    const validationErrors = validateLoginForm(formData);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setIsLoading(false);
+      return;
+    }
 
- const handleSubmit = async (e) => {
-   e.preventDefault();
-   setIsLoading(true);
-   setErrors({});
+    try {
+      const data = await loginUser(formData);
+      // Update auth context with token
+      setAuth({ token: data.token });
+      // Store token in localStorage
+      window.localStorage.setItem('token', data.token);
+      // Redirect to home page
+      navigate('/');
+    } catch (err) {
+      setErrors({
+        general: err.message || 'Login failed. Please check your credentials and try again.'
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-   const validationErrors = validateForm();
-   if (Object.keys(validationErrors).length > 0) {
-     setErrors(validationErrors);
-     setIsLoading(false);
-     return;
-   }
+  return (
+    <div className="login-form">
+      <div className="login-container">
+        <h2>Welcome Back</h2>
+        
+        {errors.general && (
+          <div className="general-error">{errors.general}</div>
+        )}
 
-   try {
-     const response = await fetch('/api/login', {
-       method: 'POST',
-       headers: {
-         'Content-Type': 'application/json',
-       },
-       body: JSON.stringify(formData)
-     });
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              className={`form-input ${errors.username ? 'input-error' : ''}`}
+              disabled={isLoading}
+              required
+            />
+            {errors.username && (
+              <span className="error-message">{errors.username}</span>
+            )}
+          </div>
 
-     const data = await response.json();
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className={`form-input ${errors.password ? 'input-error' : ''}`}
+              disabled={isLoading}
+              required
+            />
+            {errors.password && (
+              <span className="error-message">{errors.password}</span>
+            )}
+          </div>
 
-     if (!response.ok) {
-       throw new Error(data.message || 'Login failed');
-     }
+          <button 
+            type="submit"
+            className="submit-button"
+            disabled={isLoading}
+          >
+            {isLoading ? 'Logging in...' : 'Login'}
+          </button>
 
-     // Handle successful login
-     console.log('Login successful:', data);
-     
-   } catch (err) {
-     setErrors({
-       general: err.message || 'Login failed. Please try again.'
-     });
-   } finally {
-     setIsLoading(false);
-   }
- };
+          <div className="login-links">
+            <a href="/forgot-password" className="forgot-password">
+              Forgot Password?
+            </a>
+          </div>
+        </form>
 
- return (
-   <div className={styles.loginForm}>
-     <div className={styles.loginContainer}>
-       <h2>Welcome Back</h2>
-       
-       {errors.general && (
-         <div className={styles.generalError}>{errors.general}</div>
-       )}
-
-       <form onSubmit={handleSubmit}>
-         <div className={styles.formGroup}>
-           <label htmlFor="email">Email</label>
-           <input
-             type="email"
-             id="email"
-             name="email"
-             value={formData.email}
-             onChange={handleChange}
-             className={`${styles.input} ${errors.email ? styles.inputError : ''}`}
-             disabled={isLoading}
-             required
-           />
-           {errors.email && (
-             <span className={styles.errorMessage}>{errors.email}</span>
-           )}
-         </div>
-
-         <div className={styles.formGroup}>
-           <label htmlFor="password">Password</label>
-           <input
-             type="password"
-             id="password"
-             name="password"
-             value={formData.password}
-             onChange={handleChange}
-             className={`${styles.input} ${errors.password ? styles.inputError : ''}`}
-             disabled={isLoading}
-             required
-           />
-           {errors.password && (
-             <span className={styles.errorMessage}>{errors.password}</span>
-           )}
-         </div>
-
-         <div className={styles.checkboxGroup}>
-           <input
-             type="checkbox"
-             id="rememberMe"
-             name="rememberMe"
-             checked={formData.rememberMe}
-             onChange={handleChange}
-             disabled={isLoading}
-           />
-           <label htmlFor="rememberMe">Remember me</label>
-         </div>
-
-         <button 
-           type="submit"
-           className={styles.submitButton}
-           disabled={isLoading}
-         >
-           {isLoading ? 'Logging in...' : 'Login'}
-         </button>
-
-         <a href="#" className={styles.forgotPassword}>
-           Forgot Password?
-         </a>
-       </form>
-
-       <div className={styles.signupLink}>
-         Don't have an account?
-         <a href="#" className={styles.signUp}>Sign Up</a>
-       </div>
-     </div>
-   </div>
- );
+        <div className="signup-link">
+          Don't have an account?
+          <a href="/signup" className="sign-up">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default LoginForm;

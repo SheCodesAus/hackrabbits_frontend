@@ -12,17 +12,18 @@ export const loginUser = async (credentials) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(credentials)
+      body: JSON.stringify({
+        username: credentials.username,
+        password: credentials.password
+      })
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.message || 'Login failed');
+      throw new Error(data.non_field_errors?.[0] || 'Login failed');
     }
 
-    // Store token in localStorage
-    localStorage.setItem('authToken', data.token);
     return data;
   } catch (error) {
     throw new Error(error.message || 'Failed to login');

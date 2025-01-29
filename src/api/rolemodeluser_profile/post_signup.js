@@ -10,7 +10,7 @@ export const registerRoleModel = async (userData) => {
   try {
     const sanitizedData = sanitizeFormData(userData);
     
-    const response = await fetch(`${API_BASE_URL}/role-model/signup`, {
+    const response = await fetch(`${API_BASE_URL}/role-model/signup/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -30,7 +30,7 @@ export const registerRoleModel = async (userData) => {
         industry: sanitizedData.industry,
         inspiration: sanitizedData.inspiration,
         advice: sanitizedData.advice,
-        milestone: sanitizedData.milestone
+        milestones: sanitizedData.milestone
       })
     });
 
