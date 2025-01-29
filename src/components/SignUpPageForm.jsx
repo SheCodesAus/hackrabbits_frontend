@@ -4,6 +4,7 @@ import { registerCommunityUser } from "../api/communityuser_profile/post_signup.
 import { registerRoleModel } from "../api/rolemodeluser_profile/post_signup.js";
 import './SignupPageForm.css';
 
+
 const SignupPageForm = () => {
 
   const [formData, setFormData] = useState({
@@ -455,6 +456,12 @@ const SignupPageForm = () => {
           <a href="/login" className="log-in">
             Log In
           </a>
+        </div>
+        <div className="invite-link-container">
+          <p>Know someone inspiring?</p>
+          <Link to="/invite" className="invite-link">
+            Invite them to become a role model
+          </Link>
         </div>
       </div>
     </div>

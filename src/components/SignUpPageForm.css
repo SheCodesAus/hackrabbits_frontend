@@ -113,3 +113,23 @@ select.form-input {
   background-size: 1.5em 1.5em;
   padding-right: 2.5rem;
 }
+
+.invite-link {
+  text-align: center;
+  margin-top: 1rem;
+  color: var(--base-dark);
+  font-size: 0.95rem;
+}
+
+.invite-cta {
+  color: var(--brand);
+  margin-left: 0.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.invite-cta:hover {
+  color: var(--secondarybrand);
+  text-decoration: underline;
+}
