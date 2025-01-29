@@ -18,10 +18,17 @@ function SearchBar({ onFilter }) {
                 className="location-dropdown"
             >
                 <option value="">Select a Location</option>
-                <option value="Perth">Perth</option>
-                <option value="Sydney">Sydney</option>
-                <option value="Melbourne">Melbourne</option>
-                <option value="Brisbane">Brisbane</option>
+                <option value="PERTH">Perth</option>
+                <option value="ADELAIDE">Adelaide</option>
+                <option value="MELBOURNE">Melbourne</option>
+                <option value="HOBART">Hobart</option>
+                <option value="CANBERRA">Canberra</option>
+                <option value="SYDNEY">Sydney</option>
+                <option value="BRISBANE">Brisbane</option>
+                <option value="DARWIN">Darwin</option>
+
+
+
             </select>
             <button onClick={handleSearch} className="search-button">
                 Search
