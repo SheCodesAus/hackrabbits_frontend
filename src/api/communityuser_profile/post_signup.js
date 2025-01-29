@@ -1,16 +1,13 @@
 import { API_BASE_URL } from '../../config/constants';
 import { sanitizeFormData } from '../../utils/validation-utils';
 
-/**
- * Register a new community user
- * @param {Object} userData - User registration data
- * @returns {Promise} - Registration response
- */
-export const registerCommunityUser = async (userData) => {
+
+
+export const registerCommunityUser = async (formData) => {
   try {
-    const sanitizedData = sanitizeFormData(userData);
+    const sanitizedData = sanitizeFormData(formData);
     
-    const response = await fetch(`${API_BASE_URL}/community-user/signup`, {
+    const response = await fetch(`${API_BASE_URL}/community-user/signup/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,6 +25,22 @@ export const registerCommunityUser = async (userData) => {
         phone_number: sanitizedData.phone_number,
         linkedin: sanitizedData.linkedin
       })
+
+
+
+
+    //   body: JSON.stringify({
+    //     username: formData.username,
+    //     password: formData.password,
+    //     first_name: formData.first_name,  // Ensure this is included
+    //     last_name: formData.last_name,    // Ensure this is included
+    //     email: formData.email,
+    //     current_role: formData.current_role,
+    //     location: formData.location,
+    //     phone_number: formData.phone_number,
+    //     linkedin: formData.linkedin,
+    // })
+    
     });
 
     const data = await response.json();
