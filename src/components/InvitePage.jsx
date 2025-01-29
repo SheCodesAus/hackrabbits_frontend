@@ -73,7 +73,7 @@ const InvitePage = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('https://sheinspires-e47cb098889c.herokuapp.com/invitations/send', {
+      const response = await fetch('http://127.0.0.1:8000/invitations/send', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

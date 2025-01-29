@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { validatePhoneNumber, validateLinkedInUrl } from "../utils/validation-utils";
 import { registerCommunityUser } from "../api/communityuser_profile/post_signup.js";
 import { registerRoleModel } from "../api/rolemodeluser_profile/post_signup.js";
-import './SignupPageForm.css';
+import './SignUpPageForm.css';
+import { Link } from "react-router-dom";
 
 
 const SignupPageForm = () => {
