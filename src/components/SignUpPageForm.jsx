@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import { validatePhoneNumber, validateLinkedInUrl } from "../utils/validation-utils";
-import { registerCommunityUser } from "../api/communityuser_profile/post_signup";
-import { registerRoleModel } from "../api/rolemodeluser_profile/post_signup";
-import './SignupPageForm.css';
+import { registerCommunityUser } from "../api/communityuser_profile/post_signup.js";
+import { registerRoleModel } from "../api/rolemodeluser_profile/post_signup.js";
+import './SignUpPageForm.css';
+import { Link } from "react-router-dom";
+
 
 const SignupPageForm = () => {
+
   const [formData, setFormData] = useState({
-    userType: 'COMMUNITY_USER',
+    user_type: 'COMMUNITY_USER',
     username: '',
     password: '',
     first_name: '',
     last_name: '',
     email: '',
-    image: 'https://example.com/profile-image.jpg',
+    image: '',
     current_role: '',
     location: '',
     phone_number: '',
@@ -20,11 +23,11 @@ const SignupPageForm = () => {
     industry: '',
     inspiration: '',
     advice: '',
-    milestone: 'Career change',
-    is_active: true,
-    is_staff: false,
-    is_superuser: false,
-    agreeToTerms: false
+    milestones: 'Career change',
+    // is_active: true,
+    // is_staff: false,
+    // is_superuser: false,
+    // agreeToTerms: false
   });
 
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +36,7 @@ const SignupPageForm = () => {
 
   const validateForm = () => {
     const errors = {};
-    
+
     // Common validations
     if (!formData.username.trim()) {
       errors.username = 'Username is required';
@@ -51,7 +54,7 @@ const SignupPageForm = () => {
 
     if (!formData.first_name.trim()) errors.first_name = 'First name is required';
     if (!formData.last_name.trim()) errors.last_name = 'Last name is required';
-    
+
     if (!formData.email.trim()) {
       errors.email = 'Email is required';
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
@@ -59,7 +62,7 @@ const SignupPageForm = () => {
     }
 
     if (!formData.location.trim()) errors.location = 'Location is required';
-    
+
     if (!formData.phone_number.trim()) {
       errors.phone_number = 'Phone number is required';
     } else if (!validatePhoneNumber(formData.phone_number)) {
@@ -75,11 +78,11 @@ const SignupPageForm = () => {
     if (!formData.current_role.trim()) errors.current_role = 'Current role is required';
 
     // Role Model specific validations
-    if (formData.userType === 'ROLE_MODEL') {
+    if (formData.user_type === 'ROLE_MODEL') {
       if (!formData.industry.trim()) errors.industry = 'Industry is required';
       if (!formData.inspiration.trim()) errors.inspiration = 'Inspiration is required';
       if (!formData.advice.trim()) errors.advice = 'Advice is required';
-      if (!formData.milestone.trim()) errors.milestone = 'Milestone is required';
+      if (!formData.milestones.trim()) errors.milestones = 'Milestone is required';
     }
 
     if (!formData.agreeToTerms) {
@@ -102,6 +105,11 @@ const SignupPageForm = () => {
     setError(null);
     setSuccessMessage('');
 
+
+    // Debugging log
+    console.log("Submitting user data:", formData);
+
+    // Validate form data
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
       setError(validationErrors);
@@ -111,36 +119,63 @@ const SignupPageForm = () => {
     setIsLoading(true);
 
     try {
-      const result = await registerUser(formData);
+      let result;
+      if (formData.user_type === 'COMMUNITY_USER') {
+        // Submit to the Community User endpoint
+        result = await registerCommunityUser(formData);
+      } else if (formData.user_type === 'ROLE_MODEL') {
+        // Submit to the Role Model endpoint
+        result = await registerRoleModel(formData);
+      }
+
+      console.log("Signup response:", result);
+
       setSuccessMessage('Account created successfully!');
       // Reset form to initial state
       setFormData({
-        userType: 'COMMUNITY_USER',
+        user_type: 'COMMUNITY_USER',
         username: '',
         password: '',
         first_name: '',
         last_name: '',
         email: '',
-        image: 'https://example.com/profile-image.jpg',
+        image: '',
         current_role: '',
         location: '',
         phone_number: '',
         linkedin: '',
-        industry: '',
+        // industry: '',
         inspiration: '',
         advice: '',
-        milestone: 'Career change',
-        is_active: true,
-        is_staff: false,
-        is_superuser: false,
-        agreeToTerms: false
+        milestones: 'Career change',
+        // is_active: true,
+        // is_staff: false,
+        // is_superuser: false,
+        // agreeToTerms: false
       });
     } catch (err) {
+
+
+      console.error("Signup error:", err.message);
+
       setError(err.message || 'Failed to create account');
     } finally {
       setIsLoading(false);
     }
   };
+
+
+
+
+
+  // I want the form on sign up for community user point to this endpoint: registerCommunityUser
+
+
+  // for role model user poin to this endpoint. registerRoleModel
+
+
+
+
 
   return (
     <div className="signup-form">
@@ -158,11 +193,11 @@ const SignupPageForm = () => {
 
         <form onSubmit={handleSubmit} className="signup-form-container">
           <div className="form-group">
-            <label htmlFor="userType" className="form-label">Account Type *</label>
+            <label htmlFor="user_type" className="form-label">Account Type *</label>
             <select
-              id="userType"
-              name="userType"
-              value={formData.userType}
+              id="user_type"
+              name="user_type"
+              value={formData.user_type}
               onChange={handleChange}
               required
               className="form-input"
@@ -254,15 +289,15 @@ const SignupPageForm = () => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="phone_number" className="form-label">Phone Number *</label>
+            <label htmlFor="phone_number" className="form-label">Phone Number </label>
             <input
               type="tel"
               id="phone_number"
               name="phone_number"
               value={formData.phone_number}
               onChange={handleChange}
-              required
-              className={`form-input ${error?.phone_number ? 'error' : ''}`}
+              // required
+              // className={`form-input ${error?.phone_number ? 'error' : ''}`}
               disabled={isLoading}
               placeholder="+1234567890"
             />
@@ -286,8 +321,7 @@ const SignupPageForm = () => {
 
           <div className="form-group">
             <label htmlFor="location" className="form-label">Location *</label>
-            <input
-              type="text"
+            <select
               id="location"
               name="location"
               value={formData.location}
@@ -295,7 +329,17 @@ const SignupPageForm = () => {
               required
               className={`form-input ${error?.location ? 'error' : ''}`}
               disabled={isLoading}
-            />
+            >
+              <option value="">Select a location</option>
+              <option value="PERTH">Perth</option>
+              <option value="ADELAIDE">Adelaide</option>
+              <option value="MELBOURNE">Melbourne</option>
+              <option value="HOBART">Hobart</option>
+              <option value="CANBERRA">Canberra</option>
+              <option value="SYDNEY">Sydney</option>
+              <option value="BRISBANE">Brisbane</option>
+              <option value="DARWIN">Darwin</option>
+            </select>
             {error?.location && <span className="error-text">{error.location}</span>}
           </div>
 
@@ -315,12 +359,12 @@ const SignupPageForm = () => {
             {error?.linkedin && <span className="error-text">{error.linkedin}</span>}
           </div>
 
-          {formData.userType === 'ROLE_MODEL' && (
+          {formData.user_type === 'ROLE_MODEL' && (
             <>
+
               <div className="form-group">
                 <label htmlFor="industry" className="form-label">Industry *</label>
-                <input
-                  type="text"
+                <select
                   id="industry"
                   name="industry"
                   value={formData.industry}
@@ -328,9 +372,27 @@ const SignupPageForm = () => {
                   required
                   className={`form-input ${error?.industry ? 'error' : ''}`}
                   disabled={isLoading}
-                />
+                >
+                  <option value="">Select an Industry</option>
+                  <option value="EDUCATION">Education</option>
+                  <option value="HEALTHCARE">Healthcare</option>
+                  <option value="CYBER_SECURITY">Cyber Security</option>
+                  <option value="SOFTWARE_ENGINEERING">Software Engineering</option>
+                  <option value="DATA_SCIENCE">Data Science</option>
+                  <option value="FINANCE">Finance</option>
+                  <option value="AI">AI</option>
+                  <option value="ENERGY">Energy</option>
+                  <option value="TRANSPORTATION">Transportation</option>
+                  <option value="VIDEO_GAME_DEV">Video Game Development</option>
+                  <option value="GOVERNMENT">Government</option>
+                  <option value="MEDIA_ENTERTAINMENT">Media & Entertainment</option>
+                  <option value="STARTUP">Startup</option>
+                  <option value="NON_PROFIT">Non-Profit</option>
+                </select>
                 {error?.industry && <span className="error-text">{error.industry}</span>}
               </div>
+
+
 
               <div className="form-group">
                 <label htmlFor="inspiration" className="form-label">Your Inspiration *</label>
@@ -381,8 +443,8 @@ const SignupPageForm = () => {
             {error?.agreeToTerms && <span className="error-text">{error.agreeToTerms}</span>}
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             className="submit-button"
             disabled={isLoading}
           >
@@ -395,6 +457,12 @@ const SignupPageForm = () => {
           <a href="/login" className="log-in">
             Log In
           </a>
+        </div>
+        <div className="invite-link-container">
+          <p>Know someone inspiring?</p>
+          <Link to="/invite" className="invite-link">
+            Invite them to become a role model
+          </Link>
         </div>
       </div>
     </div>
