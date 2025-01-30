@@ -1,4 +1,4 @@
-// RoleModelProfile.js
+import "../styles.css";
 import React from 'react';
 import ProfileDetails from '../components/RMProfileDetails';
 import ContactForm from '../components/ContactForm';
@@ -11,10 +11,10 @@ const RoleModelProfile = () => {
   return (
     <div className="role-model-profile-page">
       <ProfileDetails
-        name="Maya Rodriguez"
-        title="Tech Innovator & Social Entrepreneur"
-        role="Senior Product Manager"
-        organization="Global Tech Solutions"
+        // name="Maya Rodriguez"
+        // title="Tech Innovator & Social Entrepreneur"
+        // role="Senior Product Manager"
+        // organization="Global Tech Solutions"
         onContact={() => console.log('Contact button clicked')}
       />
       <ContactForm onSubmit={handleFormSubmit} />
