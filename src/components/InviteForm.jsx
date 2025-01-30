@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './InvitePage.css';
+import './InviteForm.css';
 
 const InvitePage = () => {
   const [formData, setFormData] = useState({
