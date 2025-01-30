@@ -52,10 +52,8 @@ function HomePage() {
     }
 
 
-
     return (
         <>
-
             <Header />
 
             {/* <NavBar /> */}
