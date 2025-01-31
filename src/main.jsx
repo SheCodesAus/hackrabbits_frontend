@@ -4,9 +4,9 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import HomePage from "./pages/HomePage.jsx";
-import RoleModelProfilePage from "./pages/RoleModelProfilePage.jsx";
+import ProfilePage from "./pages/RoleModelProfilePage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
-import LoginPage from "./pages/LoginPage.jsx"; 
+import LoginPage from "./pages/LoginPage.jsx";
 import InvitePage from "./pages/InvitePage.jsx";
 
 import { AuthProvider } from "./components/AuthProvider.jsx";
@@ -19,13 +19,13 @@ const router = createBrowserRouter([
 
     children: [
       { path: "/", element: <HomePage /> },
-      { path: "/role-model-profile", element: <RoleModelProfilePage /> },
+      { path: "/profile/:id", element: <ProfilePage /> },
       { path: "/signup", element: <SignUpPage /> },
       { path: "/login", element: <LoginPage /> },
-      { path: "/invite", element: <InvitePage /> },
+      { path: "/invite", element: <InvitePage /> }
+    ]
+  }
 
-    ],
-  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

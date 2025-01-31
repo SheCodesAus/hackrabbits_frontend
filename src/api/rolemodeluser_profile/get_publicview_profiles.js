@@ -1,4 +1,4 @@
-export default async function getRolemodels() {
+export default async function fetchLimitedRoleModelProfiles() {
   // Add debug logging for the API URL
   if (!import.meta.env.VITE_API_URL) {
       console.error('VITE_API_URL is not defined in environment variables');
@@ -6,7 +6,7 @@ export default async function getRolemodels() {
   }
   
   const url = `${import.meta.env.VITE_API_URL}/role-models/public`;
-  console.log('Full API URL:', url); // This will help us verify the complete URL
+  console.log('Full API URL:', url); 
 
   try {
       const response = await fetch(url, { 

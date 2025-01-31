@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
 // import "./ProjectCard.css";
 
+function RolemodelCard({ rolemodelData }) {
 
+    if (!rolemodelData?.id) {
+        console.error("Error: Rolemodel ID is missing", rolemodelData);
+        return null; // Prevent rendering if ID is missing
+    }
 
-function RolemodelCard(props) {
+    const rolemodelLink = `/profile/${rolemodelData.id}`
+    // console.log('fdgssdffafsfsfsafs', rolemodelData.id);
+    // const rolemodelLink = `/profile/`
 
-
-    const { rolemodelData } = props;
-    const rolemodelLink = `/role-models/public/${rolemodelData.id}`;
     // const image = `${projectData.image_b64}` ?? "";
-
 
     return (
         <div className="rolemodel-card">
@@ -33,3 +36,6 @@ function RolemodelCard(props) {
 }
 
 export default RolemodelCard;
+
+
+
