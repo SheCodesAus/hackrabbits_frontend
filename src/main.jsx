@@ -4,29 +4,27 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import HomePage from "./pages/HomePage.jsx";
-import NavBar from "./components/NavBar.jsx";
 import ProfilePage from "./pages/RoleModelProfilePage.jsx";
-import SignUpForm from "./components/SignUpPageForm.jsx";
-import LoginForm from "./components/LoginForm.jsx";
-import InvitePage from "./components/InvitePage.jsx";
+import SignUpPage from "./pages/SignUpPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import InvitePage from "./pages/InvitePage.jsx";
 
 import { AuthProvider } from "./components/AuthProvider.jsx";
-import Header from "./components/Header.jsx";
 
 
 
 const router = createBrowserRouter([
+  {
+    path: "/",
 
-
-  // element: <NavBar />,
-
-  { path: "/", element: <HomePage /> },
-  { path: "/profile/:id", element: <ProfilePage /> },
-  { path: "/signup", element: <SignUpForm /> },
-  { path: "/login", element: <LoginForm /> },
-  { path: "/invite", element: <InvitePage /> },
-
-
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "/profile/:id", element: <ProfilePage /> },
+      { path: "/signup", element: <SignUpPage /> },
+      { path: "/login", element: <LoginPage /> },
+      { path: "/invite", element: <InvitePage /> }
+    ]
+  }
 
 ]);
 

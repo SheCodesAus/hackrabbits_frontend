@@ -1,4 +1,4 @@
-import { API_BASE_URL } from '../config/constants';
+import { API_BASE_URL } from "../config/constants";
 
 /**
  * Handle user authentication
@@ -8,25 +8,25 @@ import { API_BASE_URL } from '../config/constants';
 export const loginUser = async (credentials) => {
   try {
     const response = await fetch(`${API_BASE_URL}/api-token-auth/`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         username: credentials.username,
-        password: credentials.password
-      })
+        password: credentials.password,
+      }),
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.non_field_errors?.[0] || 'Login failed');
+      throw new Error(data.non_field_errors?.[0] || "Login failed");
     }
 
     return data;
   } catch (error) {
-    throw new Error(error.message || 'Failed to login');
+    throw new Error(error.message || "Failed to login");
   }
 };
 
@@ -35,10 +35,10 @@ export const loginUser = async (credentials) => {
  * @returns {Object} - Headers with auth token
  */
 export const getAuthHeaders = () => {
-  const token = localStorage.getItem('authToken');
+  const token = localStorage.getItem("authToken");
   return {
-    'Authorization': `Bearer ${token}`,
-    'Content-Type': 'application/json'
+    Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
   };
 };
 
@@ -46,7 +46,7 @@ export const getAuthHeaders = () => {
  * Logout user
  */
 export const logoutUser = () => {
-  localStorage.removeItem('authToken');
+  localStorage.removeItem("authToken");
 };
 
 /**
@@ -54,5 +54,5 @@ export const logoutUser = () => {
  * @returns {boolean}
  */
 export const isAuthenticated = () => {
-  return !!localStorage.getItem('authToken');
+  return !!localStorage.getItem("authToken");
 };
