@@ -56,6 +56,7 @@ import { useParams } from "react-router-dom";
 import RoleModelProfileDetails from "../components/RMProfileDetails.jsx";
 import fetchLimitedRoleModelProfile from "../api/rolemodeluser_profile/get_publicview_profile.js";
 import useRolemodel from "../hooks/use-rolemodel.js"; // Fix import name
+import "./RoleModelProfilePage.css"
 
 function ProfilePage() {
   // const { id: rolemodelId } = useParams(); // Extract ID from URL

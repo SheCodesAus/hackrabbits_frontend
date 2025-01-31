@@ -69,19 +69,22 @@ const RoleModelProfileDetails = ({ rolemodelId }) => {
       <p><strong>Role:</strong> {profile.current_role}</p>
       <p><strong>Industry:</strong> {profile.industry}</p>
       <p><strong>Location:</strong> {profile.location}</p>
-      <p><strong>Skills:</strong> {profile.skills?.join(", ")}</p>
-      <p><strong>Categories:</strong> {profile.categories?.join(", ")}</p>
+
+
+
 
       {isAuthenticated ? (
         <>
+          <p><strong>Skills:</strong> {profile.skills?.join(", ")}</p>
+          <p><strong>Categories:</strong> {profile.categories?.join(", ")}</p>
           <h3>Milestones</h3>
-          <p>{profile.milestones || "No milestones added."}</p>
+          <p>{profile.milestones || " "}</p>
 
           <h3>Achievements</h3>
-          <p>{profile.achievements || "No achievements listed."}</p>
+          <p>{profile.achievements || " "}</p>
 
           <h3>Advice</h3>
-          <p>{profile.advice || "No advice available."}</p>
+          <p>{profile.advice || " "}</p>
         </>
       ) : (
         <button onClick={() => navigate("/login")}>
