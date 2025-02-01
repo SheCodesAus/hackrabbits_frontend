@@ -41,10 +41,12 @@ const RoleModelProfileDetails = ({ rolemodelId }) => {
     setShowContactForm(!showContactForm);
   };
 
-  // Toggle for Contact Form
-  // const handleContactRequest = () => {
-  //   setShowContactForm((prev) => !prev);
-  // };
+  // Handle contact form submission
+  const handleContactSubmitted = () => {
+    setShowContactForm(false); // Hide the form after submission
+  };
+
+
 
   useEffect(() => {
     // Check authentication
@@ -108,7 +110,7 @@ const RoleModelProfileDetails = ({ rolemodelId }) => {
           {/* Contact Form */}
           {showContactForm && (
             <div className="contact-form-container">
-              <ContactForm onContactSubmitted={refetch} />
+              <ContactForm onContactSubmitted={handleContactSubmitted} />
               <button onClick={handleContactRequest} className="button">
                 Cancel
               </button>
