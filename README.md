@@ -175,7 +175,7 @@ This application will be deployed to Heroku - the DRF DB will be deployed separa
 for integration (and testing) purposes.
 We will also use Insomnia to ensure API endpoints are working smoothly (we will utilise a local and deployed
 environment in Insomnia).
-
+ 
 ## Target Audience
 
 Primary Users: Young women and non-binary people seeking inspiration from role models.
