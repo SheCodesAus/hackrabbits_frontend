@@ -1,5 +1,6 @@
-import { API_BASE_URL } from '../../config/constants';
+// import { API_BASE_URL } from '../../config/constants';
 import { sanitizeFormData } from '../../utils/validation-utils';
+
 
 /**
  * Register a new role model user
@@ -10,7 +11,8 @@ export const registerRoleModel = async (userData) => {
   try {
     const sanitizedData = sanitizeFormData(userData);
     
-    const response = await fetch(`${API_BASE_URL}/role-model/signup/`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/role-model/signup/`, {
+    // const response = await fetch(`${A_BASE_URL}/role-model/signup/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

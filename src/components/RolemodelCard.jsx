@@ -9,7 +9,7 @@ function RolemodelCard({ rolemodelData }) {
     }
 
     const rolemodelLink = `/profile/${rolemodelData.id}`
-    // console.log('fdgssdffafsfsfsafs', rolemodelData.id);
+    console.log('fdgssdffafsfsfsafs', rolemodelData.id);
     // const rolemodelLink = `/profile/`
 
     // const image = `${projectData.image_b64}` ?? "";
