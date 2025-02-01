@@ -27,6 +27,9 @@ function NavBar() {
           <Link to="/signup">
             Create an Account
           </Link>
+          <Link to="/invite">
+            Invite Someone
+          </Link>
               </>
               )}
       </div>

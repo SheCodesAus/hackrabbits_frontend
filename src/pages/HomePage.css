@@ -50,7 +50,9 @@ main {
 }
 
 
-
+.hero-statement {
+    width: 50rem;
+}
 
 .search-section {
     margin: 20px 0;
