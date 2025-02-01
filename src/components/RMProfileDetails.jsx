@@ -1,50 +1,98 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from "react";
+import fetchLimitedRoleModelProfile from "../api/rolemodeluser_profile/get_publicview_profile";
+import fetchRolemodel from "../api/rolemodeluser_profile/get_fulldetailsprofile";
+import { useNavigate } from "react-router-dom";
 
-const ProfileDetails = ({ name, title, role, organization, email, phone, onContact, onContactRoleModel }) => {
+
+// BS. I need to get id using the useparam and hook now I wonder if it's matter to get the id from which endpoint? I don't think so! 
+
+// BS. in role model profile, i need to check if it's auth user show full details profile, if not show public view with button learn more.
+
+// to get user details fetch logic for auth point to full detail for public point to public view 
+
+// BS.  Toggle function for contact form
+
+// BS. toggle for edit form:     const toggleEditForm = () => setShowEditForm((prev) => !prev);
+
+// BS. Delete project handler 
+// const handleDelete = async () => {
+//   if (confirm("Are you sure you want to delete this project?")) {
+//       try {
+//           await deleteProject(projectId);
+//           alert("Project deleted successfully!");
+//           window.location.href = "/";
+//       } catch (err) {
+//           setDeleteError(err.message);
+//       }
+//   }
+// };
+
+
+
+const RoleModelProfileDetails = ({ rolemodelId }) => {
+  const [profile, setProfile] = useState(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Check authentication
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsAuthenticated(true);
+    }
+
+    // Fetch profile data from the correct endpoint for public or registered user 
+    const fetchData = async () => {
+      try {
+        const data = isAuthenticated
+          ? await fetchRolemodel(rolemodelId)
+          : await fetchLimitedRoleModelProfile(rolemodelId);
+        setProfile(data);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [rolemodelId, isAuthenticated]);
+
+  if (loading) return <p>Loading profile...</p>;
+  if (!profile) return <p>Profile not found.</p>;
+
   return (
     <div className="profile-details">
-      <div className="profile-header">
-        <div className="profile-image">
-          <img src="/api/placeholder/200/200" alt="Profile" />
-        </div>
-        <div className="profile-info">
-          <h2>{name}</h2>
-          <p>{title}</p>
-          <p>Current Role: {role}</p>
-          <p>Organization: {organization}</p>
-          <div className="contact-info">
-            <p>Email: {email}</p>
-            <p>Phone: {phone}</p>
-          </div>
-          <button className="hide-details-button">Hide Contact Details</button>
-        </div>
-      </div>
-      <div className="profile-actions">
-        <button className="like-button">Like</button>
-        <button className="follow-button">Follow</button>
-        <button className="contact-button" onClick={onContact}>
-          Contact
+      <img src={profile.image} alt="profile photo" />
+      {/* <h2>{profile.first_name} {profile.last_name}</h2> */}
+      <p><strong>Role:</strong> {profile.current_role}</p>
+      <p><strong>Industry:</strong> {profile.industry}</p>
+      <p><strong>Location:</strong> {profile.location}</p>
+
+
+
+
+      {isAuthenticated ? (
+        <>
+          <p><strong>Skills:</strong> {profile.skills?.join(", ")}</p>
+          <p><strong>Categories:</strong> {profile.categories?.join(", ")}</p>
+          <h3>Milestones</h3>
+          <p>{profile.milestones || " "}</p>
+
+          <h3>Achievements</h3>
+          <p>{profile.achievements || " "}</p>
+
+          <h3>Advice</h3>
+          <p>{profile.advice || " "}</p>
+        </>
+      ) : (
+        <button onClick={() => navigate("/login")}>
+          Learn More
         </button>
-        <button className="contact-role-model-button" onClick={onContactRoleModel}>
-          Contact Role Model
-        </button>
-      </div>
+      )}
     </div>
   );
 };
 
-ProfileDetails.propTypes = {
-  name: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  role: PropTypes.string.isRequired,
-  organization: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired,
-  onContact: PropTypes.func.isRequired,
-  onContactRoleModel: PropTypes.func.isRequired,
-};
-
-export default ProfileDetails;
-
-//SP:added the contact RM button option, proptypes 
+export default RoleModelProfileDetails;
