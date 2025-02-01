@@ -1,15 +1,16 @@
 /* General Styles */
-.general-user-profile-form {
+.general-user-profile-page-form {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f5f5f5;
+    background-color: var(--base-light);
     padding: 20px;
+    font-family: "Inter", sans-serif;
   }
   
   .profile-form-container {
-    background-color: white;
+    background-color: var(--white);
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 40px;
@@ -19,15 +20,16 @@
   
   /* Form Title and Subtitle */
   .form-title {
+    font-family: "Merriweather", serif;
     text-align: center;
     margin-bottom: 10px;
-    color: #333;
+    color: var(--black);
   }
   
   .form-subtitle {
     text-align: center;
     margin-bottom: 30px;
-    color: #666;
+    color: var(--base-dark);
     font-weight: 600;
   }
   
@@ -46,14 +48,14 @@
   .form-label {
     display: block;
     margin-bottom: 8px;
-    color: #666;
+    color: var(--base-dark);
     font-weight: 600;
   }
   
   .form-input {
     width: 100%;
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--base-light);
     border-radius: 4px;
     font-size: 16px;
     transition: border-color 0.3s ease;
@@ -61,14 +63,14 @@
   
   .form-input:focus {
     outline: none;
-    border-color: #4a90e2;
+    border-color: var(--brand);
   }
   
   /* Upload Button */
   .upload-button {
     padding: 8px 16px;
-    background-color: #4a90e2;
-    color: white;
+    background-color: var(--brand);
+    color: var(--white);
     border: none;
     border-radius: 4px;
     font-size: 14px;
@@ -77,7 +79,7 @@
   }
   
   .upload-button:hover {
-    background-color: #357abd;
+    background-color: var(--secondarybrand);
   }
   
   /* Communication Methods */
@@ -96,41 +98,60 @@
     margin-right: 8px;
   }
   
-  /* Submit Button */
+  /* Submit Button - using your genericbtn styles */
   .submit-button {
     grid-column: 1 / -1;
-    padding: 15px;
-    background-color: #4a90e2;
-    color: white;
+    margin-top: 1rem;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: var(--white);
+    background-color: var(--brand);
     border: none;
-    border-radius: 4px;
-    font-size: 18px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    text-decoration: none;
+    transition: background-color 0.3s;
   }
   
   .submit-button:hover {
-    background-color: #357abd;
+    background-color: var(--secondarybrand);
+  }
+  
+  /* Error Messages */
+  .error-text {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  
+  /* Success Messages */
+  .success-message {
+    background-color: var(--secondarybrand);
+    color: var(--white);
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    text-align: center;
   }
   
   /* Responsive Styles */
   @media (max-width: 768px) {
     .profile-form-container {
-      padding: 20px;
-      margin: 0 10px;
+        padding: 20px;
+        margin: 0 10px;
     }
   
     .profile-form {
-      grid-template-columns: 1fr;
+        grid-template-columns: 1fr;
     }
   
     .form-title {
-      font-size: 24px;
+        font-size: 24px;
     }
   
     .form-label,
     .form-input,
     .submit-button {
-      font-size: 14px;
+        font-size: 14px;
     }
   }
