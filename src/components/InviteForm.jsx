@@ -77,6 +77,7 @@ const InvitePage = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'  // Added Accept header
         },
         body: JSON.stringify({
           fullName: formData.fullName,
@@ -87,7 +88,19 @@ const InvitePage = () => {
         })
       });
 
-      const data = await response.json();
+      // Check content type of response
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('Server returned invalid response format');
+      }
+
+      let data;
+      try {
+        data = await response.json();
+      } catch (parseError) {
+        console.error('JSON Parse Error:', parseError);
+        throw new Error('Failed to parse server response');
+      }
 
       if (!response.ok) {
         throw new Error(data.message || 'Failed to send invitation');
@@ -110,7 +123,7 @@ const InvitePage = () => {
     } finally {
       setIsSubmitting(false);
     }
-};
+  };
 
   return (
     <div className="invite-page">
