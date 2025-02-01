@@ -27,8 +27,9 @@ const BackgroundSlideshow = () => {
         >
             <div className="slideshow-content">
                 <h1>She Inspires</h1>
-                <button className="cta-button">Here to inspire!</button>
-                <p>For this part we need a nice content stay on the slideshow.</p>
+                {/* <button className="cta-button">Here to inspire!</button> */}
+                <p>Like a butterfly, each idea flows through her,</p>
+                <p>inspiring vibrant connections to help others soar.</p>
             </div>
         </div>
     );
