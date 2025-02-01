@@ -119,10 +119,16 @@ const RoleModelProfileDetails = ({ rolemodelId }) => {
           {/* need to pass onContactSubmitted to contact form */}
         </>
       ) : (
-        <button onClick={() => navigate("/login")}>
-          {/* hook to save the profile page so after login we come back to the same page */}
+        <button
+          onClick={() => {
+            localStorage.setItem("redirectAfterLogin", window.location.pathname);
+            navigate("/login");
+          }}
+        >
           Learn More
-        </button>)
+        </button>
+
+      )
       }
     </div>
   )
