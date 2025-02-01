@@ -1,17 +1,46 @@
 /* Profile Page Styling */
 .profile-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: var(--background1);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Title Styling (Role Model Name) */
+.profile-page-container h1 {
+  font-size: 2rem;
+  color: var(--brand);
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+  font-family: "Merriweather", serif;
+  text-align: center;
+}
+
+/* Profile Component Styling */
+.profile-details {
+  background-color: var(--white);
+  border-radius: 10px;/* Profile Page Styling */
+  .profile-page-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 2rem;
     background-color: var(--background1);
     min-height: 100vh;
+    box-sizing: border-box;
   }
   
+  /* Title Styling (Role Model Name) */
   .profile-page-container h1 {
     font-size: 2rem;
     color: var(--brand);
     margin-bottom: 1rem;
+    text-transform: capitalize;
+    font-family: "Merriweather", serif;
+    text-align: center;
   }
   
   /* Profile Component Styling */
@@ -23,8 +52,10 @@
     width: 100%;
     max-width: 800px;
     text-align: center;
+    margin-top: 2rem;
   }
   
+  /* Profile Image Styling */
   .profile-details img {
     width: 150px;
     height: 150px;
@@ -33,6 +64,7 @@
     margin-bottom: 1rem;
   }
   
+  /* Profile Text Styling */
   .profile-details p {
     font-size: 1rem;
     color: var(--base-dark);
@@ -49,10 +81,12 @@
     text-align: left;
   }
   
+  /* Subheading for Authenticated Details */
   .authenticated-details h3 {
     color: var(--brand);
     margin-top: 1.5rem;
     font-size: 1.2rem;
+    font-weight: bold;
   }
   
   /* Learn More Button */
@@ -66,10 +100,27 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    text-decoration: none;
   }
   
   .learn-more-btn:hover {
     background-color: var(--secondarybrand);
+  }
+  
+  /* Error message */
+  .error-message {
+    color: red;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Loading message */
+  .loading-message {
+    font-size: 1.2rem;
+    color: var(--base-dark);
+    text-align: center;
+    margin-top: 20px;
   }
   
   /* Responsive Design */
@@ -82,5 +133,108 @@
       width: 120px;
       height: 120px;
     }
+  
+    .profile-page-container h1 {
+      font-size: 1.8rem;
+    }
+  
+    .authenticated-details h3 {
+      font-size: 1rem;
+    }
   }
   
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* Profile Image Styling */
+.profile-details img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+}
+
+/* Profile Text Styling */
+.profile-details p {
+  font-size: 1rem;
+  color: var(--base-dark);
+  margin: 0.5rem 0;
+}
+
+.profile-details strong {
+  color: var(--brand);
+}
+
+/* Authenticated User Details */
+.authenticated-details {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+/* Subheading for Authenticated Details */
+.authenticated-details h3 {
+  color: var(--brand);
+  margin-top: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Learn More Button */
+.learn-more-btn {
+  margin-top: 1rem;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: var(--white);
+  background-color: var(--action);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+}
+
+.learn-more-btn:hover {
+  background-color: var(--secondarybrand);
+}
+
+/* Error message */
+.error-message {
+  color: red;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Loading message */
+.loading-message {
+  font-size: 1.2rem;
+  color: var(--base-dark);
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-details {
+    width: 90%;
+  }
+
+  .profile-details img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .profile-page-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .authenticated-details h3 {
+    font-size: 1rem;
+  }
+}
