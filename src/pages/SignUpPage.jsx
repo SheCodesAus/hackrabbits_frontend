@@ -2,15 +2,15 @@ import "../styles.css";
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
 
-import SignUpPageForm from "../components/SignUpPageForm.jsx"
+import SignupPageForm from "../components/SignUpPageForm.jsx"
 
 function SignUpPage() {
   return (
-  <>
+    <>
       <Header />
-      <SignUpPageForm />
+      <SignupPageForm />
       <Footer />;
-  </>
+    </>
   );
 }
 
