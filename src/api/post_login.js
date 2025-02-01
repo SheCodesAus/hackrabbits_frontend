@@ -1,4 +1,3 @@
-const API_BASE_URL = "https://sheinspires-e47cb098889c.herokuapp.com";
 
 /**
  * Validate the login credentials (username and password).
@@ -33,7 +32,9 @@ export const loginUser = async (credentials) => {
     validateLoginCredentials(credentials);
 
     // Send POST request for login
-    const response = await fetch(`${API_BASE_URL}/login/`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/login/`, {
+
+    // const response = await fetch(`${VITE_API_URL}/login/`, {
       // Updated to use the correct login endpoint
       method: "POST",
       headers: {
@@ -47,6 +48,7 @@ export const loginUser = async (credentials) => {
 
     const data = await response.json();
 
+    console.log(response);
     // Handle different HTTP status codes
     if (!response.ok) {
       switch (response.status) {
