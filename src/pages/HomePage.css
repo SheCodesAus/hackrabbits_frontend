@@ -51,7 +51,10 @@ main {
 
 
 .hero-statement {
-    width: 50rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0.5rem 5rem;
 }
 
 .search-section {

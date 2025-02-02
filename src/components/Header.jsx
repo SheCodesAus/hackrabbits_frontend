@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles.css";
 import NavBar from "./NavBar.jsx";
-import sheinspirelogo from "../../img/sheinspirescroplogo.png";
+import sheinspirelogo from "../../img/SheInspiresMinCrop.png";
 import "./HeaderAnimation.css"
 
 
@@ -11,7 +11,7 @@ function Header() {
         <div className="header">
                 <NavBar />
             <img className="heroimg" src={sheinspirelogo}
-                alt="A brightly coloured logo that says She Inspires in a retro font, surrounded by stars" />
+                alt="A brightly coloured logo that says She Inspires in a retro font" />
                 <div className="tagline">
                     <h3 className="animatedtext">
                         <span>Like </span>

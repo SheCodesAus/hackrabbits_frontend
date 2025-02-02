@@ -78,8 +78,7 @@ function HomePage() {
 
 
             <div className="hero-statement">
-            <h2>Welcome! Are you here to inspire or be inspired?</h2>
-            <p>She Inspires is a safe, inclusive space for female-identifying and non binary people of any culture, to come together and inspire one another. Whether you are here to find someone in your area or to share your story, everyone is welcome.</p>
+            <h2>Choose from the options below...</h2>
             </div>
             {/* Action Buttons */}
 
