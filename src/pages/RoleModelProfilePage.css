@@ -1,102 +1,745 @@
-/* Profile Page Styling */
-.profile-page-container {
+/* Profile Page Styles */
+
+.profile-banner {
+  background: linear-gradient(
+    270deg,
+    var(--brand),
+    var(--secondarybrand),
+    var(--brand)
+  );
+  background-size: 200% 200%;
+  animation: gradientShift 10s ease infinite;
+  padding: 1rem; /* Reduced from 2rem */
+  margin-bottom: 1.5rem; /* Reduced from 2rem */
+}
+
+.banner-title {
+  color: var(--white);
+  font-family: "Merriweather", serif;
+  font-size: 2rem; /* Slightly reduced if needed */
+  font-weight: 700;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.2; /* Added to control height */
+}
+
+.profile-container {
+  min-height: 100vh;
+  background-color: var(--background1);
+  padding-top: calc(var(--header-height, 8rem) + 20px);
+}
+
+.profile-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.profile-header {
+  background-color: var(--brand);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.profile-header h1 {
+  color: var(--white);
+  font-family: "Merriweather", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Profile Cards */
+.profile-card {
+  background-color: var(--white);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Profile Info Section */
+.profile-info {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.profile-image {
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-details {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 2rem;
-  background-color: var(--background1);
-  min-height: 100vh;
+  min-height: 300px; /* Match new image height */
 }
 
-.profile-page-container h1 {
-  font-size: 2rem;
+.profile-name {
   color: var(--brand);
-  margin-bottom: 1rem;
+  font-family: "Merriweather", serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
-/* Profile Component Styling */
-.profile-details {
-  background-color: var(--white);
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
+.profile-text-content {
+  text-align: center;
   width: 100%;
-  max-width: 800px;
-  /* text-align: center; */
 }
 
-.profile-details img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
+.profile-role {
+  color: var(--black);
+  font-family: "Inter", sans-serif;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
 }
 
-.profile-details p {
-  font-size: 1rem;
-  color: var(--brand);
-  margin: 0.5rem 0;
-  text-align: left;
-  background-color: var(--background1);
-  font-weight: bold;
+.profile-current-role,
+.profile-organization {
+  color: var(--base-dark);
+  font-family: "Inter", sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
 }
 
-.profile-details strong {
-  color: var(--brand);
+/* Journey Section */
+.journey-content {
   text-align: left;
+  font-family: "Inter", sans-serif;
 }
-.milestones p {
+
+.journey-text {
+  color: var(--black);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Section Headers */
+.section-header {
   color: var(--brand);
-}
-.milestones {
-  color: var(--brand);
-  font-size: 16px;
-}
-.achievements p {
-  color: var(--brand);
-}
-.achievements {
-  color: var(--brand);
-  font-size: 16px;
-}
-/* Authenticated User Details */
-.authenticated-details {
-  margin-top: 2rem;
+  font-family: "Merriweather", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
   text-align: left;
 }
 
-.authenticated-details h3 {
+/* Skills Section */
+.skills-content {
+  text-align: left;
+  font-family: "Inter", sans-serif;
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+}
+
+.skill-item {
+  color: var(--black);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.skill-item:before {
+  content: "•";
   color: var(--brand);
-  margin-top: 1.5rem;
+  margin-right: 0.75rem;
   font-size: 1.2rem;
 }
 
-/* Learn More Button */
-.learn-more-btn {
-  margin-top: 1rem;
-  padding: 10px 20px;
-  font-size: 1rem;
-  color: var(--white);
-  background-color: var(--action);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+/* Loading & Error States */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
 }
 
-.learn-more-btn:hover {
+.loading-spinner {
+  border: 4px solid var(--base-light);
+  border-top: 4px solid var(--brand);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+.error-message {
+  color: #dc2626;
+  text-align: center;
+  padding: 1rem;
+  margin: 2rem auto;
+  max-width: 600px;
+  background-color: #fef2f2;
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+}
+
+/* Animation Keyframes */
+@keyframes slideInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes borderPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(94, 23, 235, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(94, 23, 235, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(94, 23, 235, 0);
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Apply animations to elements */
+.profile-banner {
+  background: linear-gradient(
+    270deg,
+    var(--brand),
+    var(--secondarybrand),
+    var(--brand)
+  );
+  background-size: 200% 200%;
+  animation: gradientShift 10s ease infinite;
+}
+
+.profile-card {
+  animation: slideInFromBottom 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+/* Stagger card animations */
+.profile-card:nth-child(1) { animation-delay: 0.1s; }
+.profile-card:nth-child(2) { animation-delay: 0.2s; }
+.profile-card:nth-child(3) { animation-delay: 0.3s; }
+.profile-card:nth-child(4) { animation-delay: 0.4s; }
+.profile-card:nth-child(5) { animation-delay: 0.5s; }
+
+.profile-image img {
+  transition: transform 0.3s ease;
+}
+
+.profile-image:hover img {
+  transform: scale(1.05);
+}
+
+.timeline-dot {
+  animation: borderPulse 2s infinite;
+}
+
+.timeline-milestone {
+  animation: fadeInScale 0.3s ease-out;
+}
+
+/* Interactive button animations */
+.linkedin-button,
+.contact-button,
+.learn-more-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.linkedin-button:hover,
+.contact-button:hover,
+.learn-more-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(94, 23, 235, 0.3);
+}
+
+/* Skill item animations */
+.skill-item {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.skill-item:hover {
+  transform: translateX(10px);
+  color: var(--brand);
+}
+
+/* Section header animations */
+.section-header {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-header::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--brand);
+  transition: width 0.3s ease;
+}
+
+.section-header:hover::after {
+  width: 100%;
+}
+
+/* Add these to your existing RoleModelProfilePage.css */
+
+/* Loading Spinner Styles */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(94, 23, 235, 0.1), rgba(7, 131, 117, 0.1));
+  backdrop-filter: blur(4px);
+  z-index: 50;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.spinner-box {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+}
+
+.spinner {
+  animation: spin 2s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sparkle-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--brand);
+}
+
+.star-container {
+  position: absolute;
+  inset: 0;
+}
+
+.star {
+  position: absolute;
+  font-size: 1.25rem;
+  opacity: 0;
+}
+
+.star-1 {
+  top: 0;
+  right: 0;
+  animation: twinkle 1.5s ease-in-out infinite;
+}
+
+.star-2 {
+  bottom: 10px;
+  right: 10px;
+  animation: twinkle 1.5s ease-in-out infinite 0.5s;
+}
+
+.star-3 {
+  bottom: 0;
+  left: 0;
+  animation: twinkle 1.5s ease-in-out infinite 1s;
+}
+
+.loading-text {
+  font-family: "Merriweather", serif;
+  color: var(--brand);
+  font-size: 1.125rem;
+  animation: fadeInOut 2s ease-in-out infinite;
+}
+
+/* Error State Styles */
+.error-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(94, 23, 235, 0.1);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+}
+
+.error-container {
+  max-width: 28rem;
+  background: var(--white);
+  border: 2px solid var(--brand);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.error-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.error-title {
+  font-family: "Merriweather", serif;
+  font-size: 1.5rem;
+  color: var(--brand);
+  margin: 0;
+}
+
+.header-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.header-icon.sparkle {
+  color: var(--brand);
+}
+
+.header-icon.star {
+  color: var(--action);
+}
+
+.error-message {
+  font-size: 1.125rem;
+  color: var(--base-dark);
+  margin-bottom: 1rem;
+}
+
+.encouragement {
+  font-family: "Merriweather", serif;
+  font-size: 1.125rem;
+  color: var(--secondarybrand);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-button.refresh {
+  background-color: var(--brand);
+}
+
+.action-button.refresh:hover {
   background-color: var(--secondarybrand);
+  transform: translateY(-1px);
+}
+
+.action-button.home {
+  background-color: var(--secondarybrand);
+}
+
+.action-button.home:hover {
+  background-color: var(--brand);
+  transform: translateY(-1px);
+}
+
+.button-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Animations */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .spinner-box {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .sparkle-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .loading-text {
+    font-size: 1rem;
+  }
+  
+  .error-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .action-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Add smooth transitions for all interactive elements */
+* {
+  transition: background-color 0.3s ease,
+              transform 0.3s ease,
+              box-shadow 0.3s ease,
+              color 0.3s ease;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .profile-details {
-    width: 90%;
+  .profile-info {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .profile-details img {
-    width: 120px;
-    height: 120px;
+  .profile-image {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 1.5rem;
+  }
+
+  .profile-details {
+    min-height: auto;
+  }
+
+  .profile-name {
+    font-size: 2rem;
+  }
+
+  .profile-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-banner {
+    padding: 0.75rem; /* Even more compact on mobile */
+  }
+  
+  .banner-title {
+    font-size: 1.75rem;
+  }
+}
+/* LinkedIn Button */
+.linkedin-connect {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.linkedin-button {
+  background-color: var(--brand);
+  color: var(--white);
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+}
+
+.linkedin-button:hover {
+  background-color: var(--secondarybrand);
+}
+
+/* Timeline Styles */
+.timeline-container {
+  padding: 2rem 0;
+}
+
+.timeline {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+  margin: 0 40px;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--base-light);
+  z-index: 1;
+}
+
+.timeline-point {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  padding: 0;
+}
+
+.timeline-dot {
+  width: 20px;
+  height: 20px;
+  background-color: var(--secondarybrand);
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.timeline-point:hover .timeline-dot {
+  transform: scale(1.2);
+  background-color: var(--brand);
+}
+
+.timeline-year {
+  color: var(--base-dark);
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.timeline-details {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+
+.timeline-instruction {
+  color: var(--brand);
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-description {
+  color: var(--base-dark);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.timeline-milestone {
+  background-color: var(--background1);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.timeline-milestone h4 {
+  color: var(--brand);
+  font-family: "Merriweather", serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .timeline {
+    margin: 0 20px;
+  }
+
+  .timeline-year {
+    font-size: 0.9rem;
+  }
+
+  .timeline-dot {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .linkedin-button {
+    max-width: 100%;
+    margin: 0 1rem;
   }
 }
