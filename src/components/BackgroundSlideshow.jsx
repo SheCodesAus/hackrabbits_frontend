@@ -26,10 +26,10 @@ const BackgroundSlideshow = () => {
             style={{ backgroundImage: `url(${images[currentIndex]})` }}
         >
             <div className="slideshow-content">
-                <h1>She Inspires</h1>
+                <h2>Where women come to inspire and be inspired</h2>
                 {/* <button className="cta-button">Here to inspire!</button> */}
-                <p>Like a butterfly, each idea flows through her,</p>
-                <p>inspiring vibrant connections to help others soar.</p>
+
+                
             </div>
         </div>
     );

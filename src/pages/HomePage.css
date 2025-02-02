@@ -50,7 +50,12 @@ main {
 }
 
 
-
+.hero-statement {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0.5rem 5rem;
+}
 
 .search-section {
     margin: 20px 0;
