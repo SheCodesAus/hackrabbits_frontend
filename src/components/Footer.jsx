@@ -25,6 +25,10 @@ function Footer() {
           alt="the indigenous Australian flag - a yellow sun on red earth and black sky"
         />
       </div>
+      <div className="acknowledgement">
+        <p>She Inspires recognises and acknowledges that the traditional owners of land on which this project was created, are the Whadjuk-Nyoongar people. </p>
+        <p>Always was, and always will be.</p>
+      </div>
       <div className="copyright">
         <p>© HackRabbits 2025</p>
       </div>

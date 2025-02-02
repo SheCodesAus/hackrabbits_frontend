@@ -70,39 +70,50 @@ function HomePage() {
             </div>
 
 
-            {/* Search  bar */}
+{/* Interactive Menu */}
+<div className="interactive-menu">
+    
+    {/* Search Section */}
+    <div className="search-section">
+        <h2>Looking for someone inspiring in your city?</h2>
+        <p>Use the search bar below...</p>
+        <SearchBar onFilter={handleFilter} />
+    </div>
+    
+    <p className="hero-statement">
+        She Inspires is a designated resource for women and non-binary folk to connect and inspire one another! Create a profile and start inspiring! Not your jam? We have a community user option if you'd like to join and find some inspiration! 
+    </p>
 
-            <div className="search-section">
-                <SearchBar onFilter={handleFilter} />
-            </div>
+    
+    {/* Action Buttons Section */}
+    <div className="button-section">
+        <div className="button-text">
+            <h2>..or looking for something else?</h2>
+            <p>The buttons below are sure to help!</p>
+        </div>
 
-
-            <div className="hero-statement">
-            <h2>Choose from the options below...</h2>
-            </div>
-            {/* Action Buttons */}
-
-            <div className="action-buttons">
-                <button
-                    className="action-button"
-                    onClick={() => handleSignUpNavigation("role-model")}
-                >
-                    To Inspire
-                </button>
-                <button
-                    className="action-button"
-                    onClick={() => handleSignUpNavigation("community-user")}
-                    >
-                    To Be Inspired
-                </button>
-                <button 
-                    className="action-button"
-                    onClick={() => navigate('/invite')}  
-                >
-                    Know someone Inspiring
-                </button>
-            </div>
-
+        <div className="action-buttons flex flex-col md:flex-row items-center justify-center gap-4">
+            <button
+                className="action-button bg-blue-500 text-white py-2 px-4 rounded-2xl shadow-md hover:bg-blue-600 transition duration-300"
+                onClick={() => handleSignUpNavigation("role-model")}
+            >
+                I'm here to inspire!
+            </button>
+            <button
+                className="action-button bg-green-500 text-white py-2 px-4 rounded-2xl shadow-md hover:bg-green-600 transition duration-300"
+                onClick={() => handleSignUpNavigation("community-user")}
+            >
+                I need inspiration!
+            </button>
+            <button 
+                className="action-button bg-purple-500 text-white py-2 px-4 rounded-2xl shadow-md hover:bg-purple-600 transition duration-300"
+                onClick={() => navigate('/invite')}
+            >
+                I know someone inspiring!
+            </button>
+        </div>
+    </div>
+</div>
             {/* rolemodel cards Section */}
 
 

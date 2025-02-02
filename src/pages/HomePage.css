@@ -8,13 +8,14 @@
     --base-light: #F5F5F5;
     --base-dark: #737373;
     --black: #111111;
+    --soft-black: rgb(56, 56, 56);
 }
 
 body {
     margin: 0;
     font-family: "Inter", sans-serif;
     background-color: var(--base-light);
-    color: var(--black);
+    color: var(--soft-black);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -53,58 +54,97 @@ main {
 .hero-statement {
     display: flex;
     flex-direction: column;
+    justify-content: center; 
+    align-items: center;  
+    text-align: center;    
+    max-width: 40rem;
+    font-size: 24px;          
+    margin: auto; 
+    padding-bottom: 50px;
+}
+
+
+/* Interactive menu section */
+.interactive-menu {
+    display: flex;
     justify-content: center;
-    margin: 0.5rem 5rem;
+    flex-direction: column;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3); 
 }
 
 .search-section {
-    margin: 20px 0;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 10px;
 }
 
 .location-dropdown {
-    padding: 10px;
+    padding: 12px;
     font-size: 1rem;
     border: 1px solid var(--base-dark);
-    border-radius: 5px;
-    margin-right: 10px;
+    border-radius: 8px;
+    margin-right: 12px;
+    background: var(--white);
 }
 
 .search-button {
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 1rem;
     background-color: var(--secondarybrand);
     color: var(--white);
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .search-button:hover {
     background-color: var(--action);
+    transform: scale(1.05);
+}
+
+.button-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--soft-black);
 }
 
 .action-buttons {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 15px;
     margin: 20px 0;
 }
 
 .action-button {
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 1rem;
+    font-weight: bold;
     background-color: var(--brand);
     color: var(--white);
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .action-button:hover {
     background-color: var(--secondarybrand);
+    transform: scale(1.05);
 }
+
 
 
 /* Featured Role Models Section - Grid Container */
@@ -116,6 +156,7 @@ main {
     max-width: 1200px; /* Limit the width of the section */
     margin: 0 auto; /* Center the section */
     margin-top: 100px;
+    
 }
 
 /* Header for Featured Role Models */
@@ -134,7 +175,14 @@ main {
     gap: 20px; /* Space between cards */
     justify-items: center; /* Center the cards in their grid cells */
     padding: 20px;
+    background-color: rgba(255, 255, 255, 0.2); /* Transparent glass effect */
+    backdrop-filter: blur(5px); /* Frosted glass blur */
+    -webkit-backdrop-filter: blur(10px); /* Safari support */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Softer shadow for depth */
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border for clarity */
 }
+
 
 .rolemodel-card {
     background-color: var(--white);
