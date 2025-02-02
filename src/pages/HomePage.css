@@ -115,6 +115,7 @@ main {
     padding: 20px;
     max-width: 1200px; /* Limit the width of the section */
     margin: 0 auto; /* Center the section */
+    margin-top: 100px;
 }
 
 /* Header for Featured Role Models */

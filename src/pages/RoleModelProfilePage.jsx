@@ -5,6 +5,10 @@ import fetchLimitedRoleModelProfile from "../api/rolemodeluser_profile/get_publi
 import useRolemodel from "../hooks/use-rolemodel.js"; // Fix import name
 import "./RoleModelProfilePage.css"
 
+import "../styles.css";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 function ProfilePage() {
   // const { id: rolemodelId } = useParams(); // Extract ID from URL
   const params = useParams();
@@ -42,11 +46,15 @@ function ProfilePage() {
   }, [rolemodelId]);
 
   return (
-    <div className="profile-page-container">
-      <h1>{name}</h1>
-      {isLoading ? <p>Loading...</p> : <RoleModelProfileDetails rolemodelId={rolemodelId} />}
-      {error && <p>Error: {error.message}</p>}
-    </div>
+    <>
+      <Header />
+        <div className="profile-page-container">
+          <h1>{name}</h1>
+          {isLoading ? <p>Loading...</p> : <RoleModelProfileDetails rolemodelId={rolemodelId} />}
+          {error && <p>Error: {error.message}</p>}
+        </div>
+      <Footer />
+    </>
   );
 }
 
