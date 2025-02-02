@@ -6,6 +6,10 @@ import "./GeneralUserProfilePage.css";
 import useCommunityuser from "../hooks/use-communityuser.js"; // Fix import name
 
 
+import "../styles.css";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 function GeneralUserProfilePage() {
   const navigate = useNavigate();
 
@@ -46,10 +50,18 @@ function GeneralUserProfilePage() {
   const fakeProfile = {image: "https://sheinspire-ff5867c4dc81.herokuapp.com/role-models/public/image", first_name: "Sicilia", last_name: "Perumalsamy", current_role: "Public Health Researcher", industry: "Health", location: "Perth"}
 
   return (
-    <div className="profile-page-container">
-      <h1>{name}</h1>
-      <GeneralUserProfileDetails profile={fakeProfile} isOwnProfile={true} />
+
+    <>
+    <Header />
+    <div className="container mx-auto mt-8 px-4">
+      <h1 className="text-3xl font-bold mb-6">My Profile</h1>
+      <GeneralUserProfileDetails 
+        profile={profile} 
+        isOwnProfile={true} // This flag can be used to show edit options
+      />
     </div>
+    <Footer />
+  </>
   );
 }
 

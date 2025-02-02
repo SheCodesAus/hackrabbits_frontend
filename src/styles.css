@@ -75,26 +75,51 @@ select {
   background-color: var(--base-light);
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   display: flex;
-  align-items: stretch;  /* This centers content vertically inside the header */
+  align-items: center;
   justify-content: space-between;
   padding: 10px 20px;
   max-height: 8rem;
-  background-image: linear-gradient(180deg, #dddaf3, #e4f0f2);
-  border-top: 5px solid var(--secondarybrand);
+  background-image: linear-gradient(180deg, var(--background1), var(--background2));
+  border-top: 5px solid var(--brand);
+}
+
+/* Logo container */
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 /* Hero image styles */
 .heroimg {
   max-height: 7rem;
   width: auto;
-  margin-right: 20px;
   border-radius: 10px;
-  /* border: 2px, solid var(--secondarybrand) */
+}
+
+/* New: Tagline container */
+.tagline-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-grow: 1;
+}
+
+/* Animated text styles */
+.animatedtext {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--brand);
 }
 
 /* Ensures content falls below header */
 body {
   padding-top: calc(var(--header-height, 8rem) + 20px);
+  background-image: url(img/SheInspiresBackground.png);
+  background-repeat:initial;
 }
 
 /* Footer styles */
@@ -133,72 +158,70 @@ body {
 }
 
 
-/* NavBar */
-
+/* NavBar - Dropdown positioning */
 .dropdown {
-    position: fixed;
-    top: 10px;
-    right: 10px;   
-    z-index: 1000;   
-    font-family: Arial, sans-serif;
-    right: calc(10px + 5vw);
-    padding-top:0.5rem;
-    padding-right: 3rem;
-  }
-  
-  /* Dropdown button */
-  .dropbtn {
-    background-color: var(--brand);
-    color: var(--white);
-    padding: 12px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .dropbtn:hover {
-    background-color: var(--secondarybrand);
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Dropdown content (hidden by default) */
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: var(--white);
-    min-width: 180px;
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid var(--base-light);
-  }
-  
-  /* Links inside the dropdown */
-  .dropdown-content a {
-    color: var(--base-dark);
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    transition: background-color 0.3s ease, color 0.3s ease;
-  }
-  
-  .dropdown-content a:hover {
-    background-color: var(--base-light);
-    color: var(--brand);
-  }
-  
-  /* Show the dropdown content on hover */
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  
-  /* Optional: Add some subtle animations */
-  .dropdown-content {
-    animation: fadeIn 0.3s ease-in-out;
-  }
+  position: relative; /* Keeps it inside the header */
+  padding-right: 2rem;
+}
+
+/* Dropdown button */
+.dropbtn {
+  background-color: var(--brand);
+  color: var(--white);
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dropbtn:hover {
+  background-color: var(--secondarybrand);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Dropdown content */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--white);
+  min-width: 180px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--base-light);
+  right: 0; /* Aligns dropdown menu to the button */
+}
+
+.dropdown-content a {
+  color: var(--base-dark);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-content a:hover {
+  background-color: var(--base-light);
+  color: var(--brand);
+}
+
+/* Show dropdown content on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Optional: Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dropdown-content {
+  animation: fadeIn 0.3s ease-in-out;
+}
   
 
 /* *****GENERIC BUTTON STYLING***** */
