@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const ContactForm = ({ onContactSubmitted }) => {
+const ContactForm = ({ onContactSubmitted, recipientEmail }) => {
     const [formData, setFormData] = useState({
         fullName: "",
         email: "",
@@ -27,7 +27,7 @@ const ContactForm = ({ onContactSubmitted }) => {
             return;
         }
 
-        const recipientEmail = "example@email.com"; // Replace with your contact email
+        // const recipientEmail = "example@email.com"; // Replace with your contact email
         const encodedSubject = encodeURIComponent(`Contact Request: ${subject}`);
         const encodedBody = encodeURIComponent(
             `Full Name: ${fullName}\nEmail: ${email}\n\nMessage:\n${message}`
@@ -122,6 +122,8 @@ const ContactForm = ({ onContactSubmitted }) => {
 // Define PropTypes
 ContactForm.propTypes = {
     onContactSubmitted: PropTypes.func,
+    recipientEmail: PropTypes.string.isRequired,
+
 };
 
 export default ContactForm;

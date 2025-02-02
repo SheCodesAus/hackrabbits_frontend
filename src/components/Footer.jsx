@@ -1,8 +1,9 @@
 import React from "react";
 import "../styles.css";
-import femalesymbol from "../../img/femalesymbol.png";
-import nonbinarysymbol from "../../img/nonbinarysymbol.jpg";
+import prideflag from "../../img/prideflag.jpg";
 import uniteicon from "../../img/uniteicon.png";
+import indigflag from "../../img/indigflag.png";
+
 
 function Footer() {
   return (
@@ -10,18 +11,18 @@ function Footer() {
       <div className="iconcontainer">
         <img
           className="inclusiveicons"
-          src={femalesymbol}
-          alt="the symbol for female"
-        />
-        <img
-          className="inclusiveicons"
-          src={nonbinarysymbol}
-          alt="the symbol for non-binary"
+          src={prideflag}
+          alt="the rainbow flag for LGBTQIA+"
         />
         <img
           className="inclusiveicons"
           src={uniteicon}
           alt="diverse colours of hands surrounding a heart"
+        />
+                <img
+          className="inclusiveicons"
+          src={indigflag}
+          alt="the indigenous Australian flag - a yellow sun on red earth and black sky"
         />
       </div>
       <div className="copyright">

@@ -75,6 +75,9 @@ const RoleModelProfileDetails = ({ rolemodelId }) => {
   if (loading) return <p>Loading profile...</p>;
   if (!profile) return <p>Profile not found.</p>;
 
+
+
+
   return (
     <div className="profile-details">
       <img src={profile.image} alt="profile photo" />
@@ -110,7 +113,9 @@ const RoleModelProfileDetails = ({ rolemodelId }) => {
           {/* Contact Form */}
           {showContactForm && (
             <div className="contact-form-container">
-              <ContactForm onContactSubmitted={handleContactSubmitted} />
+              <ContactForm
+                recipientEmail={profile?.email || ""}
+                onContactSubmitted={handleContactSubmitted} />
               <button onClick={handleContactRequest} className="button">
                 Cancel
               </button>
@@ -133,6 +138,5 @@ const RoleModelProfileDetails = ({ rolemodelId }) => {
     </div>
   )
 }
-
 
 export default RoleModelProfileDetails;

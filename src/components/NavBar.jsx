@@ -33,6 +33,8 @@ function NavBar() {
           </Link>
           <Link to="/my-profile">
             My Profile
+          <Link to="/invite">
+            Invite Someone
           </Link>
               </>
               )}
