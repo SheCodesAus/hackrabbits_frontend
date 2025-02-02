@@ -4,17 +4,17 @@ import fetchRolemodel from "../api/rolemodeluser_profile/get_fulldetailsprofile"
 import { useNavigate } from "react-router-dom";
 import ContactForm from "./ContactForm";
 
-// BS. I need to get id using the useparam and hook now I wonder if it's matter to get the id from which endpoint? I don't think so! 
+// BS. I need to get id using the useparam and hook now I wonder if it's matter to get the id from which endpoint? I don't think so!
 
 // BS. in role model profile, i need to check if it's auth user show full details profile, if not show public view with button learn more.
 
-// to get user details fetch logic for auth point to full detail for public point to public view 
+// to get user details fetch logic for auth point to full detail for public point to public view
 
 // BS.  Toggle function for contact form
 
 // BS. toggle for edit form:     const toggleEditForm = () => setShowEditForm((prev) => !prev);
 
-// BS. Delete project handler 
+// BS. Delete project handler
 // const handleDelete = async () => {
 //   if (confirm("Are you sure you want to delete this project?")) {
 //       try {
@@ -26,8 +26,6 @@ import ContactForm from "./ContactForm";
 //       }
 //   }
 // };
-
-
 
 const RoleModelProfileDetails = ({ rolemodelId }) => {
   const [profile, setProfile] = useState(null);
@@ -55,7 +53,7 @@ const RoleModelProfileDetails = ({ rolemodelId }) => {
       setIsAuthenticated(true);
     }
 
-    // Fetch profile data from the correct endpoint for public or registered user 
+    // Fetch profile data from the correct endpoint for public or registered user
     const fetchData = async () => {
       try {
         const data = isAuthenticated
@@ -89,15 +87,22 @@ const RoleModelProfileDetails = ({ rolemodelId }) => {
 
       {isAuthenticated ? (
         <>
-          <p><strong>Skills:</strong> {profile.skills?.join(", ")}</p>
-          <p><strong>Categories:</strong> {profile.categories?.join(", ")}</p>
-          <h3>Milestones</h3>
+          <p>
+            <strong>Skills:</strong> {profile.skills?.join(", ")}
+          </p>
+          <p>
+            <strong>Categories:</strong> {profile.categories?.join(", ")}
+          </p>
+          <div className="milestones"></div>
+          <p>Milestones</p>
           <p>{profile.milestones || " "}</p>
 
-          <h3>Achievements</h3>
+          <div className="achievements"></div>
+          <p>Achievements</p>
           <p>{profile.achievements || " "}</p>
 
-          <h3>Advice</h3>
+          <div className="advice"></div>
+          <p>Advice</p>
           <p>{profile.advice || " "}</p>
 
           {/* Contact Form */}
