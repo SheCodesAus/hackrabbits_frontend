@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { Sparkles, Star, RotateCcw, Home } from "lucide-react";
 import fetchLimitedRoleModelProfile from "../api/rolemodeluser_profile/get_publicview_profile.js";
 import fetchRolemodel from "../api/rolemodeluser_profile/get_fulldetailsprofile.js";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ContactForm from "../components/ContactForm";
 import "./RoleModelProfilePage.css";
+import '../components/LoadingSpinner.css';
 
 function ProfilePage() {
   const params = useParams();
@@ -16,7 +18,25 @@ function ProfilePage() {
   const [name, setName] = useState("Role Model Profile");
   const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [selectedYear, setSelectedYear] = useState(null);
+
+  const loadingMessages = [
+    "Gathering inspiration...",
+    "Connecting with role models...",
+    "Preparing something amazing...",
+    "Creating possibilities...",
+    "Loading success stories..."
+  ];
+
+  const encouragements = [
+    "Every challenge is an opportunity!",
+    "Success is just around the corner!",
+    "Let's break through this barrier together!",
+    "Tech pioneers face obstacles too!",
+    "Time for some problem-solving magic!"
+  ];
+
 
   const handleTimelineClick = (year) => {
     setSelectedYear(year);
@@ -47,20 +67,24 @@ function ProfilePage() {
     }
 
     if (!rolemodelId) {
-      console.error("Error: rolemodelId is undefined!");
+      setError(new Error("Invalid profile ID"));
+      setLoading(false);
       return;
     }
 
     const fetchProfile = async () => {
       try {
+        setLoading(true);
+        setError(null);
         const data = isAuthenticated
           ? await fetchRolemodel(rolemodelId)
           : await fetchLimitedRoleModelProfile(rolemodelId);
-
+        
         setName(`${data.first_name || ""} ${data.last_name || ""}`.trim() || "Role Model Profile");
         setProfileData(data);
       } catch (error) {
         console.error("Error fetching profile:", error);
+        setError(error);
       } finally {
         setLoading(false);
       }
@@ -71,14 +95,64 @@ function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="loading-container">
-        <div className="loading-spinner"></div>
+      <div className="loading-overlay">
+        <div className="loading-container">
+          <div className="spinner-box">
+            <div className="spinner">
+              <Sparkles className="sparkle-icon" />
+            </div>
+            <div className="star-container">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className={`star star-${i + 1}`}>✨</div>
+              ))}
+            </div>
+          </div>
+          <p className="loading-text">
+            {loadingMessages[Math.floor(Math.random() * loadingMessages.length)]}
+          </p>
+        </div>
       </div>
     );
   }
 
-  if (!profileData) {
-    return <div className="error-message">Profile not found.</div>;
+  if (error) {
+    return (
+      <div className="error-overlay">
+        <div className="error-container">
+          <div className="error-header">
+            <Sparkles className="header-icon sparkle" />
+            <h2 className="error-title">Oops! A Small Setback</h2>
+            <Star className="header-icon star" />
+          </div>
+          
+          <div className="error-content">
+            <p className="error-message">
+              Even tech has its moments! Let's try that again.
+            </p>
+            <p className="encouragement">
+              {encouragements[Math.floor(Math.random() * encouragements.length)]} ✨
+            </p>
+            
+            <div className="button-group">
+              <button 
+                onClick={() => window.location.reload()}
+                className="action-button refresh"
+              >
+                <RotateCcw className="button-icon" />
+                Refresh
+              </button>
+              <button 
+                onClick={() => navigate('/')}
+                className="action-button home"
+              >
+                <Home className="button-icon" />
+                Home
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (

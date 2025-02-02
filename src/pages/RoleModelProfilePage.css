@@ -1,21 +1,28 @@
 /* Profile Page Styles */
 
 .profile-banner {
-  background-color: var(--brand);
-  padding: 2rem 1rem;
-  margin-bottom: 2rem;
-  text-align: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(
+    270deg,
+    var(--brand),
+    var(--secondarybrand),
+    var(--brand)
+  );
+  background-size: 200% 200%;
+  animation: gradientShift 10s ease infinite;
+  padding: 1rem; /* Reduced from 2rem */
+  margin-bottom: 1.5rem; /* Reduced from 2rem */
 }
 
 .banner-title {
   color: var(--white);
   font-family: "Merriweather", serif;
-  font-size: 2.5rem;
+  font-size: 2rem; /* Slightly reduced if needed */
   font-weight: 700;
   max-width: 800px;
   margin: 0 auto;
+  line-height: 1.2; /* Added to control height */
 }
+
 .profile-container {
   min-height: 100vh;
   background-color: var(--background1);
@@ -186,10 +193,385 @@
   font-family: "Inter", sans-serif;
 }
 
+/* Animation Keyframes */
+@keyframes slideInFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes borderPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(94, 23, 235, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(94, 23, 235, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(94, 23, 235, 0);
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Apply animations to elements */
+.profile-banner {
+  background: linear-gradient(
+    270deg,
+    var(--brand),
+    var(--secondarybrand),
+    var(--brand)
+  );
+  background-size: 200% 200%;
+  animation: gradientShift 10s ease infinite;
+}
+
+.profile-card {
+  animation: slideInFromBottom 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+/* Stagger card animations */
+.profile-card:nth-child(1) { animation-delay: 0.1s; }
+.profile-card:nth-child(2) { animation-delay: 0.2s; }
+.profile-card:nth-child(3) { animation-delay: 0.3s; }
+.profile-card:nth-child(4) { animation-delay: 0.4s; }
+.profile-card:nth-child(5) { animation-delay: 0.5s; }
+
+.profile-image img {
+  transition: transform 0.3s ease;
+}
+
+.profile-image:hover img {
+  transform: scale(1.05);
+}
+
+.timeline-dot {
+  animation: borderPulse 2s infinite;
+}
+
+.timeline-milestone {
+  animation: fadeInScale 0.3s ease-out;
+}
+
+/* Interactive button animations */
+.linkedin-button,
+.contact-button,
+.learn-more-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.linkedin-button:hover,
+.contact-button:hover,
+.learn-more-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(94, 23, 235, 0.3);
+}
+
+/* Skill item animations */
+.skill-item {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.skill-item:hover {
+  transform: translateX(10px);
+  color: var(--brand);
+}
+
+/* Section header animations */
+.section-header {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-header::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--brand);
+  transition: width 0.3s ease;
+}
+
+.section-header:hover::after {
+  width: 100%;
+}
+
+/* Add these to your existing RoleModelProfilePage.css */
+
+/* Loading Spinner Styles */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(94, 23, 235, 0.1), rgba(7, 131, 117, 0.1));
+  backdrop-filter: blur(4px);
+  z-index: 50;
+}
+
+.loading-container {
+  text-align: center;
+  padding: 2rem;
+}
+
+.spinner-box {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+}
+
+.spinner {
+  animation: spin 2s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sparkle-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--brand);
+}
+
+.star-container {
+  position: absolute;
+  inset: 0;
+}
+
+.star {
+  position: absolute;
+  font-size: 1.25rem;
+  opacity: 0;
+}
+
+.star-1 {
+  top: 0;
+  right: 0;
+  animation: twinkle 1.5s ease-in-out infinite;
+}
+
+.star-2 {
+  bottom: 10px;
+  right: 10px;
+  animation: twinkle 1.5s ease-in-out infinite 0.5s;
+}
+
+.star-3 {
+  bottom: 0;
+  left: 0;
+  animation: twinkle 1.5s ease-in-out infinite 1s;
+}
+
+.loading-text {
+  font-family: "Merriweather", serif;
+  color: var(--brand);
+  font-size: 1.125rem;
+  animation: fadeInOut 2s ease-in-out infinite;
+}
+
+/* Error State Styles */
+.error-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(94, 23, 235, 0.1);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+}
+
+.error-container {
+  max-width: 28rem;
+  background: var(--white);
+  border: 2px solid var(--brand);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.error-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.error-title {
+  font-family: "Merriweather", serif;
+  font-size: 1.5rem;
+  color: var(--brand);
+  margin: 0;
+}
+
+.header-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.header-icon.sparkle {
+  color: var(--brand);
+}
+
+.header-icon.star {
+  color: var(--action);
+}
+
+.error-message {
+  font-size: 1.125rem;
+  color: var(--base-dark);
+  margin-bottom: 1rem;
+}
+
+.encouragement {
+  font-family: "Merriweather", serif;
+  font-size: 1.125rem;
+  color: var(--secondarybrand);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.action-button.refresh {
+  background-color: var(--brand);
+}
+
+.action-button.refresh:hover {
+  background-color: var(--secondarybrand);
+  transform: translateY(-1px);
+}
+
+.action-button.home {
+  background-color: var(--secondarybrand);
+}
+
+.action-button.home:hover {
+  background-color: var(--brand);
+  transform: translateY(-1px);
+}
+
+.button-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
 /* Animations */
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  .spinner-box {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .sparkle-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .loading-text {
+    font-size: 1rem;
+  }
+  
+  .error-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .action-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Add smooth transitions for all interactive elements */
+* {
+  transition: background-color 0.3s ease,
+              transform 0.3s ease,
+              box-shadow 0.3s ease,
+              color 0.3s ease;
 }
 
 /* Responsive Design */
@@ -220,14 +602,13 @@
 
 @media (max-width: 768px) {
   .profile-banner {
-    padding: 1.5rem 1rem;
+    padding: 0.75rem; /* Even more compact on mobile */
   }
   
   .banner-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
 }
-
 /* LinkedIn Button */
 .linkedin-connect {
   text-align: center;
