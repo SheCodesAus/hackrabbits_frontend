@@ -3,7 +3,14 @@ import { useParams } from "react-router-dom";
 import RoleModelProfileDetails from "../components/RMProfileDetails.jsx";
 import fetchLimitedRoleModelProfile from "../api/rolemodeluser_profile/get_publicview_profile.js";
 import useRolemodel from "../hooks/use-rolemodel.js"; // Fix import name
-import "./RoleModelProfilePage.css";
+
+import "./RoleModelProfilePage.css"
+
+import "../styles.css";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
+
 function ProfilePage() {
   // const { id: rolemodelId } = useParams(); // Extract ID from URL
   const params = useParams();
@@ -36,7 +43,10 @@ function ProfilePage() {
     fetchName();
   }, [rolemodelId]);
   return (
-    <div className="profile-page-container">
+
+    <>
+      <Header />
+        <div className="profile-page-container">
       <h1>{name}</h1>
       {isLoading ? (
         <p>Loading...</p>
@@ -45,6 +55,9 @@ function ProfilePage() {
       )}
       {error && <p>Error: {error.message}</p>}
     </div>
+      <Footer />
+    </>
+
   );
 }
 export default ProfilePage;

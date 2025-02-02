@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import GeneralUserProfileDetails from "../components/GeneralUserProfileDetails";
 import { get_profile } from "../api/communityuser_profile/get_profile.js";
 
+import "../styles.css";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 function GeneralUserProfilePage() {
   const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
@@ -37,6 +41,8 @@ function GeneralUserProfilePage() {
   if (!profile) return <p>No profile found.</p>;
 
   return (
+    <>
+    <Header />
     <div className="container mx-auto mt-8 px-4">
       <h1 className="text-3xl font-bold mb-6">My Profile</h1>
       <GeneralUserProfileDetails 
@@ -44,6 +50,8 @@ function GeneralUserProfilePage() {
         isOwnProfile={true} // This flag can be used to show edit options
       />
     </div>
+    <Footer />
+  </>
   );
 }
 
