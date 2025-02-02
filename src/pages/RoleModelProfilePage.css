@@ -1,102 +1,364 @@
-/* Profile Page Styling */
-.profile-page-container {
+/* Profile Page Styles */
+
+.profile-banner {
+  background-color: var(--brand);
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.banner-title {
+  color: var(--white);
+  font-family: "Merriweather", serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.profile-container {
+  min-height: 100vh;
+  background-color: var(--background1);
+  padding-top: calc(var(--header-height, 8rem) + 20px);
+}
+
+.profile-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.profile-header {
+  background-color: var(--brand);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.profile-header h1 {
+  color: var(--white);
+  font-family: "Merriweather", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Profile Cards */
+.profile-card {
+  background-color: var(--white);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Profile Info Section */
+.profile-info {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.profile-image {
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-details {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  padding: 2rem;
-  background-color: var(--background1);
-  min-height: 100vh;
+  min-height: 300px; /* Match new image height */
 }
 
-.profile-page-container h1 {
-  font-size: 2rem;
+.profile-name {
   color: var(--brand);
-  margin-bottom: 1rem;
+  font-family: "Merriweather", serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
-/* Profile Component Styling */
-.profile-details {
-  background-color: var(--white);
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 2rem;
+.profile-text-content {
+  text-align: center;
   width: 100%;
-  max-width: 800px;
-  /* text-align: center; */
 }
 
-.profile-details img {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
+.profile-role {
+  color: var(--black);
+  font-family: "Inter", sans-serif;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
 }
 
-.profile-details p {
-  font-size: 1rem;
-  color: var(--brand);
-  margin: 0.5rem 0;
-  text-align: left;
-  background-color: var(--background1);
-  font-weight: bold;
+.profile-current-role,
+.profile-organization {
+  color: var(--base-dark);
+  font-family: "Inter", sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
 }
 
-.profile-details strong {
-  color: var(--brand);
+/* Journey Section */
+.journey-content {
   text-align: left;
+  font-family: "Inter", sans-serif;
 }
-.milestones p {
+
+.journey-text {
+  color: var(--black);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Section Headers */
+.section-header {
   color: var(--brand);
-}
-.milestones {
-  color: var(--brand);
-  font-size: 16px;
-}
-.achievements p {
-  color: var(--brand);
-}
-.achievements {
-  color: var(--brand);
-  font-size: 16px;
-}
-/* Authenticated User Details */
-.authenticated-details {
-  margin-top: 2rem;
+  font-family: "Merriweather", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
   text-align: left;
 }
 
-.authenticated-details h3 {
+/* Skills Section */
+.skills-content {
+  text-align: left;
+  font-family: "Inter", sans-serif;
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+}
+
+.skill-item {
+  color: var(--black);
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.skill-item:before {
+  content: "•";
   color: var(--brand);
-  margin-top: 1.5rem;
+  margin-right: 0.75rem;
   font-size: 1.2rem;
 }
 
-/* Learn More Button */
-.learn-more-btn {
-  margin-top: 1rem;
-  padding: 10px 20px;
-  font-size: 1rem;
-  color: var(--white);
-  background-color: var(--action);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+/* Loading & Error States */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
 }
 
-.learn-more-btn:hover {
-  background-color: var(--secondarybrand);
+.loading-spinner {
+  border: 4px solid var(--base-light);
+  border-top: 4px solid var(--brand);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+.error-message {
+  color: #dc2626;
+  text-align: center;
+  padding: 1rem;
+  margin: 2rem auto;
+  max-width: 600px;
+  background-color: #fef2f2;
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+}
+
+/* Animations */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .profile-details {
-    width: 90%;
+  .profile-info {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .profile-details img {
-    width: 120px;
-    height: 120px;
+  .profile-image {
+    width: 250px;
+    height: 250px;
+    margin-bottom: 1.5rem;
+  }
+
+  .profile-details {
+    min-height: auto;
+  }
+
+  .profile-name {
+    font-size: 2rem;
+  }
+
+  .profile-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-banner {
+    padding: 1.5rem 1rem;
+  }
+  
+  .banner-title {
+    font-size: 2rem;
+  }
+}
+
+/* LinkedIn Button */
+.linkedin-connect {
+  text-align: center;
+  padding: 1rem 0;
+}
+
+.linkedin-button {
+  background-color: var(--brand);
+  color: var(--white);
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+}
+
+.linkedin-button:hover {
+  background-color: var(--secondarybrand);
+}
+
+/* Timeline Styles */
+.timeline-container {
+  padding: 2rem 0;
+}
+
+.timeline {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+  margin: 0 40px;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--base-light);
+  z-index: 1;
+}
+
+.timeline-point {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 2;
+  padding: 0;
+}
+
+.timeline-dot {
+  width: 20px;
+  height: 20px;
+  background-color: var(--secondarybrand);
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.timeline-point:hover .timeline-dot {
+  transform: scale(1.2);
+  background-color: var(--brand);
+}
+
+.timeline-year {
+  color: var(--base-dark);
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.timeline-details {
+  text-align: center;
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+
+.timeline-instruction {
+  color: var(--brand);
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+.timeline-description {
+  color: var(--base-dark);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.timeline-milestone {
+  background-color: var(--background1);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.timeline-milestone h4 {
+  color: var(--brand);
+  font-family: "Merriweather", serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .timeline {
+    margin: 0 20px;
+  }
+
+  .timeline-year {
+    font-size: 0.9rem;
+  }
+
+  .timeline-dot {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .linkedin-button {
+    max-width: 100%;
+    margin: 0 1rem;
   }
 }

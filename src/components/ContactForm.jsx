@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import './ContactForm.css';
+
 
 const ContactForm = ({ onContactSubmitted, recipientEmail }) => {
     const [formData, setFormData] = useState({
