@@ -126,7 +126,8 @@ const RoleModelProfileDetails = ({ rolemodelId }) => {
       ) : (
         <button
           onClick={() => {
-            localStorage.setItem("redirectAfterLogin", window.location.pathname);
+            localStorage.setItem("redirectAfterLogin", `/profile/${rolemodelId}`);
+
             navigate("/login");
           }}
         >
