@@ -51,14 +51,18 @@ const LoginForm = () => {
       // Store token in localStorage
       window.localStorage.setItem('token', data.token);
 
+      // const redirectPath = localStorage.getItem("redirectAfterLogin") || "/";
+
+      // if (redirectPath && redirectPath.startsWith("/role-model-profile")) {
+      //   navigate(redirectPath); // If coming from profile, go back there
+      // } else {
+      //   navigate("/"); // Otherwise, go to home
+      // }
+
+
       const redirectPath = localStorage.getItem("redirectAfterLogin") || "/";
-
-      if (redirectPath && redirectPath.startsWith("/role-model-profile")) {
-        navigate(redirectPath); // If coming from profile, go back there
-      } else {
-        navigate("/"); // Otherwise, go to home
-      }
-
+      localStorage.removeItem("redirectAfterLogin"); // Clear after use
+      navigate(redirectPath);
 
 
 
