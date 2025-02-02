@@ -15,17 +15,24 @@ function NavBar() {
       <button className="dropbtn">Menu</button>
       <div className="dropdown-content">
         <Link to="/">Home</Link>
-        {auth.token ? (
+        {auth.token ? (<>
           <Link to="/" onClick={handleLogout}>
             Log Out
-          </Link>
+          </Link>          
+          <Link to="/my-profile">
+            My Profile
+          </Link></>     
             ) : ( 
+              
               <>
           <Link to="/login">
             Login
           </Link>
           <Link to="/signup">
             Create an Account
+          </Link>
+          <Link to="/my-profile">
+            My Profile
           </Link>
               </>
               )}
