@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import fetchLimitedRoleModelProfile from "../api/rolemodeluser_profile/get_publicview_profile";
 import fetchRolemodel from "../api/rolemodeluser_profile/get_fulldetailsprofile";
 import { useNavigate } from "react-router-dom";
+import ContactForm from "./ContactForm";
 
 // BS. I need to get id using the useparam and hook now I wonder if it's matter to get the id from which endpoint? I don't think so!
 
@@ -31,6 +32,19 @@ const RoleModelProfileDetails = ({ rolemodelId }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const [showContactForm, setShowContactForm] = useState(false);
+
+  // toggle for contact form 
+  const handleContactRequest = () => {
+    setShowContactForm(!showContactForm);
+  };
+
+  // Handle contact form submission
+  const handleContactSubmitted = () => {
+    setShowContactForm(false); // Hide the form after submission
+  };
+
+
 
   useEffect(() => {
     // Check authentication
@@ -59,19 +73,17 @@ const RoleModelProfileDetails = ({ rolemodelId }) => {
   if (loading) return <p>Loading profile...</p>;
   if (!profile) return <p>Profile not found.</p>;
 
+
+
+
   return (
     <div className="profile-details">
       <img src={profile.image} alt="profile photo" />
       {/* <h2>{profile.first_name} {profile.last_name}</h2> */}
-      <p>
-        <strong>Role:</strong> {profile.current_role}
-      </p>
-      <p>
-        <strong>Industry:</strong> {profile.industry}
-      </p>
-      <p>
-        <strong>Location:</strong> {profile.location}
-      </p>
+      <p><strong>Role:</strong> {profile.current_role}</p>
+      <p><strong>Industry:</strong> {profile.industry}</p>
+      <p><strong>Location:</strong> {profile.location}</p>
+
 
       {isAuthenticated ? (
         <>
@@ -92,12 +104,45 @@ const RoleModelProfileDetails = ({ rolemodelId }) => {
           <div className="advice"></div>
           <p>Advice</p>
           <p>{profile.advice || " "}</p>
+
+          {/* Contact Form */}
+          <button onClick={handleContactRequest} className="button">
+            Contact
+          </button>
+
+          {/* I am tryin to implement a contact form button happen.
+               set up a toggle and the button here. 
+               but not sure how to handle when i call contact form. 
+               this pieace of code is borrowed from my other project  */}
+
+          {/* Contact Form */}
+          {showContactForm && (
+            <div className="contact-form-container">
+              <ContactForm
+                recipientEmail={profile?.email || ""}
+                onContactSubmitted={handleContactSubmitted} />
+              <button onClick={handleContactRequest} className="button">
+                Cancel
+              </button>
+            </div>
+          )}
+          {/* need to pass onContactSubmitted to contact form */}
         </>
       ) : (
-        <button onClick={() => navigate("/login")}>Learn More</button>
-      )}
+        <button
+          onClick={() => {
+            localStorage.setItem("redirectAfterLogin", `/profile/${rolemodelId}`);
+
+            navigate("/login");
+          }}
+        >
+          Learn More
+        </button>
+
+      )
+      }
     </div>
-  );
-};
+  )
+}
 
 export default RoleModelProfileDetails;

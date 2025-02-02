@@ -134,7 +134,7 @@ const InvitePage = () => {
       <div className="invite-form-container">
         <h2>Invite Someone Inspiring</h2>
         <p className="invite-subtitle">
-          Know someone who could inspire others? Invite them to join!
+          Know someone who could inspire others? Invite them to join by entering their details below...
         </p>
 
         {submitStatus === 'success' && (
@@ -152,7 +152,7 @@ const InvitePage = () => {
         <form onSubmit={handleSubmit} className="invite-form">
           <div className="form-group">
             <label htmlFor="fullName">
-              Their Full Name <span className="required">*</span>
+              Full Name <span className="required">*</span>
             </label>
             <input
               id="fullName"
@@ -172,7 +172,7 @@ const InvitePage = () => {
 
           <div className="form-group">
             <label htmlFor="email">
-              Their Email <span className="required">*</span>
+              Email <span className="required">*</span>
             </label>
             <input
               id="email"
@@ -183,7 +183,7 @@ const InvitePage = () => {
               required
               className={errors.email ? 'form-input error' : 'form-input'}
               disabled={isSubmitting}
-              placeholder="Enter their email address"
+              placeholder="Email address"
             />
             {errors.email && (
               <span className="error-text">{errors.email}</span>
@@ -192,7 +192,7 @@ const InvitePage = () => {
 
           <div className="form-group">
             <label htmlFor="industry">
-              Their Industry <span className="required">*</span>
+            What industry are they in? <span className="required">*</span>
             </label>
             <select
               id="industry"
@@ -218,7 +218,7 @@ const InvitePage = () => {
 
           <div className="form-group">
             <label htmlFor="currentRole">
-              Their Current Role <span className="required">*</span>
+             Current role: <span className="required">*</span>
             </label>
             <input
               id="currentRole"
@@ -238,7 +238,7 @@ const InvitePage = () => {
 
           <div className="form-group">
             <label htmlFor="whyInspiring">
-              Why are they inspiring? <span className="required">*</span>
+              Tell us how they inspire you: <span className="required">*</span>
             </label>
             <textarea
               id="whyInspiring"
@@ -249,7 +249,7 @@ const InvitePage = () => {
               className={errors.whyInspiring ? 'form-input error' : 'form-input'}
               disabled={isSubmitting}
               rows={4}
-              placeholder="Tell us why this person inspires you (minimum 20 characters)"
+              placeholder="Minimum 20 characters"
             />
             {errors.whyInspiring && (
               <span className="error-text">{errors.whyInspiring}</span>

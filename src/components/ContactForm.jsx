@@ -1,33 +1,59 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-const ContactForm = ({ onSubmit }) => {
+const ContactForm = ({ onContactSubmitted, recipientEmail }) => {
     const [formData, setFormData] = useState({
-        fullName: '',
-        email: '',
-        subject: '',
-        message: '',
+        fullName: "",
+        email: "",
+        subject: "",
+        message: "",
     });
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+    const handleChange = (event) => {
+        const { name, value } = event.target;
         setFormData((prevState) => ({
             ...prevState,
             [name]: value,
         }));
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onSubmit(formData);
+    const handleSendEmail = (event) => {
+        event.preventDefault();
+
+        const { fullName, email, subject, message } = formData;
+
+        if (!fullName.trim() || !email.trim() || !subject.trim() || !message.trim()) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+
+        // const recipientEmail = "example@email.com"; // Replace with your contact email
+        const encodedSubject = encodeURIComponent(`Contact Request: ${subject}`);
+        const encodedBody = encodeURIComponent(
+            `Full Name: ${fullName}\nEmail: ${email}\n\nMessage:\n${message}`
+        );
+
+        // Open user's email client with pre-filled details
+        window.location.href = `mailto:${recipientEmail}?subject=${encodedSubject}&body=${encodedBody}`;
+
+        // Notify parent component that the form was submitted
+        if (onContactSubmitted) {
+            onContactSubmitted();
+        }
+
+        // Clear form after sending
+        setFormData({
+            fullName: "",
+            email: "",
+            subject: "",
+            message: "",
+        });
     };
 
     return (
-        <form onSubmit={handleSubmit} className="contact-form">
+        <form onSubmit={handleSendEmail} className="contact-form">
             <div className="form-group">
-                <label htmlFor="fullName">
-                    Your Full Name <span className="required">*</span>
-                </label>
+                <label htmlFor="fullName">Your Full Name <span className="required">*</span></label>
                 <input
                     type="text"
                     id="fullName"
@@ -39,9 +65,7 @@ const ContactForm = ({ onSubmit }) => {
             </div>
 
             <div className="form-group">
-                <label htmlFor="email">
-                    Your Email <span className="required">*</span>
-                </label>
+                <label htmlFor="email">Your Email <span className="required">*</span></label>
                 <input
                     type="email"
                     id="email"
@@ -53,9 +77,7 @@ const ContactForm = ({ onSubmit }) => {
             </div>
 
             <div className="form-group">
-                <label htmlFor="subject">
-                    Subject <span className="required">*</span>
-                </label>
+                <label htmlFor="subject">Subject <span className="required">*</span></label>
                 <select
                     id="subject"
                     name="subject"
@@ -64,16 +86,22 @@ const ContactForm = ({ onSubmit }) => {
                     required
                 >
                     <option value="">Select...</option>
-                    <option value="Coaching Session">Coaching Session</option>
-                    <option value="Conference Request">Conference Request</option>
-                    <option value="Custom Request">Custom Request</option>
+                    <option value="Guest Speaker Request">Guest Speaker Request</option>
+                    <option value="Mentorship Inquiry">Mentorship Inquiry</option>
+                    <option value="Career Advice">Career Advice</option>
+                    <option value="Collaboration Opportunity">Collaboration Opportunity</option>
+                    <option value="Media & Interviews">Media & Interviews</option>
+                    <option value="General Inquiry">General Inquiry</option>
+
                 </select>
+
+
+
+
             </div>
 
             <div className="form-group">
-                <label htmlFor="message">
-                    Message <span className="required">*</span>
-                </label>
+                <label htmlFor="message">Message <span className="required">*</span></label>
                 <textarea
                     id="message"
                     name="message"
@@ -85,14 +113,17 @@ const ContactForm = ({ onSubmit }) => {
             </div>
 
             <button type="submit" className="submit-button">
-                Send Message
+                Send via Email
             </button>
         </form>
     );
 };
 
+// Define PropTypes
 ContactForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
+    onContactSubmitted: PropTypes.func,
+    recipientEmail: PropTypes.string.isRequired,
+
 };
 
 export default ContactForm;

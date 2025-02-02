@@ -8,7 +8,7 @@ import './LoginForm.css';
 const LoginForm = () => {
   const navigate = useNavigate();
   const { setAuth } = useAuth();
-  
+
   const [formData, setFormData] = useState({
     username: '',
     password: ''
@@ -50,8 +50,25 @@ const LoginForm = () => {
       setAuth({ token: data.token });
       // Store token in localStorage
       window.localStorage.setItem('token', data.token);
-      // Redirect to home page
-      navigate('/');
+
+      // const redirectPath = localStorage.getItem("redirectAfterLogin") || "/";
+
+      // if (redirectPath && redirectPath.startsWith("/role-model-profile")) {
+      //   navigate(redirectPath); // If coming from profile, go back there
+      // } else {
+      //   navigate("/"); // Otherwise, go to home
+      // }
+
+
+      const redirectPath = localStorage.getItem("redirectAfterLogin") || "/";
+      localStorage.removeItem("redirectAfterLogin"); // Clear after use
+      navigate(redirectPath);
+
+
+
+      localStorage.removeItem("redirectAfterLogin");
+
+
     } catch (err) {
       setErrors({
         general: err.message || 'Login failed. Please check your credentials and try again.'
@@ -65,7 +82,7 @@ const LoginForm = () => {
     <div className="login-form">
       <div className="login-container">
         <h2>Welcome Back</h2>
-        
+
         {errors.general && (
           <div className="general-error">{errors.general}</div>
         )}
@@ -105,7 +122,7 @@ const LoginForm = () => {
             )}
           </div>
 
-          <button 
+          <button
             type="submit"
             className="submit-button"
             disabled={isLoading}

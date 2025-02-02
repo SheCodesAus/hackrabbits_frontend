@@ -77,10 +77,11 @@ function HomePage() {
             </div>
 
 
-
-            {/* sign_buttons (she inspires, to be inspired , ) */}
-
+            <div className="hero-statement">
+            <h2>Choose from the options below...</h2>
+            </div>
             {/* Action Buttons */}
+
             <div className="action-buttons">
                 <button
                     className="action-button"

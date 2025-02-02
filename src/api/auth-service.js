@@ -1,4 +1,3 @@
-import { API_BASE_URL } from "../config/constants";
 
 /**
  * Handle user authentication
@@ -7,7 +6,10 @@ import { API_BASE_URL } from "../config/constants";
  */
 export const loginUser = async (credentials) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api-token-auth/`, {
+    // const response = await fetch(`${VITE_API_URL}/api-token-auth/`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api-token-auth/`, {
+
+      
       method: "POST",
       headers: {
         "Content-Type": "application/json",
