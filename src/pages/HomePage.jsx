@@ -93,10 +93,15 @@ function HomePage() {
                 <button
                     className="action-button"
                     onClick={() => handleSignUpNavigation("community-user")}
-                >
+                    >
                     To Be Inspired
                 </button>
-                <button className="action-button">Know someone Inspiring</button>
+                <button 
+                    className="action-button"
+                    onClick={() => navigate('/invite')}  
+                >
+                    Know someone Inspiring
+                </button>
             </div>
 
             {/* rolemodel cards Section */}
