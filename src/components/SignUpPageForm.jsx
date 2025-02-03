@@ -120,10 +120,10 @@ const SignupPageForm = () => {
 
     try {
       let result;
-      if (formData.user_type == 'COMMUNITY_USER') {
+      if (formData.user_type === 'COMMUNITY_USER') {
         // Submit to the Community User endpoint
         result = await registerCommunityUser(formData);
-      } else if (formData.user_type == 'ROLE_MODEL') {
+      } else if (formData.user_type === 'ROLE_MODEL') {
         // Submit to the Role Model endpoint
         result = await registerRoleModel(formData);
       }
