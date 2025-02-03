@@ -7,7 +7,7 @@ export const registerCommunityUser = async (formData) => {
   try {
     const sanitizedData = sanitizeFormData(formData);
     
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/role-model/signup/`, {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/community-user/signup/`, {
 
     // const response = await fetch(`${API_BASE_URL}/community-user/signup/`, {
       method: 'POST',
