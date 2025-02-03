@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import "./ContactForm.css"
+
 
 const ContactForm = ({ onContactSubmitted, recipientEmail }) => {
     const [formData, setFormData] = useState({
@@ -112,9 +114,12 @@ const ContactForm = ({ onContactSubmitted, recipientEmail }) => {
                 ></textarea>
             </div>
 
-            <button type="submit" className="submit-button">
-                Send via Email
-            </button>
+
+
+            <div className="button-container">
+                <button type="submit" className="action-button">Send an Email</button>
+            </div>
+
         </form>
     );
 };

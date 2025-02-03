@@ -28,13 +28,14 @@ function ProfilePage() {
   // I don't know what's I am getting wrong. id is coming from useParams but also in useRolemodel hook I pass the rolemodelId which seems not getting anywhere
   const [name, setName] = useState("Role Model Profile");
   // Fetch name for the profile page title
+
   useEffect(() => {
     const fetchName = async () => {
       try {
         const data = await fetchLimitedRoleModelProfile(rolemodelId);
         setName(
           `${data.first_name || ""} ${data.last_name || ""}`.trim() ||
-            "Role Model Profile"
+          "Role Model Profile"
         );
       } catch (error) {
         console.error("Error fetching role model name:", error);
@@ -46,15 +47,21 @@ function ProfilePage() {
 
     <>
       <Header />
-        <div className="profile-page-container">
-      <h1>{name}</h1>
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        <RoleModelProfileDetails rolemodelId={rolemodelId} />
-      )}
-      {error && <p>Error: {error.message}</p>}
-    </div>
+      <div className="profile-page-container">
+
+
+
+        <h1 className="profile-name">{name}</h1>
+
+
+
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          <RoleModelProfileDetails rolemodelId={rolemodelId} />
+        )}
+        {error && <p>Error: {error.message}</p>}
+      </div>
       <Footer />
     </>
 

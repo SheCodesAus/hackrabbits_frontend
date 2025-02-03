@@ -4,47 +4,52 @@ import fetchRolemodel from "../api/rolemodeluser_profile/get_fulldetailsprofile"
 import { useNavigate } from "react-router-dom";
 import ContactForm from "./ContactForm";
 
-// BS. I need to get id using the useparam and hook now I wonder if it's matter to get the id from which endpoint? I don't think so!
+// // BS. I need to get id using the useparam and hook now I wonder if it's matter to get the id from which endpoint? I don't think so!
 
-// BS. in role model profile, i need to check if it's auth user show full details profile, if not show public view with button learn more.
+// // BS. in role model profile, i need to check if it's auth user show full details profile, if not show public view with button learn more.
 
-// to get user details fetch logic for auth point to full detail for public point to public view
+// // to get user details fetch logic for auth point to full detail for public point to public view
 
-// BS.  Toggle function for contact form
+// // BS.  Toggle function for contact form
 
-// BS. toggle for edit form:     const toggleEditForm = () => setShowEditForm((prev) => !prev);
+// // BS. toggle for edit form:     const toggleEditForm = () => setShowEditForm((prev) => !prev);
 
-// BS. Delete project handler
-// const handleDelete = async () => {
-//   if (confirm("Are you sure you want to delete this project?")) {
-//       try {
-//           await deleteProject(projectId);
-//           alert("Project deleted successfully!");
-//           window.location.href = "/";
-//       } catch (err) {
-//           setDeleteError(err.message);
-//       }
-//   }
-// };
+// // BS. Delete project handler
+// // const handleDelete = async () => {
+// //   if (confirm("Are you sure you want to delete this project?")) {
+// //       try {
+// //           await deleteProject(projectId);
+// //           alert("Project deleted successfully!");
+// //           window.location.href = "/";
+// //       } catch (err) {
+// //           setDeleteError(err.message);
+// //       }
+// //   }
+// // };
 
-const RoleModelProfileDetails = ({ rolemodelId }) => {
+const RoleModelProfileDetails = ({ rolemodelId, name }) => {
   const [profile, setProfile] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [showContactForm, setShowContactForm] = useState(false);
 
-  // toggle for contact form 
   const handleContactRequest = () => {
     setShowContactForm(!showContactForm);
   };
 
-  // Handle contact form submission
   const handleContactSubmitted = () => {
     setShowContactForm(false); // Hide the form after submission
   };
 
 
+  const formatText = (text) => {
+    if (!text) return "";
+    return text
+      .replace(/_/g, " ")
+      .toLowerCase()
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  };
 
   useEffect(() => {
     // Check authentication
@@ -74,75 +79,109 @@ const RoleModelProfileDetails = ({ rolemodelId }) => {
   if (!profile) return <p>Profile not found.</p>;
 
 
-
-
   return (
-    <div className="profile-details">
-      <img src={profile.image} alt="profile photo" />
-      {/* <h2>{profile.first_name} {profile.last_name}</h2> */}
-      <p><strong>Role:</strong> {profile.current_role}</p>
-      <p><strong>Industry:</strong> {profile.industry}</p>
-      <p><strong>Location:</strong> {profile.location}</p>
+    <div className="profile-content">
+      {/* Profile Info Card */}
+      <div className="profile-card">
+        <div className="profile-info">
+          <div className="profile-image">
+            <img src={profile.image} alt="Profile Photo" />
+          </div>
+          <div className="profile-details">
+            <h2 className="profile-name">{name}</h2>
+            <div className="profile-data">
+              <p className="profile-info"><strong>Role:</strong> {profile.current_role}</p>
+              <p className="profile-info"><strong>Industry:</strong> {formatText(profile.industry)}</p>
+              <p className="profile-info"><strong>Organisation:</strong> {profile.organization} </p>
+              <p className="profile-info"><strong>Location:</strong> {formatText(profile.location)}</p>
 
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* Journey Section */}
+      <div className="profile-card">
+        <h3 className="section-header">Inspiration</h3>
+        <p>{profile.journey || ""}</p>
+      </div>
+
+      {/* Skills Section */}
+      <div className="profile-card">
+        <h3 className="section-header">Skill Set</h3>
+        <ul className="skills-list">
+          {profile.skills ? profile.skills.map((skill, index) => <li key={index}>{skill}</li>) : (
+            <>
+              {/* <li>Product Management</li> */}
+              {/* <li>Strategic Innovation</li>
+              <li>Tech Entrepreneurship</li>
+              <li>Agile Methodologies</li> */}
+            </>
+          )}
+        </ul>
+      </div>
+
+      {/* Inspiration Section */}
+      <div className="profile-card">
+        <h3 className="section-header">My Inspiration</h3>
+        <p>{profile.inspiration || "No inspiration added yet. Click edit to add your inspiration!"}</p>
+      </div>
 
       {isAuthenticated ? (
         <>
-          <p>
-            <strong>Skills:</strong> {profile.skills?.join(", ")}
-          </p>
-          <p>
-            <strong>Categories:</strong> {profile.categories?.join(", ")}
-          </p>
-          <div className="milestones"></div>
-          <p>Milestones</p>
-          <p>{profile.milestones || " "}</p>
 
-          <div className="achievements"></div>
-          <p>Achievements</p>
-          <p>{profile.achievements || " "}</p>
+          {/* Advice Section */}
+          <div className="profile-card">
+            <h3 className="section-header">Advice</h3>
+            <p>{profile.advice || "No advice added yet. Click edit to add your advice!"}</p>
+          </div>
 
-          <div className="advice"></div>
-          <p>Advice</p>
-          <p>{profile.advice || " "}</p>
+          {/* Achievements Section */}
+          <div className="profile-card">
+            <h3 className="section-header">Achievements</h3>
+            <p>{profile.achievements || "No achievements added yet. Click edit to add your achievments!"}</p>
+          </div>
 
-          {/* Contact Form */}
-          <button onClick={handleContactRequest} className="button">
-            Contact
-          </button>
+          {/* LinkedIn Section */}
+          <div className="profile-card">
+            <button
+              className="action-button"
+              onClick={() => window.open(profile.linkedin_url || "https://linkedin.com", "_blank")}
+            >
+              Connect on LinkedIn
+            </button>
 
-          {/* I am tryin to implement a contact form button happen.
-               set up a toggle and the button here. 
-               but not sure how to handle when i call contact form. 
-               this pieace of code is borrowed from my other project  */}
 
-          {/* Contact Form */}
-          {showContactForm && (
-            <div className="contact-form-container">
-              <ContactForm
-                recipientEmail={profile?.email || ""}
-                onContactSubmitted={handleContactSubmitted} />
-              <button onClick={handleContactRequest} className="button">
-                Cancel
-              </button>
-            </div>
-          )}
-          {/* need to pass onContactSubmitted to contact form */}
+            {/* Contact Section */}
+            <button onClick={handleContactRequest} className="action-button">
+              Contact
+            </button>
+            {showContactForm && (
+              <div className="button-container">
+                <ContactForm recipientEmail={profile.email || ""} onContactSubmitted={handleContactSubmitted} />
+                <button onClick={handleContactRequest} className="action-button">
+                  Cancel
+                </button>
+              </div>
+            )}
+          </div>
         </>
       ) : (
-        <button
-          onClick={() => {
-            localStorage.setItem("redirectAfterLogin", `/profile/${rolemodelId}`);
-
-            navigate("/login");
-          }}
-        >
-          Learn More
-        </button>
-
-      )
-      }
+        <div className="profile-card">
+          <button
+            className="action-button"
+            onClick={() => {
+              localStorage.setItem("redirectAfterLogin", `/profile/${rolemodelId}`);
+              navigate("/login");
+            }}
+          >
+            Learn More
+          </button>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
 export default RoleModelProfileDetails;
