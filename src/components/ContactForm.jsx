@@ -114,9 +114,12 @@ const ContactForm = ({ onContactSubmitted, recipientEmail }) => {
                 ></textarea>
             </div>
 
-            <button type="submit" className="submit-button">
-                Send via Email
-            </button>
+
+
+            <div className="button-container">
+                <button type="submit" className="action-button">Send an Email</button>
+            </div>
+
         </form>
     );
 };

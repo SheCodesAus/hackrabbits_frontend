@@ -53,21 +53,6 @@ textarea {
   resize: vertical;
 }
 
-.submit-button {
-  width: 100%;
-  padding: 0.75rem;
-  font-size: 1.2rem;
-  color: var(--white);
-  background: var(--brand);
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.submit-button:hover {
-  background: var(--secondarybrand);
-}
 
 @media (max-width: 640px) {
   .contact-form {
