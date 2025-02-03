@@ -52,16 +52,13 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
   };
 
   useEffect(() => {
-    // Check authentication
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsAuthenticated(true);
-    }
+    const checkAuthAndFetch = async () => {
+      const token = localStorage.getItem("token");
+      const authStatus = !!token;
+      setIsAuthenticated(authStatus);
 
-    // Fetch profile data from the correct endpoint for public or registered user
-    const fetchData = async () => {
       try {
-        const data = isAuthenticated
+        const data = authStatus
           ? await fetchRolemodel(rolemodelId)
           : await fetchLimitedRoleModelProfile(rolemodelId);
         setProfile(data);
@@ -72,8 +69,10 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
       }
     };
 
-    fetchData();
-  }, [rolemodelId, isAuthenticated]);
+    checkAuthAndFetch();
+  }, [rolemodelId]);
+
+
 
   if (loading) return <p>Loading profile...</p>;
   if (!profile) return <p>Profile not found.</p>;
@@ -92,7 +91,7 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
             <div className="profile-data">
               <p className="profile-info"><strong>Role:</strong> {profile.current_role}</p>
               <p className="profile-info"><strong>Industry:</strong> {formatText(profile.industry)}</p>
-              <p className="profile-info"><strong>Organisation:</strong> {profile.organization} </p>
+              {/* <p className="profile-info"><strong>Organisation:</strong> {profile.organization} </p> */}
               <p className="profile-info"><strong>Location:</strong> {formatText(profile.location)}</p>
 
             </div>
@@ -122,15 +121,15 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
         </ul>
       </div> */}
 
-      {/* Inspiration Section */}
-      <div className="profile-card">
-        <h3 className="section-header">My Inspiration</h3>
-        <p>{profile.inspiration}</p>
-      </div>
+
 
       {isAuthenticated ? (
         <>
-
+          {/* Inspiration Section */}
+          <div className="profile-card">
+            <h3 className="section-header">My Inspiration</h3>
+            <p>{profile.inspiration}</p>
+          </div>
           {/* Advice Section */}
           <div className="profile-card">
             <h3 className="section-header">Advice</h3>
