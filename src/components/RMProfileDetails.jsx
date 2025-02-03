@@ -3,7 +3,7 @@ import fetchLimitedRoleModelProfile from "../api/rolemodeluser_profile/get_publi
 import fetchRolemodel from "../api/rolemodeluser_profile/get_fulldetailsprofile";
 import { useNavigate } from "react-router-dom";
 import ContactForm from "./ContactForm";
-
+import deleteProfile from "../api/rolemodeluser_profile/delete_profile";
 // // BS. I need to get id using the useparam and hook now I wonder if it's matter to get the id from which endpoint? I don't think so!
 
 // // BS. in role model profile, i need to check if it's auth user show full details profile, if not show public view with button learn more.
@@ -14,18 +14,7 @@ import ContactForm from "./ContactForm";
 
 // // BS. toggle for edit form:     const toggleEditForm = () => setShowEditForm((prev) => !prev);
 
-// // BS. Delete project handler
-// // const handleDelete = async () => {
-// //   if (confirm("Are you sure you want to delete this project?")) {
-// //       try {
-// //           await deleteProject(projectId);
-// //           alert("Project deleted successfully!");
-// //           window.location.href = "/";
-// //       } catch (err) {
-// //           setDeleteError(err.message);
-// //       }
-// //   }
-// // };
+
 
 const RoleModelProfileDetails = ({ rolemodelId, name }) => {
   const [profile, setProfile] = useState(null);
@@ -33,6 +22,15 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [showContactForm, setShowContactForm] = useState(false);
+  const [deleteError, setDeleteError] = useState(null);
+
+  const formatText = (text) => {
+    if (!text) return "";
+    return text
+      .replace(/_/g, " ")
+      .toLowerCase()
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+  };
 
   const handleContactRequest = () => {
     setShowContactForm(!showContactForm);
@@ -42,14 +40,19 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
     setShowContactForm(false); // Hide the form after submission
   };
 
-
-  const formatText = (text) => {
-    if (!text) return "";
-    return text
-      .replace(/_/g, " ")
-      .toLowerCase()
-      .replace(/\b\w/g, (char) => char.toUpperCase());
+  // BS. Delete profile handler
+  const handleDelete = async () => {
+    if (confirm("Are you sure you want to delete this profile?")) {
+      try {
+        await deleteProfile(rolemodelId);
+        alert("Profile deleted successfully!");
+        window.location.href = "/";
+      } catch (err) {
+        setDeleteError(err.message);
+      }
+    }
   };
+
 
   useEffect(() => {
     // Check authentication
@@ -163,7 +166,13 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
                 <button onClick={handleContactRequest} className="action-button">
                   Cancel
                 </button>
+
+
+                <button onClick={handleDelete} className="action-button">Delete</button>
+                {deleteError && <p className="error-message">{deleteError}</p>}
               </div>
+
+
             )}
           </div>
         </>
@@ -179,8 +188,9 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
             Learn More
           </button>
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 
