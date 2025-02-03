@@ -102,30 +102,30 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
       </div>
 
       {/* Journey Section */}
-      <div className="profile-card">
+      {/* <div className="profile-card">
         <h3 className="section-header">Inspiration</h3>
-        <p>{profile.journey || ""}</p>
-      </div>
+        <p>{profile.inspiration || ""}</p>
+      </div> */}
 
       {/* Skills Section */}
-      <div className="profile-card">
+      {/* <div className="profile-card">
         <h3 className="section-header">Skill Set</h3>
         <ul className="skills-list">
           {profile.skills ? profile.skills.map((skill, index) => <li key={index}>{skill}</li>) : (
-            <>
-              {/* <li>Product Management</li> */}
-              {/* <li>Strategic Innovation</li>
+            <> */}
+      {/* <li>Product Management</li> */}
+      {/* <li>Strategic Innovation</li>
               <li>Tech Entrepreneurship</li>
               <li>Agile Methodologies</li> */}
-            </>
+      {/* </>
           )}
         </ul>
-      </div>
+      </div> */}
 
       {/* Inspiration Section */}
       <div className="profile-card">
         <h3 className="section-header">My Inspiration</h3>
-        <p>{profile.inspiration || "No inspiration added yet. Click edit to add your inspiration!"}</p>
+        <p>{profile.inspiration}</p>
       </div>
 
       {isAuthenticated ? (
@@ -134,23 +134,24 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
           {/* Advice Section */}
           <div className="profile-card">
             <h3 className="section-header">Advice</h3>
-            <p>{profile.advice || "No advice added yet. Click edit to add your advice!"}</p>
+            <p>{profile.advice}</p>
           </div>
 
           {/* Achievements Section */}
           <div className="profile-card">
             <h3 className="section-header">Achievements</h3>
-            <p>{profile.achievements || "No achievements added yet. Click edit to add your achievments!"}</p>
+            <p>{profile.achievements}</p>
           </div>
 
           {/* LinkedIn Section */}
           <div className="profile-card">
             <button
               className="action-button"
-              onClick={() => window.open(profile.linkedin_url || "https://linkedin.com", "_blank")}
+              onClick={() => window.open(profile.linkedin)}
             >
               Connect on LinkedIn
             </button>
+
 
 
             {/* Contact Section */}
@@ -159,7 +160,7 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
             </button>
             {showContactForm && (
               <div className="button-container">
-                <ContactForm recipientEmail={profile.email || ""} onContactSubmitted={handleContactSubmitted} />
+                <ContactForm recipientEmail={profile.email} onContactSubmitted={handleContactSubmitted} />
                 <button onClick={handleContactRequest} className="action-button">
                   Cancel
                 </button>
