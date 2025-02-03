@@ -153,18 +153,17 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
             </button>
 
 
-
             {/* Contact Section */}
             <button onClick={handleContactRequest} className="action-button">
               Contact
             </button>
             {showContactForm && (
-              <div className="button-container">
+              <>
                 <ContactForm recipientEmail={profile.email} onContactSubmitted={handleContactSubmitted} />
                 <button onClick={handleContactRequest} className="action-button">
                   Cancel
                 </button>
-              </div>
+              </>
             )}
           </div>
         </>
