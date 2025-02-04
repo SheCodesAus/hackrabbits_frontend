@@ -100,34 +100,12 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
         </div>
       </div>
 
-      {/* Journey Section */}
-      {/* <div className="profile-card">
-        <h3 className="section-header">Inspiration</h3>
-        <p>{profile.inspiration || ""}</p>
-      </div> */}
-
-      {/* Skills Section */}
-      {/* <div className="profile-card">
-        <h3 className="section-header">Skill Set</h3>
-        <ul className="skills-list">
-          {profile.skills ? profile.skills.map((skill, index) => <li key={index}>{skill}</li>) : (
-            <> */}
-      {/* <li>Product Management</li> */}
-      {/* <li>Strategic Innovation</li>
-              <li>Tech Entrepreneurship</li>
-              <li>Agile Methodologies</li> */}
-      {/* </>
-          )}
-        </ul>
-      </div> */}
-
-
 
       {isAuthenticated ? (
         <>
           {/* Inspiration Section */}
           <div className="profile-card">
-            <h3 className="section-header">My Inspiration</h3>
+            <h3 className="section-header">Inspiration</h3>
             <p>{profile.inspiration}</p>
           </div>
           {/* Advice Section */}
