@@ -158,7 +158,7 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
               Contact
             </button>
             {showContactForm && (
-              <div className="button-container">
+              <div >
                 <ContactForm recipientEmail={profile.email || ""} onContactSubmitted={handleContactSubmitted} />
                 <button onClick={handleContactRequest} className="action-button">
                   Cancel
