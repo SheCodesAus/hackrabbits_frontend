@@ -52,16 +52,13 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
   };
 
   useEffect(() => {
-    // Check authentication
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsAuthenticated(true);
-    }
+    const checkAuthAndFetch = async () => {
+      const token = localStorage.getItem("token");
+      const authStatus = !!token;
+      setIsAuthenticated(authStatus);
 
-    // Fetch profile data from the correct endpoint for public or registered user
-    const fetchData = async () => {
       try {
-        const data = isAuthenticated
+        const data = authStatus
           ? await fetchRolemodel(rolemodelId)
           : await fetchLimitedRoleModelProfile(rolemodelId);
         setProfile(data);
@@ -72,8 +69,10 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
       }
     };
 
-    fetchData();
-  }, [rolemodelId, isAuthenticated]);
+    checkAuthAndFetch();
+  }, [rolemodelId]);
+
+
 
   if (loading) return <p>Loading profile...</p>;
   if (!profile) return <p>Profile not found.</p>;
@@ -92,7 +91,7 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
             <div className="profile-data">
               <p className="profile-info"><strong>Role:</strong> {profile.current_role}</p>
               <p className="profile-info"><strong>Industry:</strong> {formatText(profile.industry)}</p>
-              <p className="profile-info"><strong>Organisation:</strong> {profile.organization} </p>
+              {/* <p className="profile-info"><strong>Organisation:</strong> {profile.organization} </p> */}
               <p className="profile-info"><strong>Location:</strong> {formatText(profile.location)}</p>
 
             </div>
@@ -101,53 +100,31 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
         </div>
       </div>
 
-      {/* Journey Section */}
-      <div className="profile-card">
-        <h3 className="section-header">Inspiration</h3>
-        <p>{profile.journey || ""}</p>
-      </div>
-
-      {/* Skills Section */}
-      <div className="profile-card">
-        <h3 className="section-header">Skill Set</h3>
-        <ul className="skills-list">
-          {profile.skills ? profile.skills.map((skill, index) => <li key={index}>{skill}</li>) : (
-            <>
-              {/* <li>Product Management</li> */}
-              {/* <li>Strategic Innovation</li>
-              <li>Tech Entrepreneurship</li>
-              <li>Agile Methodologies</li> */}
-            </>
-          )}
-        </ul>
-      </div>
-
-      {/* Inspiration Section */}
-      <div className="profile-card">
-        <h3 className="section-header">My Inspiration</h3>
-        <p>{profile.inspiration || "No inspiration added yet. Click edit to add your inspiration!"}</p>
-      </div>
 
       {isAuthenticated ? (
         <>
-
+          {/* Inspiration Section */}
+          <div className="profile-card">
+            <h3 className="section-header">Inspiration</h3>
+            <p>{profile.inspiration}</p>
+          </div>
           {/* Advice Section */}
           <div className="profile-card">
             <h3 className="section-header">Advice</h3>
-            <p>{profile.advice || "No advice added yet. Click edit to add your advice!"}</p>
+            <p>{profile.advice}</p>
           </div>
 
           {/* Achievements Section */}
           <div className="profile-card">
             <h3 className="section-header">Achievements</h3>
-            <p>{profile.achievements || "No achievements added yet. Click edit to add your achievments!"}</p>
+            <p>{profile.achievements}</p>
           </div>
 
           {/* LinkedIn Section */}
           <div className="profile-card">
             <button
               className="action-button"
-              onClick={() => window.open(profile.linkedin_url || "https://linkedin.com", "_blank")}
+              onClick={() => window.open(profile.linkedin)}
             >
               Connect on LinkedIn
             </button>
@@ -158,12 +135,12 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
               Contact
             </button>
             {showContactForm && (
-              <div >
-                <ContactForm recipientEmail={profile.email || ""} onContactSubmitted={handleContactSubmitted} />
+              <>
+                <ContactForm recipientEmail={profile.email} onContactSubmitted={handleContactSubmitted} />
                 <button onClick={handleContactRequest} className="action-button">
                   Cancel
                 </button>
-              </div>
+              </>
             )}
           </div>
         </>
