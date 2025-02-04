@@ -162,3 +162,4 @@ const RoleModelProfileDetails = ({ rolemodelId, name }) => {
 };
 
 export default RoleModelProfileDetails;
+
