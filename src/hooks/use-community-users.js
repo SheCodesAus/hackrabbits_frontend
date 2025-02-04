@@ -1,22 +1,19 @@
-import getCommunityusers from "../api/communityuser_profile/get_publicview_profiles";
+import fetchLimitedCommunityUserProfiles from "../api/communityuser_profile/get_publicview_profiles";
 import { useState, useEffect } from "react";
 
-
-
-export default function useCommunityusers() {
-    // Here we use the useState hook to create a state variable called Communityusers and a function to update it called setCommunityusers. We initialize the state variable with an empty array.
-    const [Communityusers, setCommunityusers] = useState([]);
-  
-    // We also create a state variable called isLoading and error to keep track of the loading state and any errors that might occur.
+export default function useCommunityUsers() {
+    // State to store community user profiles
+    const [communityUsers, setCommunityUsers] = useState([]);
+    
+    // State for loading and error tracking
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState();
-  
-    // We use the useEffect hook to fetch the Communityusers from the API and update the state variables accordingly.
-    // This useEffect will only run once, when the component this hook is used in is mounted.
+
+    // Fetch community user profiles on component mount
     useEffect(() => {
-      getCommunityusers()
-        .then((Communityusers) => {
-          setCommunityusers(Communityusers);
+      fetchLimitedCommunityUserProfiles()
+        .then((users) => {
+          setCommunityUsers(users);
           setIsLoading(false);
         })
         .catch((error) => {
@@ -25,6 +22,6 @@ export default function useCommunityusers() {
         });
     }, []);
   
-    // Finally, we return the state variables and the error. As the state in this hook changes it will update these values and the component using this hook will re-render.
-    return { Communityusers, isLoading, error };
-  }
+    // Return state variables
+    return { communityUsers, isLoading, error };
+}

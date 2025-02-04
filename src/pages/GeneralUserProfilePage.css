@@ -1,157 +1,122 @@
 /* General Styles */
-.general-user-profile-page-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: var(--base-light);
-    padding: 20px;
-    font-family: "Inter", sans-serif;
+body {
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* GeneralUserProfilePage Styles */
+.profile-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.profile-page-container h1 {
+  font-size: 1.5rem;
+  color: #5c4099;
+  font-family: "Merriweather", serif;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.profile-details {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.profile-details img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+}
+
+.profile-details h2 {
+  font-size: 1.25rem;
+  color: #5c4099;
+  font-family: "Merriweather", serif;
+  margin-bottom: 1rem;
+}
+
+.profile-details p {
+  font-size: 1rem;
+  color: #4b5563;
+  margin-bottom: 1rem;
+}
+
+.profile-details strong {
+  color: #5c4099;
+  font-weight: 600;
+}
+
+.profile-details .authenticated-details {
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.profile-details .authenticated-details h3 {
+  font-size: 1.125rem;
+  color: #5c4099;
+  margin-top: 1.5rem;
+  font-family: "Merriweather", serif;
+}
+
+.profile-details .authenticated-details p {
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin-top: 0.5rem;
+}
+
+.profile-details .learn-more-btn {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  color: white;
+  background-color: #5e17eb;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.profile-details .learn-more-btn:hover {
+  background-color: #7f56c7;
+}
+
+@media (max-width: 768px) {
+  .profile-page-container {
+    padding: 1rem;
   }
-  
-  .profile-form-container {
-    background-color: var(--white);
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    width: 100%;
-    max-width: 800px;
+
+  .profile-details {
+    padding: 1.5rem;
+    width: 90%;
   }
-  
-  /* Form Title and Subtitle */
-  .form-title {
-    font-family: "Merriweather", serif;
-    text-align: center;
-    margin-bottom: 10px;
-    color: var(--black);
+
+  .profile-details img {
+    width: 100px;
+    height: 100px;
   }
-  
-  .form-subtitle {
-    text-align: center;
-    margin-bottom: 30px;
-    color: var(--base-dark);
-    font-weight: 600;
+
+  .profile-details h2,
+  .profile-details .authenticated-details h3 {
+    font-size: 1.125rem;
   }
-  
-  /* Form Groups */
-  .profile-form {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
+
+  .profile-details p,
+  .profile-details .authenticated-details p,
+  .profile-details .learn-more-btn {
+    font-size: 0.875rem;
   }
-  
-  .form-group {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .form-label {
-    display: block;
-    margin-bottom: 8px;
-    color: var(--base-dark);
-    font-weight: 600;
-  }
-  
-  .form-input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--base-light);
-    border-radius: 4px;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-  }
-  
-  .form-input:focus {
-    outline: none;
-    border-color: var(--brand);
-  }
-  
-  /* Upload Button */
-  .upload-button {
-    padding: 8px 16px;
-    background-color: var(--brand);
-    color: var(--white);
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .upload-button:hover {
-    background-color: var(--secondarybrand);
-  }
-  
-  /* Communication Methods */
-  .communication-methods {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .communication-method {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .form-radio {
-    margin-right: 8px;
-  }
-  
-  /* Submit Button - using your genericbtn styles */
-  .submit-button {
-    grid-column: 1 / -1;
-    margin-top: 1rem;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    color: var(--white);
-    background-color: var(--brand);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    transition: background-color 0.3s;
-  }
-  
-  .submit-button:hover {
-    background-color: var(--secondarybrand);
-  }
-  
-  /* Error Messages */
-  .error-text {
-    color: #dc3545;
-    font-size: 14px;
-    margin-top: 4px;
-  }
-  
-  /* Success Messages */
-  .success-message {
-    background-color: var(--secondarybrand);
-    color: var(--white);
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  /* Responsive Styles */
-  @media (max-width: 768px) {
-    .profile-form-container {
-        padding: 20px;
-        margin: 0 10px;
-    }
-  
-    .profile-form {
-        grid-template-columns: 1fr;
-    }
-  
-    .form-title {
-        font-size: 24px;
-    }
-  
-    .form-label,
-    .form-input,
-    .submit-button {
-        font-size: 14px;
-    }
-  }
+}

@@ -33,11 +33,13 @@ const LoginForm = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log('handleSubmit');
     e.preventDefault();
     setIsLoading(true);
     setErrors({});
 
     const validationErrors = validateLoginForm(formData);
+    console.log('formData', formData);
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       setIsLoading(false);
@@ -46,6 +48,7 @@ const LoginForm = () => {
 
     try {
       const data = await loginUser(formData);
+      console.log(formData);
       // Update auth context with token
       setAuth({ token: data.token });
       // Store token in localStorage
